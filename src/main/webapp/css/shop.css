@@ -1,0 +1,280 @@
+@charset "utf-8";
+/* CSS Document */
+#head{
+	width:100%;
+	height:490px;
+	float:left;
+}
+#head #left{
+	width:550px;
+	height:500px;
+	float:left;
+	margin-top:20px;
+}
+#head #photo{
+	width:400px;
+	height:350px;
+	margin-left:125px;
+	margin-top:50px;
+}
+
+#head #photo li{
+	display:none;	
+}
+#head #photo img{
+	width:260px;
+	height:260px;
+}
+#head #small_photo{
+	width:400px;
+	height:50px;
+	margin-left:90px;
+}
+
+#small_photo ul li img{
+	width:90%;
+	height:90%;}
+#head #small_photo ul{
+	width:400px;
+	height:50px;
+	text-decoration:none;
+}
+#head #small_photo ul li{
+	list-style:none;
+	display:block;
+	width:60px;
+	height:50px;
+	margin-left:5px;
+	float:left;
+	border:1px solid #DDD;
+}
+#head #small_photo ul li:hover{
+	border:1px solid #F00;
+	}
+#head #fenxiang{
+	margin-left:125px;
+	margin-top:20px;
+}
+#head #center{
+	width:450px;
+	height:430px;
+	float:left;
+	margin-top:30px;
+}
+#head #center #main{
+	width:450px;
+	height:200px;
+	float:left;
+	}
+#head #center #choose{
+	float:left;
+	width:100%;
+}
+#head #center #choose ul li{
+	display:block;
+	width:20px;
+	height:20px;
+	float:left;
+	margin-left:20px;
+	border:1px solid #DDD;
+}
+#head #center #choose ul li a{
+		text-decoration:none;
+}
+#head #center #choose ul li:hover{
+	border:1px solid #F00;
+}
+#head #center #number{
+	float:left;
+}
+#head #center #number a{
+	text-decoration:none;
+	color:#000;
+}
+#head #center #main p{
+	font-size:15px;
+	display:block;
+	margin-left:12px;
+	line-height:25px;
+	color:#999;
+}
+#head #center #main .a{
+	font-size:12px;
+	color:red;
+}
+#head #center #main2 ul li{
+	list-style:none;
+}
+
+#head #center #main2 ul li img{
+	float:left;
+	margin-left:20px;
+	width:60px;
+	height:60px;
+	border:1px solid #DDD;
+}
+#head #center #main2 ul li img:hover{
+	border:1px solid #C00;
+}
+
+#head #center #shop{
+	float:left;
+	width:100%;
+	margin-top:20px;
+}
+#head #right{
+	float:left;
+	width:300px;
+	height:490px;
+}
+
+#main{
+	width:100%;
+	height:auto;
+	float:left;	
+}
+#head #center #main .b{
+	color:#F00;
+}
+#main span{
+	font-size:25px;
+}
+#main #find{
+	width:25%;
+	height:100%;
+	float:left;
+	margin-top:50px;
+}
+#main #find #f1{
+	float:left;
+	width:60%;
+	height:40px;
+	background:#F03;
+	margin-left:150px;
+	font-size:16px;
+	font-weight:bold;
+	line-height:24px;
+	text-align:center;
+	color:#FFF;
+}
+#main #find #f2{
+	float:left;
+	width:60%;
+	height:40px;
+	background:#000;
+	margin-left:150px;
+	font-size:16px;
+	font-weight:bold;
+	line-height:24px;
+	text-align:center;
+	color:#FFF;
+}
+#main #find #f3{
+	float:left;
+	width:60%;
+	height:auto;
+	background:#eee;
+	margin-left:150px;
+	margin-bottom:8px;
+	font-size:12px;
+	
+}
+#main #find #f3 a{
+	display:block;
+	width:45%;
+	height:20px;
+	color:#000;
+	text-decoration:none;
+	float:left;
+	margin-top:8px;
+	margin-left:5px;
+	}
+#main #find #f3 a:hover{
+	color:#C33;
+	}
+#main #info{
+	width:75%;
+	height:100%;
+	float:left;
+	
+}
+
+#main #info #head_info1 ul{
+	text-decoration:none;
+	width:740px;
+	height:40px;
+	background:#333;
+	margin-top:50px;
+	padding-left:0px;
+	margin-left:50px;
+	text-align:center;
+}
+#main #info #head_info1 ul li{
+	list-style:none;
+	width:33.3%;
+	height:100%;
+	font-size:18px;
+	float:left;
+	text-align:center;
+	color:#FFF;
+}
+ #head_info1 ul #li1{
+	 background-color:#F03;}
+
+#main #info #info2{
+	width:100%;
+	height:200px;
+	float:left;
+	margin-left:50px;
+	margin-top:50px;
+}
+#main #info #info3{
+	width:100%;
+	height:200px;
+	float:left;
+	margin-left:50px;
+	margin-top:50px;
+}
+
+#main #info #info3 #table #td_left{
+	 box-sizing: border-box;
+    padding: 16px 10px 16px 6px;
+    text-align: left;
+    width: 56%;	
+	font-size:14px;
+}
+#main #info #info3 #table #td_right{
+	box-sizing: border-box;
+    padding: 16px 0 16px 40px;
+    text-align: left;
+    width: 22%;
+	font-size:14px;
+}
+#main #info #info4{
+	width:100%;
+	height:200px;
+	float:left;
+	margin-left:50px;
+	margin-top:50px;
+}		
+#main #info #info2 #jieshao_wenzi{
+	width:740px;
+	height:300px;
+	float:left;
+}
+#main #info #info2 duizhaobiao{
+	float:left;
+}
+<!-----------------------------------放大效果------------------------------>
+ #Browser{
+border:1px solid #000;
+z-index:100;
+position:absolute;
+background:#555;
+}
+
+#mag{
+border:1px solid #000;
+overflow:hidden;
+z-index:100;
+}

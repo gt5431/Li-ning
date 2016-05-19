@@ -1,0 +1,62 @@
+
+
+#ok_content{
+	width:986px;
+	height:600px;
+	position:relative;
+	top:90px;
+	text-align:center;
+}
+
+#ok_content  #finish{
+	width:986px;
+	height:34px;
+	background:url(../images/cart_3.png) no-repeat;
+}
+
+#ok_content #paymentinfo{
+	width:922px;
+	height:122px;
+	background:rgb(243,243,243);
+	
+}
+#ok_content #paymentinfo h2{
+	width:922px;
+	height:23px;
+	font-size:18px;
+	color:red;
+	margin-top:20px;
+	
+}
+#ok_content #paymentinfo p{
+	width:927px;
+	height:17px;
+	line-height:22px;
+} 
+#ok_content #paymentinfo p span{
+	color:red;
+}
+
+#ok_content #cent{
+	width:986px;
+	height:220px;
+	background:url(../images/ok.png) no-repeat;
+}
+#ok_content #text1{
+	width:854px;
+	height:30px;
+	text-align:center;
+	color:red;
+}
+#ok_content #button{
+	width:100px;
+	height:50px;
+}
+#ok_content #button input{
+	width:200px;
+	height:50px;
+	background:red;
+	margin-left:340px;
+	color:white;
+	font-size:14px;
+}

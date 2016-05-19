@@ -1,0 +1,35 @@
+
+body{
+	height:auto;
+}
+#shopincart_content{
+	width:986px;
+	height:560px;
+	position:relative;
+	top:100px;
+}
+
+#shoppingbag{
+	width:986px;
+	height:34px;
+	background:url(../images/cart_1.png) no-repeat;
+}
+
+a{
+	text-decoration:none;
+	text-align:center;
+}
+
+.grid{
+	border:1px solid rgb(197,197,197);
+	margin-top:20px;
+	width:984px;
+	text-align:center;
+}
+
+.grid td{
+	border-bottom:1px solid rgb(197,197,197);
+}
+
+
+

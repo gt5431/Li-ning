@@ -1,0 +1,96 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+#container{
+	width:980px;
+	height:480px;
+	position:relative;
+	top:100px;
+}
+#container_header{
+	width:980px;
+	height:32px;
+}
+#container_content{
+	width:980px;
+	height:280px;	
+}
+#container_content  #content_login{
+	width:400px;
+	height:280px;
+	float:left;
+}
+#container   #content_right{
+	 width:337px;
+	 height:280px;
+	 float:right;
+	 text-align:left;
+}
+
+#container   #content_right #title{
+	width:337px;
+	height:140px;
+	border-bottom:1px dashed rgb(119,119,119);
+	margin-top:20px;
+}
+#container   #content_right #title p{
+	line-height:24px;
+	font-size:14px;
+	color:rgb(119,119,119);
+}
+#container   #content_right #title .zhuce{
+	width:220px;
+	height:50px;
+	background:rgb(238,39,55);
+	margin-left:0px;
+	margin-top:24px;
+	text-align:center;
+}
+#container   #content_right #title .zhuce a{
+	line-height:50px;
+	font-size:16px;
+	color:white;
+	text-decoration:none;
+	font-weight:bold;
+}
+
+#container   #content_right #delu p{
+	font-size:13px;
+	color:rgb(119,119,119);
+}
+#container   #content_right #delu a{
+	font-size:13px;
+	text-decoration:none;
+}
+
+.note{
+	background: #ffeaea none repeat scroll 0 0;
+    border: 1px solid #e5c3c4;
+    border-radius: 2px;
+    color: #cc0000;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 22px;
+    min-height: 22px;
+    padding: 8px;
+    vertical-align: top;
+    width: 160px;
+    margin-left:320px;
+    margin-top:-40px;
+    display:none;
+}
+.button{
+	width:200px;
+	height:50px;
+	background:rgb(238,39,55);	
+	text-align:center;
+}
+.button a{
+	font-size:16px;
+	color:#FFF;	
+	text-decoration:none;
+	vertical-align:middle; /*使文字垂直居中*/
+	line-height:50px;
+	font-weight:bold;	
+}

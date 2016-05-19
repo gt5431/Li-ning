@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<context:component-scan base-package="com.yc" />
+	<context:property-placeholder  location="classpath:db.properties"/>
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+	p:driverClassName="${jdbc.driverName}" p:url="${jdbc.url}"
+	p:username="${jdbc.username}"  p:password="${jdbc.password}"/>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+	p:dataSource-ref="dataSource"
+	p:typeAliasesPackage="com.yc.lining.entity"
+	p:mapperLocations="classpath:mapper/*Mapper.xml"/>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+		p:sqlSessionFactoryBeanName="sqlSessionFactory" p:basePackage="com.yc.lining.mapper">
+	</bean>
+	
+	<!-- 配置邮箱发送bean -->
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl" >
+		<property name="host"  value="smtp.qq.com"/>
+		<property name="username"  value="2769328353@qq.com"/>
+		<property name="password" value="gt199410162271"/>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.timeout">20000</prop>
+			</props>
+		</property>
+		
+	</bean>
+</beans>

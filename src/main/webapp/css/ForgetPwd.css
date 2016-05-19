@@ -1,0 +1,219 @@
+#ForgetPwd_main{
+    height: 560px;
+    width: 986px;
+    position:relative;
+	top:100px;
+}
+#ForgetPwd_header{
+	border-bottom:1px solid #F00;	
+}
+#ForgetPwd_center_left{
+	float:left;
+	margin: 0 auto;
+	margin-top:10px;
+    overflow: auto;
+    width: 600px;
+	height:300px;
+}
+.ForgetPwd_username{
+	width:70px;
+	height:40px;
+	line-height:40px;
+	float:left;
+	margin-left:30px;
+	margin-top:2px;
+}
+
+#first{
+	float:left;
+	width:500px;
+	height:50px;
+}
+.text{
+	float:left;
+	margin-left:6px;
+	width:256px;
+	height:40px;
+	line-height:40px;
+	border:1px solid #ccc;	
+	background:#FFFDEC;
+}
+
+#span_name{
+	float:left;
+	width:160px;
+	height:40px;
+	line-height:40px;
+	margin-left:6px;
+	margin-top:2px;
+	border:1px solid #ccc;
+	color:#cc0000;
+	background:#FFFDEC;
+	display:none;
+
+}
+
+#span_yzm{
+	float:left;
+	width:160px;
+	height:40px;
+	line-height:40px;
+	margin-left:6px;
+	margin-top:2px;
+	border:1px solid #ccc;
+	color:#cc0000;
+	background:#FFFDEC;
+	display:none;
+}
+
+#second{
+	float:left;
+	width:500px;
+	height:50px;
+	margin-top:20px;
+}
+
+.ForgetPwd_useryzm{
+	width:70px;
+	height:40px;
+	line-height:40px;
+	float:left;
+	margin-left:30px;
+	margin-top:20px;
+}
+
+.text_yzm{
+	float:left;
+	margin-left:6px;
+	width:160px;
+	height:40px;
+	line-height:40px;
+	border:1px solid #ccc;	
+	background:#FFFDEC;
+}
+
+.img{
+	float:left;
+	margin-left:6px;
+	margin-top:2px;
+	width:80px;
+	height:40px;
+	cursor:pointer;
+}
+
+
+#button{
+	width:200px;
+	height:50px;
+	line-height:50px;
+	float:left;
+	margin-top:10px;
+	color:white;
+	font-weight:bold;
+	font-size:12px;
+	margin-left:108px;
+	cursor:pointer;
+	background:#ee2d24;
+}
+
+.F_mima{
+	margin-left:70px;	
+}
+
+.ForgetPwd_center{
+	float:left;	
+}
+
+#ForgetPwd_center_right{
+	float:left;
+	width:366px;
+	height:220px;
+	
+}
+
+#ForgetPwd_center_right_top{
+	float:left;
+	margin-left:60px;
+	margin-top:20px;
+	width:200px;
+	height:50px;
+	font-size:14px;
+	color:#ccc;
+}
+
+
+#ForgetPwd_center_right_center{
+	width:200px;
+	height:50px;
+	line-height:50px;
+	float:left;
+	margin-top:20px;
+	color:white;
+	font-weight:bold;
+	font-size:12px;
+	margin-left:60px;
+	cursor:pointer;
+	background:#ee2d24;
+}
+
+.F_zhuce{
+	margin-left:70px;
+	font-size:16px;	
+}
+
+
+#ForgetPwd_center_right_button{
+	float:left;
+	width:366px;
+	height:200px;
+	margin-top:100px;
+}
+
+.Introduction{
+	float:left;
+	font-size:14px;	
+	color:#ccc;
+	font-weight:bold;
+}
+
+.F_Link{
+	float:left;
+    height:50px;
+    margin-top:20px;
+    width:366px;
+}
+
+.F_style{
+	float:left;
+	width:84px;
+	height:22px;
+	line-height:22px;
+	margin-left:6px;
+	margin-top:4px;	
+}
+.F_style:hover{
+	color:red;	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
