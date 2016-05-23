@@ -3,7 +3,7 @@ package com.yc.lining.entity;
 import java.math.BigDecimal;
 
 public class Product {
-    private BigDecimal proNumber;
+    private int proNumber;
 
     private String proName;
 
@@ -33,15 +33,15 @@ public class Product {
 
     private String color;
 
-    public BigDecimal getProNumber() {
-        return proNumber;
-    }
+    public int getProNumber() {
+		return proNumber;
+	}
 
-    public void setProNumber(BigDecimal proNumber) {
-        this.proNumber = proNumber;
-    }
+	public void setProNumber(int proNumber) {
+		this.proNumber = proNumber;
+	}
 
-    public String getProName() {
+	public String getProName() {
         return proName;
     }
 
