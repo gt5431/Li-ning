@@ -3,8 +3,7 @@ var mytime=0;//定时器
 var total=0;//图片总数
 var index=0;//图片索引
 var change_time=3000;//改变时间
-
-
+var currentIndex =0;
 //滚动浏览器的进度条到30px时显示  到顶部
 $(function(){   //#content的7个点击事件
 	$(document).scroll(function(){
@@ -176,8 +175,7 @@ $(function(){   //#content的7个点击事件
 		
 		$("#r_logo").css("position","relative");
 		$("#r_logo").css("top","0px");
-		$("#r_logo").css("left","-600px");
-		console.info($("#float_head #content .bar  .hide_loginimg1"));
+		$("#r_logo").css("left","0px");
 
 	});
 	//点击查看信息后弹出的div 层#float_head #content .bar  .hide_loginimg1
@@ -338,7 +336,7 @@ $(function(){
 			i=0;
 			$("#swiper_slide").animate({left: -document.body.clientWidth*i}, "fast");
 		}else{
-  			$("#swiper_slide").animate({left: -document.body.clientWidth*i}, "slow");
+  			$("#swiper_slide").animate({left: -(document.body.clientWidth+10)*i}, "slow");
 		}
 	});
 	$("#center .arrow_right").click(function(){
@@ -348,7 +346,7 @@ $(function(){
 			i=3;
 			$("#swiper_slide").animate({left: -document.body.clientWidth*i}, "fast");
 		}else{
-			$("#swiper_slide").animate({left: -document.body.clientWidth*i}, "slow");
+			$("#swiper_slide").animate({left: -(document.body.clientWidth+10)*i}, "slow");
 		}
 	});
 	
@@ -359,63 +357,52 @@ $(function(){
 	//mytime =window.setInterval("showPic()",change_time);
 	$("#center .swiper_title   .swiper_a").bind({
 		mouseover:function(){
+			currentIndex = $(this).index();
+			//alert("总长度为==>"+total+"当前是第"+currentIndex+"个图片");
+			showPic();
 			window.clearInterval(mytime);
-			showPic();//$(this).parent().parent().index()
+			
 		},
 		mouseout:function(){
 			
 			window.clearInterval(mytime);
-			mytime=window.setInterval("showPic()",change_time);
+			mytime=window.setInterval("showPicBig()",change_time);//currentIndex
 		}	
 	});
 });
-//-------------大图片轮播
+
 function showPic(){
+	var arguments = $("#center .swiper_title .swiper_a");
 	if(arguments.length>0){
-		if(arguments[0]<0){
+		if(currentIndex<=0){
 			index=0;
-		}else if(arguments[0]>total){
+		}else if(currentIndex>total){
 			index=total;
 		}else{
-			index=arguments[0];
+			index=currentIndex;
 		}
 	}else{
 		index=index%total;
 	}
-	
 	$("#swiper_slide .swiper").css("display","none");
 	$("#center .swiper_title   .swiper_a").css("background","#999");
 	$("#swiper_slide .swiper").eq(index).css("display","block");
 	$("#center .swiper_title   .swiper_a").eq(index).css("background","red");
 	index++;
 	
-	if(index==4){
+	if(index==3){
 		index=0;
 	}
-	
 }
 
 
- 
-
-
+//*******************自动播放************************/
 $(function(){
 	total =$("#center  .swiper_title a").length;
 	totalLeft=$("#gray_bg .banner_star  .banner_list1 a").length;
 	totalRight=$("#gray_bg .banner_new  .banner_list2 a").length;
 	
 	mytime =window.setInterval("showPic()",change_time);
-	$("#swiper_slide .swiper_title   .swiper_a").bind({
-		mouseover:function(){
-			window.clearInterval(mytime);
-			showPic();//$(this).parent().parent().index()
-		},
-		mouseout:function(){
-			
-			window.clearInterval(mytime);
-			mytime=window.setInterval("showPic()",change_time);
-		}	
-	});
 	$("#gray_bg .banner_star  .banner_list1 a").bind({
 		mouseover:function(){
 			window.clearInterval(mytime);
@@ -438,6 +425,35 @@ $(function(){
 	});
 });
 
+
+//显示大图
+function  showPicBig(){
+	
+	var arguments1 = $("#center .swiper_title .swiper_a");
+	if(arguments1.length>0){
+		if(arguments1[0]<0){
+			index=0;
+		}else if(arguments1[0]>=total){
+			index=total;
+		}
+	}else{
+		index=index%total;
+	}
+	
+	if(index ==4){
+		index=0;
+	}
+	
+	$("#swiper_slide .swiper").css("display","none");
+	$("#center .swiper_title   .swiper_a").css("background","#999");
+	$("#swiper_slide .swiper").eq(index).css("display","block");
+	$("#center .swiper_title   .swiper_a").eq(index).css("background","red");
+	
+	index++;
+	
+	
+	
+}
 //显示#gray_bg .banner_star list1左边下的图片
 function  showPicLeft(){
 	if(arguments.length>0){
