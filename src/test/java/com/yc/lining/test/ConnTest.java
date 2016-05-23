@@ -36,7 +36,7 @@ public class ConnTest {
 	@Test
 	public void testConn2() {
 		conn = sqlSessionFactory.openSession(true).getConnection();
-		assertNotNull("¡¨Ω” ß∞‹ConnectFail!!",conn);
+		assertNotNull("ConnectFail!!",conn);
 	}
 
 
