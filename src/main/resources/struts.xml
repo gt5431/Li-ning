@@ -12,12 +12,13 @@
 
 		<action name="*_*" class="{1}Action" method="{2}">
 			<result name="{2}">index.jsp</result>
+			<result name="findgoods">goodsinfo.jsp</result>
 			<result	type="json">
 				<param name="root">usersinfo1</param>
 			</result>
 			<result name="loginFail" type="redirect">page/login.jsp</result>
 			<result name="listAll" type="redirect">page/index.jsp</result>
+			
 		</action>
-
 	</package>
 </struts>

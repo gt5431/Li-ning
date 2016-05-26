@@ -172,7 +172,7 @@
 				</a>
 			</div>
 			<div id="navigation_right">
-				<a href="MyNing.jsp">我的李宁</a> <span>|</span> <a href="#">会员俱乐部</a>
+				<a href="MyNing.jsp">我的李宁</a> <span>|</span> <a href="goodsinfo_FindGoods">会员俱乐部</a>
 			</div>
 		</div>
 		<div id="comm_logo_contain">
