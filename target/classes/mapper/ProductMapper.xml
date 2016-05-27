@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yc.lining.mapper.ProductMapper" >
+
+
+
+
   <select id="selectAllProduct"  resultType="Product">
     select pro_name,pro_tagprice,color,pro_number from product where typesid=1 order by pro_number desc 
   </select>
