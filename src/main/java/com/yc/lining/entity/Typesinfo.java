@@ -3,15 +3,15 @@ package com.yc.lining.entity;
 import java.math.BigDecimal;
 
 public class Typesinfo {
-    private BigDecimal typesid;
+    private int typesid;
 
     private String typename;
 
-    public BigDecimal getTypesid() {
+    public int getTypesid() {
         return typesid;
     }
 
-    public void setTypesid(BigDecimal typesid) {
+    public void setTypesid(int typesid) {
         this.typesid = typesid;
     }
 
@@ -20,6 +20,12 @@ public class Typesinfo {
     }
 
     public void setTypename(String typename) {
-        this.typename = typename == null ? null : typename.trim();
+        this.typename = typename;
     }
+
+	@Override
+	public String toString() {
+		return "Typesinfo [typesid=" + typesid + ", typename=" + typename + "]";
+	}
+    
 }

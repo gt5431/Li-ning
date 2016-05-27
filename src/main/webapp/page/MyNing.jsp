@@ -8,14 +8,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
     <title>会员信息</title>
 		    <style type="text/css"></style>
 			<link href="css/myNing.css" type="text/css" rel="stylesheet">
 			<link href="css/Common.css" rel="stylesheet" type="text/css"></link>
 		    <script type="text/javascript" src="js/jquery-1.11.3.js" /></script>
 			<script type="text/javascript" src="js/public.js" /></script>
-  </head>
+    </head>
   
   <body>
   	<jsp:include page="header.jsp"></jsp:include>

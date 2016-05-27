@@ -344,15 +344,15 @@ body{
 /*-------------爆款推荐-------------*/
 #indexContent{
 	width:1349px;
-	height:720px;
+	height:auto;
 	margin-top:10px;
 }
 
-#indexContent   .hchoice{
+#indexContent .hchoice{
 	width:1195px;
 	height:50px;
 }
-#indexContent   .hchoice .choice_Item  a{
+#indexContent .hchoice .choice_Item  a{
 	font-size:20px;
 	font-family:"Microsoft YaHei UI";
 	font-weight:bold;
@@ -370,11 +370,11 @@ body{
 #indexContent   .hchoice  span{
 	width:237px;
 	height:25px;
-	color:#ee2737;
+	color:#000;
 	text-align:center;
 }
 
-#select_1   .selinter{
+#select_1  .selinter{
 	width:1px;
 	height:310px;
 	background:rgb(237,237,237);

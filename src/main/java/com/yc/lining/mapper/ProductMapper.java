@@ -1,18 +1,12 @@
 package com.yc.lining.mapper;
 
 import com.yc.lining.entity.Product;
+
 import java.math.BigDecimal;
+import java.util.List;
 
 public interface ProductMapper {
-    int deleteByPrimaryKey(BigDecimal proNumber);
-
-    int insert(Product record);
-
-    int insertSelective(Product record);
-
-    Product selectByPrimaryKey(BigDecimal proNumber);
-
-    int updateByPrimaryKeySelective(Product record);
-
-    int updateByPrimaryKey(Product record);
+   List selectAllProduct();
+   List selectAllProById(int typesid);
+   List selectSprotPro();
 }

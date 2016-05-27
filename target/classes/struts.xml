@@ -2,22 +2,15 @@
 <!DOCTYPE struts PUBLIC
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
-
 <struts>
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.objectFactory" value="spring" />
-
-	<package name="default" namespace="/" extends="json-default">
-
+	<package name="default" namespace="/" extends="struts-default">
 		<action name="*_*" class="{1}Action" method="{2}">
-			<result name="{2}">index.jsp</result>
-			<result	type="json">
-				<param name="root">usersinfo1</param>
-			</result>
-			<result name="loginFail" type="redirect">page/login.jsp</result>
-			<result name="listAll" type="redirect">page/index.jsp</result>
+			<result name="listAll">page/index.jsp</result>
 		</action>
-
+		<action name="baokuan" class="baokuanAction" method="getProById">
+		</action>
 	</package>
 </struts>

@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.yc</groupId>
-	<artifactId>AiGo</artifactId>
+	<artifactId>Li-ning</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>AiGo Maven Webapp</name>
@@ -109,6 +109,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>AiGo</finalName>
+		<finalName>Li-ning</finalName>
 	</build>
 </project>
