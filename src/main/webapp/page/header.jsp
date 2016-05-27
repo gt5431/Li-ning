@@ -85,13 +85,20 @@
             <span class="row">|</span>
 			<a>
 				<span class="shopping_chart"></span> 
-				<span class="shopping_count">(0)</span>
+				<c:choose>
+					<c:when test="${sessionScope.cartList == null}">
+					<span class="shopping_count">(0)</span>
+				</c:when>
+				<c:otherwise>
+					<span class="shopping_count">(${sessionScope.cartList.size()})</span>
+				</c:otherwise>
+				</c:choose>
 			</a>
         </div>
         <div id="navigation_right">
         	<a href="MyNing.jsp">会员中心</a>
            	<span>|</span>
-            <a href="#">会员俱乐部</a>
+            <a href="#">消息中心</a>
         </div>
     </div>
     <div id="comm_logo_contain">
@@ -839,7 +846,14 @@
         <div class="solid"><img  src="../images/solid.png"/></div>
         <div id="r_cart" class="bar">
         	<img   src="../images/cart_icon_1.png"/>
-            <span>(0)</span>
+        	<c:choose>
+				<c:when test="${sessionScope.cartList == null}">
+					<span>(0)</span>
+				</c:when>
+				<c:otherwise>
+					<span>(${sessionScope.cartList.size()})</span>
+				</c:otherwise>
+			</c:choose>
         </div>
         <!--购物车隐藏栏-->
         <div id="r_cart_hide" style="display:none; width:213px; height:577px; background:url(../images/cart_background_1.png);">
@@ -857,7 +871,11 @@
                 </div>
                 
                 <div style="width:98%;height:300px;margin-top:8px;margin-right:2px; float:right;">
-                	
+                	<span>
+                		<img style="width:40px;height:40px;" class="item" 
+	                            			alt="李宁弧四代植绒版男子减震跑鞋ARHJ049-2" src="../images/small1_img.png" />
+	                    <span>1233</span>
+	               </span>
                 </div>
                 <div style="width:94%;height:26px; background:#CCC;float:right; margin-top:0px;margin-right:6px; font-size:14px;">
                 	<span style="float:left; margin-left:6px; margin-top:2px;">已选择<span style="color:red;">0</span>件商品</span>

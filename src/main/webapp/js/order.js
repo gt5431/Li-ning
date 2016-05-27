@@ -11,18 +11,18 @@ $(function(){
 	});
 	
 	$(".sprite").click(function(){
-		$.ajax({
+		alert("保存收货信息");
+		/*$.ajax({
 			type: "POST",
-			url: "order.do",
-			data: $("#address_form").serialize(),
+			url: "order_addAdress.action",
+			dataType:"JSON",
 			success: function(msg){			//查询成功后弹窗
 	 			window.location.href="order.jsp";
 			}
 				
-		});
+		});*/
 		$("#add_deliver").css("display","none");
 		$("#order_center").css("height","600px");
-	
 	});
 	
 	

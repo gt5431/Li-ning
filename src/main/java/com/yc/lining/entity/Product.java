@@ -1,155 +1,131 @@
 package com.yc.lining.entity;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 
-public class Product {
-    private int proNumber;
+public class Product implements Serializable{
+	private static final long serialVersionUID = 8375699147090209033L;
 
-    private String proName;
+	private int pro_number;
 
-    private BigDecimal typesid;
+	private String pro_name;
 
-    private BigDecimal proTagprice;
+	private int typesid;
 
-    private BigDecimal proPrice;
+	private double pro_tagprice;
 
-    private String proImg;
+	private double pro_price;
 
-    private String detail;
+	private String pro_img;
 
-    private String registertime;
+	private String detail;
 
-    private String removetime;
+	private String registertime;
 
-    private BigDecimal registerflag;
+	private String removetime;
 
-    private BigDecimal mid;
+	private int registerflag;
 
-    private BigDecimal stock;
+	private int mid;
 
-    private String sex;
+	private int stock;
 
-    private String proSize;
+	private String sex;
 
-    private String color;
+	private String proSize;
 
-    public int getProNumber() {
-		return proNumber;
+	private String color;
+
+	public int getPro_number() {
+		return pro_number;
 	}
 
-	public void setProNumber(int proNumber) {
-		this.proNumber = proNumber;
+	public void setPro_number(int pro_number) {
+		this.pro_number = pro_number;
 	}
 
-	public String getProName() {
-        return proName;
-    }
+	public String getPro_name() {
+		return pro_name;
+	}
 
-    public void setProName(String proName) {
-        this.proName = proName == null ? null : proName.trim();
-    }
+	public void setPro_name(String pro_name) {
+		this.pro_name = pro_name;
+	}
 
-    public BigDecimal getTypesid() {
-        return typesid;
-    }
+	public int getTypesid() {
+		return typesid;
+	}
 
-    public void setTypesid(BigDecimal typesid) {
-        this.typesid = typesid;
-    }
+	public void setTypesid(int typesid) {
+		this.typesid = typesid;
+	}
 
-    public BigDecimal getProTagprice() {
-        return proTagprice;
-    }
+	public double getPro_tagprice() {
+		return pro_tagprice;
+	}
 
-    public void setProTagprice(BigDecimal proTagprice) {
-        this.proTagprice = proTagprice;
-    }
+	public void setPro_tagprice(double pro_tagprice) {
+		this.pro_tagprice = pro_tagprice;
+	}
 
-    public BigDecimal getProPrice() {
-        return proPrice;
-    }
+	public double getPro_price() {
+		return pro_price;
+	}
 
-    public void setProPrice(BigDecimal proPrice) {
-        this.proPrice = proPrice;
-    }
+	public void setPro_price(double pro_price) {
+		this.pro_price = pro_price;
+	}
 
-    public String getProImg() {
-        return proImg;
-    }
+	public String getPro_img() {
+		return pro_img;
+	}
 
-    public void setProImg(String proImg) {
-        this.proImg = proImg == null ? null : proImg.trim();
-    }
+	public void setPro_img(String pro_img) {
+		this.pro_img = pro_img;
+	}
 
-    public String getDetail() {
-        return detail;
-    }
+	public String getDetail() {
+		return detail;
+	}
 
-    public void setDetail(String detail) {
-        this.detail = detail == null ? null : detail.trim();
-    }
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 
-    public String getRegistertime() {
-        return registertime;
-    }
+	public int getStock() {
+		return stock;
+	}
 
-    public void setRegistertime(String registertime) {
-        this.registertime = registertime == null ? null : registertime.trim();
-    }
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 
-    public String getRemovetime() {
-        return removetime;
-    }
+	public String getProSize() {
+		return proSize;
+	}
 
-    public void setRemovetime(String removetime) {
-        this.removetime = removetime == null ? null : removetime.trim();
-    }
+	public void setProSize(String proSize) {
+		this.proSize = proSize;
+	}
 
-    public BigDecimal getRegisterflag() {
-        return registerflag;
-    }
+	public String getColor() {
+		return color;
+	}
 
-    public void setRegisterflag(BigDecimal registerflag) {
-        this.registerflag = registerflag;
-    }
+	public void setColor(String color) {
+		this.color = color;
+	}
 
-    public BigDecimal getMid() {
-        return mid;
-    }
+	@Override
+	public String toString() {
+		return "\nProduct [pro_number=" + pro_number + ", pro_name=" + pro_name
+				+ ", typesid=" + typesid + ", pro_tagprice=" + pro_tagprice
+				+ ", pro_price=" + pro_price + ", pro_img=" + pro_img
+				+ ", detail=" + detail + ", registerflag=" + registerflag
+				+ ", stock=" + stock + ", proSize=" + proSize + ", color="
+				+ color + "]";
+	}
 
-    public void setMid(BigDecimal mid) {
-        this.mid = mid;
-    }
+	public Product() {
 
-    public BigDecimal getStock() {
-        return stock;
-    }
-
-    public void setStock(BigDecimal stock) {
-        this.stock = stock;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
-    }
-
-    public String getProSize() {
-        return proSize;
-    }
-
-    public void setProSize(String proSize) {
-        this.proSize = proSize == null ? null : proSize.trim();
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color == null ? null : color.trim();
-    }
+	}
 }

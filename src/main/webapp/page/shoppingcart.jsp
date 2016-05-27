@@ -1,3 +1,5 @@
+<%@page import="com.yc.lining.entity.Product"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -10,6 +12,16 @@
 <link type="text/css" href="../css/shoppingcart.css" rel="stylesheet" />
 <script type="text/javascript" src="../js/jquery-1.11.3.js" /></script>
 <script type="text/javascript" src="../js/public.js" /></script>
+<script type="text/javascript">
+	function ContinueShopping(){
+		window.location.href="index.jsp";
+	}
+	
+	function GoCheck(){
+		alert("去结算");
+		window.location.href="order_order.action";
+	}
+</script>
 </head>
 
 <body>
@@ -67,7 +79,7 @@
 					</tbody>
 
 					<tbody style="background: white; height: 240px;" id="butInfo">
-						<c:forEach begin="0" end="3" step="1">
+						<c:forEach items="${sessionScope.cartList}" var="product">
 							<tr>
 							<td><input type="checkbox" checked="checked" id="chkGoods"  name="chkGoods"></td>
 							<td style="text-align:left;">
@@ -78,19 +90,19 @@
 							</td>
 							<td class="tal">
 								<span>
-									<a target="_blank" href="/shop/goods-278459.html?intcmp=cartproduct">跑鞋</a>
+									<a target="_blank" href="/shop/goods-278459.html?intcmp=cartproduct">${product.pro_name}</a>
 								</span>
 							</td>
 							<td><div style="line-height:2em;">黑/焰红色 42</div></td>
 							<td>
-								<p><del>¥499</del></p>
-								<p id="danjia">¥499</p>
+								<p><del>¥${product.pro_tagprice}</del></p>
+								<p id="danjia">¥${product.pro_price}</p>
 							</td>
 							<td>
-	                        	<p class="quantity">5</p>
+	                        	<p class="quantity">1</p>
 							</td>
 							<td>¥0.00</td>
-							<td><div class="price">¥1999</div></td>
+							<td><div class="price">¥${product.pro_price*1}</div></td>
 							<td>
 								<div onclick="collecte()"style="margin-bottom:4px;">
 									<a style="text-decoration:none;" class="line" href="javascript:void(0);">收藏</a>
@@ -104,7 +116,6 @@
 							</td>
 						</tr>
 						</c:forEach>
-						
 					</tbody>
 					<tfoot style="background: rgb(239, 239, 239);">
 						<tr>
@@ -123,7 +134,16 @@
 							<td colspan="2">
 								<div
 									style="height: 20px; line-height: 20px; text-align: center;">
-									总计：&nbsp;&nbsp;&nbsp;¥<span id="totalPrice">56.0</span>
+									总计：&nbsp;&nbsp;&nbsp;¥<span id="totalPrice">
+									<%
+										List<Product> list=(List<Product>)session.getAttribute("cartList");
+										double sum=0.0;
+										for(Product p:list){
+											sum+=p.getPro_price();
+										}
+									%>
+									<%=sum %>
+									</span>
 								</div>
 								<div
 									style="height: 20px; line-height: 20px; text-align: center;">
@@ -136,11 +156,10 @@
 			</div>
 			<div style="height: 15px;"></div>
 			<div style="width: 980px; height: 60px;" id="heji"></div>
-			<form style="float: right; margin-button: -10px;" action="order.jsp"
-				id="orderMyform">
-				<input type="button" id="continueBuy" value="继续购物"
+			<form style="float: right; margin-button: -10px;" id="orderMyform" method="POST">
+				<input type="button" id="continueBuy" value="继续购物"  onclick="ContinueShopping()"
 					style="width: 135px; height: 56px; font-size: 14px; margin-left: -656px; background: #000; color: white;" />
-				<input type="submit" value="去结算"
+				<input type="button" value="去结算"  onclick="GoCheck()"
 					style="width: 135px; height: 56px; background: red; color: white; font-size: 14px;" />
 			</form>
 		</div>

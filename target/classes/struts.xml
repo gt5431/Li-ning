@@ -17,7 +17,10 @@
 			</result>
 			<result name="loginFail" type="redirect">page/login.jsp</result>
 			<result name="listAll" type="redirect">page/index.jsp</result>
+			<result name="Addcart">shoppingcart.jsp</result>
+			<result name="orderSuccess">order.jsp</result>
+			<result name="Addsuccess" type="redirect">page/order_order.action</result>
 		</action>
-
+		
 	</package>
 </struts>
