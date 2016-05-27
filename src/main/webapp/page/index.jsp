@@ -1057,8 +1057,8 @@
 	<div id="center">
 		<div id="div_1">
 			<div id="swiper_slide">
-				<a class="swiper" href="pro_cart.action?pro_number=15"><img src="../images/swiper_1.png" /></a> 
-				<a class="swiper" href="pro_details.action?pro_number=15"><img src="../images/swiper_2.png" /></a> 
+				<a class="swiper" href="pro_cart.action?pro_number=1"><img src="../images/swiper_1.png" /></a> 
+				<a class="swiper"><img src="../images/swiper_2.png" /></a> 
 				<a class="swiper"><img src="../images/swiper_3.png" /></a> 
 				<a class="swiper"><img src="../images/swiper_4.png" /></a>
 			</div>
