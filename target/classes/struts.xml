@@ -6,7 +6,7 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.objectFactory" value="spring" />
-	<package name="default" namespace="/" extends="struts-default">
+	<package name="default" namespace="/" extends="json-default">
 		<action name="*_*" class="{1}Action" method="{2}">
 			<result name="listAll">page/index.jsp</result>
 		</action>
