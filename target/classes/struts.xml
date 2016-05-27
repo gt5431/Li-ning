@@ -20,7 +20,7 @@
 			<result name="Addcart">shoppingcart.jsp</result>
 			<result name="orderSuccess">order.jsp</result>
 			<result name="Addsuccess" type="redirect">page/order_order.action</result>
+			<result name="details">goodsinfo.jsp</result>
 		</action>
-		
 	</package>
 </struts>

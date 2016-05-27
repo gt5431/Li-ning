@@ -23,6 +23,12 @@ public class ProductAction implements ModelDriven<Product>,SessionAware{
 
 	//Õ¹Ê¾ÏêÇé
 	public String details(){
+		Product product_1 = productService.ProductDetailsById(product.getPro_number());
+		String [] color =product_1.getColor().split(",");
+		String [] img =product_1.getPro_img().split(",");
+		session.put("goodsinfo", product_1);
+		session.put("goodsinfocolor", color);
+		session.put("goodsinfoimg", img);
 		return "details";
 	}
 
