@@ -352,7 +352,7 @@ $(function(){
 				</ul>
 			</div>
 			<div id="fenxiang">
-				<img src="images/fenxiang.png" />
+				<img src="../images/fenxiang.png" />
 			</div>
 		</div>
 		<div id="mag">
@@ -397,12 +397,13 @@ $(function(){
 					class="add" href="javascript:void(0)" onclick="goods_buy(1);"
 					style="font-family: 微软雅黑;">+</a>
 				<div id="shop">
-					<a href="javascript:void(0)"
+					<a href="order_order.action" title="下单完成后请务必于6个小时内付款，否则订单将自动取消(特殊抢购商品除外)"><img
+						src="../images/goumai.png" />
+					</a>
+					<a	href="pro_cart.action?pro_number=${sessionScope.goodsinfo.pro_number}"
 						title="下单完成后请务必于6个小时内付款，否则订单将自动取消(特殊抢购商品除外)"><img
-						src="images/goumai.png" /></a> <a
-						href="order.do?op=sendid&id=${sessionScope.goodsinfo.pro_number}"
-						title="下单完成后请务必于6个小时内付款，否则订单将自动取消(特殊抢购商品除外)"><img
-						src="images/jiaru.png" /></a>
+						src="../images/jiaru.png" />
+					</a>
 				</div>
 			</div>
 		</div>
@@ -450,13 +451,13 @@ $(function(){
 				</div>
 			</div>
 			<div id="info2">
-				<img src="images/jieshao.png">
+				<img src="../images/jieshao.png">
 				<div id="jieshao_wenzi">
 					<pre class="PD_desc"
 						style="word-wrap: break-word; white-space: pre-wrap;">&nbsp;&nbsp;&nbsp;&nbsp;李宁云三代Smart智能减震跑鞋，通过鞋中底的智能芯片与小米运动APP相结合，可查阅运动记录、对落地方式进行监测，给出统计数据及相关建议帮助跑者提高、参与里程换购、给与购鞋指导。鞋子运用简洁的配色，简单大方。云三代跑鞋统一使用改善后的宽楦；满足不同人群穿着，带来舒适脚感。一体织网布结合无缝工艺，支撑与透气结合，带来舒适的跑步体验。鞋子上的李宁品牌LOGO,做工细致，彰显品牌魅力。鞋底采用橡胶+EVA复合底材质，耐磨防滑。 智能芯片 李宁智能跑鞋，内置智能芯片，记录跑程、热量消耗等数据，以技术改写你的跑步生活 √ 鞋面：纺织品 √ 鞋底：橡胶+EVA复合底 √ 通过鞋中底的智能芯片与小米运动APP相结合，可查阅运动记录、对落地方式进行监测，给出统计数据及相关建议帮助跑者提高、参与里程换购、给与购鞋指导 √ 一体织网布结合无缝工艺，支撑与透气结合，带来舒适的跑步体验 √ 鞋底采用橡胶+EVA复合底材质，耐磨防滑 √ 智能芯片</pre>
 				</div>
 				<div id="duizhaobiao">
-					<img src="images/duizhaobiao.png">
+					<img src="../images/duizhaobiao.png">
 				</div>
 			</div>
 			<div id="info3" style="display: none">

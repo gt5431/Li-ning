@@ -29,7 +29,7 @@ public class ProductAction implements ModelDriven<Product>,SessionAware{
 		session.put("goodsinfo", product_1);
 		session.put("goodsinfocolor", color);
 		session.put("goodsinfoimg", img);
-		return "details";
+		return "Finddetails";
 	}
 
 	//加入购物车(做为测试用)
