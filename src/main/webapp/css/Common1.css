@@ -385,11 +385,18 @@ body{
 	height:333px;
 	float:left;
 	margin:0 auto;
+	
 }
+#select_1  .selItem:hover{
+  background:red;
+  font-color:black;
+}
+
 #select_1  .selItem  .selMainPic{
 	width:166px;
 	height:215px;
 }
+
 #select_1  .selItem  .selMainPic img{
 	width:166px;
 	height:166px;

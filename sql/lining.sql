@@ -253,8 +253,6 @@ to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'�
 insert into product values(seq_pronum.nextval,'李宁女子轻质冬季防滑跑鞋',1,375,296,'images/img_10_1.jpg,images/img_10_2.jpg,images/img_10_3.png,images/img_10_4.jpg,images/img_10_5.jpg',null,
 to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'女','39,40,41','images/color_10_1.jpg,images/color_10_2.jpg,images/color_10_3.jpg');
 	
-	
-	
 	select c.u_id,p.pro_number,p.pro_img,p.pro_tagprice from  product p inner join collection c on p.pro_number=c.pro_number where u_id=101
 	
 insert into orderform values(seq_orderid.nextval,to_date('2015-7-1','yyyy-MM-dd'),101,18,4,375,1,1)	

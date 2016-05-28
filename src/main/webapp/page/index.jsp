@@ -1012,7 +1012,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="selectItem">
 							<div style="width: 1191px; height:auto;" id="selectItmdiv_1">
 							 <c:forEach items="${sessionScope.Product}" var="product">
-					          <div class="selinter"></div>
 						         <div class="selItem">
 		                            	<div class="selMainPic">
 		                                	<a  id="god_1" ><img src="${product.color.split(',')[0]}"/></a>
@@ -1022,9 +1021,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                                        <div class="slaveItem"><img  src="${product.color.split(',')[2]}"/><font></font></div>
 		                                    </div>
 		                                </div>
-                                <div class="hgoodsName" id="hgoodsName">${product.pro_name}</div>
-                                <font class="ft_price">￥${product.pro_tagprice}</font>
-                                <div class="hgoodsLine"></div>
+		                                <div class="hgoodsName" id="hgoodsName">${product.pro_name}</div>
+		                                <font class="ft_price">￥${product.pro_tagprice}</font>
                                  </div> 
 						      </c:forEach>
 							</div>

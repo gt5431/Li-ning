@@ -56,7 +56,6 @@ import com.yc.lining.service.UserService;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
 		}
 		@Override
 		public Product getModel() {
