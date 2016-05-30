@@ -100,7 +100,8 @@ create table orderform(         --订单
         buy_number int,         --购买数量
         buyprice int,         -- 购买价格
         pid int,
-        orderflas int,
+        orderflag int,
+        commentflag int
       constraint fk_p foreign key(pid) references place(pid),
      constraint fk1_id foreign key(pro_number) references  product(pro_number),
      constraint fk2_id foreign key(u_id) references  usersinfo(u_id)
@@ -183,9 +184,12 @@ select * from orderform;  --|
 select * from place;	  --|
 select * from collection; --|
 select  * from comments;  --|
+
+	select pro_name,pro_tagprice,color,pro_number from product where typesid=1 and pro_number < 11
+		order by pro_number desc
 -----------------------------
 commit;
-
+delete from typesinfo where typesid>=6;
 delete sequence seq_place;
 delete manager;
 update orderform set orderflas=1 where u_id=101
@@ -248,7 +252,7 @@ select * from orderform
 
 select * from place
 select * from(select a .*,rownum rn from (select  orderid,to_char(riqi,'yyyy-MM-dd'),u_id,pro_number,buy_number,buyprice,pid,orderflas from orderform order by orderid asc)a)
-
-
+insert into ORDERFORM (ORDERID, RIQI, U_ID,PRO_NUMBER, BUY_NUMBER, BUYPRICE,PID)
+    	values (seq_orderid.nextval,sysdate,101,0,1,216.0,1)
 select * from product where pro_number=15;
 commit;

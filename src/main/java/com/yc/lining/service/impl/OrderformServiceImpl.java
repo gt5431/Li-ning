@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yc.lining.entity.Orderform;
 import com.yc.lining.entity.Place;
 import com.yc.lining.mapper.OrderformMapper;
 import com.yc.lining.mapper.PlaceMapper;
@@ -26,13 +27,13 @@ public class OrderformServiceImpl implements OrderformService{
 
 	@Override
 	public int addNewAddress(Place place) {
-		System.out.println("实现类中的place==>"+place);
+		System.out.println("瀹炵幇绫讳腑鐨刾lace==>"+place);
 		return placeMapper.insertPlaceById(place);
 	}
 
 	@Override
-	public int handOrder() {
-		return orderformMapper.insertOrderById();
+	public int handOrder(Orderform orderform) {
+		return orderformMapper.insertOrderById(orderform);
 	} 
 	
 }

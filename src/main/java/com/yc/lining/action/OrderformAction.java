@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.yc.lining.entity.Orderform;
 import com.yc.lining.entity.Place;
 import com.yc.lining.service.OrderformService;
 
@@ -18,17 +19,69 @@ public class OrderformAction implements ModelDriven<Place>,SessionAware{
 	private OrderformService  orderService;
 	private Map<String, Object> session;
 	private Place place;
+	private int buynumber;
+	private double buyprice;
+	private int pidnumber;
+	private Orderform orderform;
+	private int Buyamount;
 	
+	public int getBuyamount() {
+		return Buyamount;
+	}
+
+	public void setBuyamount(int buyamount) {
+		Buyamount = buyamount;
+	}
+
+	public Orderform getOrderform() {
+		return orderform;
+	}
+
+	public void setOrderform(Orderform orderform) {
+		this.orderform = orderform;
+	}
+
+	public int getBuynumber() {
+		return buynumber;
+	}
+
+	public void setBuynumber(int buynumber) {
+		this.buynumber = buynumber;
+	}
+
+	public double getBuyprice() {
+		return buyprice;
+	}
+
+	public void setBuyprice(double buyprice) {
+		this.buyprice = buyprice;
+	}
+
+	public int getPidnumber() {
+		return pidnumber;
+	}
+
+	public void setPidnumber(int pidnumber) {
+		this.pidnumber = pidnumber;
+	}
+
 	public String order(){
+		System.out.println("当前的购买数量为==>"+buynumber);
 		List<Place> placeList = orderService.findPlaceByUid(101);
 		session.put("placeList",placeList);
 		return "orderSuccess";
 	}
 	
 	public String hand(){
-		int result = orderService.handOrder();
-		System.out.println("下单结果为==>"+result);
-		return "Handsuccess";
+		System.out.println("pid==>"+pidnumber);
+		Orderform orderform = new Orderform(buynumber,buyprice,pidnumber);
+		int result = orderService.handOrder(orderform);
+		if(1==result){
+			session.put("orderform", orderform);
+			return "success";
+		}else{
+			return "HandFail";
+		}
 	}
 	
 	public String addAdress(){

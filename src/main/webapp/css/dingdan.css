@@ -1,11 +1,14 @@
-
+body{
+	height:auto;
+}
 
 #order_center{
 	width:986px;
-	height:660px;
+	height:auto;
 	position:relative;
 	top:100px;
 }
+
 #order_center  #orderbag{
 	width:986px;
 	height:34px;
@@ -74,6 +77,7 @@
 }
 #address_form{
 	float:left;
+	padding-bottom:20px;
 }
 #address_form  #add_deliver {
     background: #e5e5e5 none repeat scroll 0 0;

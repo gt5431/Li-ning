@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.yc.lining.entity.Orderform;
 import com.yc.lining.entity.Place;
 import com.yc.lining.service.OrderformService;
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,6 +25,14 @@ public class OrderformServiceImplTest {
 		List<Place> list = orderService.findPlaceByUid(101);
 		System.out.println(list);
 		assertNotNull("收货地址为空",list);
+	}
+	
+	@Test
+	public void testHandOrder() {
+		Orderform orderform = new Orderform(1,1322.2,2);
+		int result = orderService.handOrder(orderform);
+		System.out.println(result);
+		assertNotNull("收货地址为空",result);
 	}
 
 }

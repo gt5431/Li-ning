@@ -18,7 +18,7 @@
 	}
 	
 	function GoCheck(){
-		alert("去结算");
+		var Buyamount  
 		window.location.href="order_order.action";
 	}
 </script>
@@ -85,7 +85,7 @@
 							<td style="text-align:left;">
 								<a target="_blank" title="李宁弧四代植绒版男子减震跑鞋ARHJ049-2" href="#">
 	                            	<img style="width:60px;height:60px;" class="item" 
-	                            			alt="李宁弧四代植绒版男子减震跑鞋ARHJ049-2" src="../images/small1_img.png">
+	                            			alt="李宁弧四代植绒版男子减震跑鞋ARHJ049-2" src="../${product.color.split(',')[0]}" />
 	                            </a>
 							</td>
 							<td class="tal">
@@ -99,7 +99,9 @@
 								<p id="danjia">¥${product.pro_price}</p>
 							</td>
 							<td>
-	                        	<p class="quantity">1</p>
+								<a href="" >-</a>
+	                        	<input class="quantity" value="1" style="top:0;text-align:center;width:30px;"/>
+	                        	<a href="">+</a>
 							</td>
 							<td>¥0.00</td>
 							<td><div class="price">¥${product.pro_price*1}</div></td>
@@ -154,11 +156,11 @@
 					</tfoot>
 				</table>
 			</div>
-			<div style="height: 15px;"></div>
+			<div style="height:15px;"></div>
 			<div style="width: 980px; height: 60px;" id="heji"></div>
-			<form style="float: right; margin-button: -10px;" id="orderMyform" method="POST">
+			<form style="float:right;margin-top:-30px;" id="orderMyform" method="POST">
 				<input type="button" id="continueBuy" value="继续购物"  onclick="ContinueShopping()"
-					style="width: 135px; height: 56px; font-size: 14px; margin-left: -656px; background: #000; color: white;" />
+					style="width:135px;height: 56px;font-size: 14px;background:#000;color:white;" />
 				<input type="button" value="去结算"  onclick="GoCheck()"
 					style="width: 135px; height: 56px; background: red; color: white; font-size: 14px;" />
 			</form>

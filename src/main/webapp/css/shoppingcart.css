@@ -4,7 +4,7 @@ body{
 }
 #shopincart_content{
 	width:986px;
-	height:560px;
+	height:auto;
 	position:relative;
 	top:100px;
 }

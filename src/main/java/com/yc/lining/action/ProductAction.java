@@ -19,7 +19,25 @@ public class ProductAction implements ModelDriven<Product>,SessionAware{
 	private ProductService productService;
 	private Map<String, Object> session;
 	private Product product;
+	private int Buyamount;
+	private int num = 0;
 	private List<Product> list = new ArrayList<Product>();
+	
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public int getBuyamount() {
+		return Buyamount;
+	}
+
+	public void setBuyamount(int buyamount) {
+		Buyamount = buyamount;
+	}
 
 	//展示详情
 	public String details(){
@@ -35,6 +53,8 @@ public class ProductAction implements ModelDriven<Product>,SessionAware{
 	//加入购物车(做为测试用)
 	@SuppressWarnings("unchecked")
 	public String cart(){
+		System.out.println("加入购物车的数量==>"+Buyamount);
+		boolean flag = false; //判断是否为同一件商品
 		if(session.get("cartList") == null){
 			Product product1 = productService.ProductDetailsById(product.getPro_number());
 			list.add(product1);
@@ -43,17 +63,31 @@ public class ProductAction implements ModelDriven<Product>,SessionAware{
 			list1 = (List<Product>) session.get("cartList");
 			for(int i=0;i<list1.size();i++){
 				if(product.getPro_number() == list1.get(i).getPro_number()){
-					break;
+					flag =true;
 				}else{
-					Product product3 = productService.ProductDetailsById(product.getPro_number());
-					list.add(product3);
+					flag =false;
 				}
+			}
+			
+			if(false ==flag){
+				Product product3 = productService.ProductDetailsById(product.getPro_number());
+				list.add(product3);
+			}else{
+				//暂时不处理
 			}
 		}
 		session.put("cartList",list);
 		return "Addcart";
 	}
-
+	
+	//////////////多重查询///////////////(PageUtil)session.getAttribute("pageutil");
+	
+	/*//模糊查询
+	public String searchInfo(){
+		return "searchInfo";
+	}*/
+	
+	
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session  = session;

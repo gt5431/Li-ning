@@ -1,30 +1,29 @@
 package com.yc.lining.entity;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class Orderform {
-    private BigDecimal orderid;
+    private int orderid;
 
     private Date riqi;
 
-    private BigDecimal uId;
+    private int uId;
 
-    private BigDecimal proNumber;
+    private int proNumber;
 
-    private BigDecimal buyNumber;
+    private int buyNumber;
 
-    private BigDecimal buyprice;
+    private double buyprice;
 
-    private BigDecimal pid;
+    private int pid;
 
-    private BigDecimal orderflas;
+    private int orderflas;
 
-    public BigDecimal getOrderid() {
+    public int getOrderid() {
         return orderid;
     }
 
-    public void setOrderid(BigDecimal orderid) {
+    public void setOrderid(int orderid) {
         this.orderid = orderid;
     }
 
@@ -36,51 +35,69 @@ public class Orderform {
         this.riqi = riqi;
     }
 
-    public BigDecimal getuId() {
+    public int getuId() {
         return uId;
     }
 
-    public void setuId(BigDecimal uId) {
+    public void setuId(int uId) {
         this.uId = uId;
     }
 
-    public BigDecimal getProNumber() {
+    public int getProNumber() {
         return proNumber;
     }
 
-    public void setProNumber(BigDecimal proNumber) {
+    public void setProNumber(int proNumber) {
         this.proNumber = proNumber;
     }
 
-    public BigDecimal getBuyNumber() {
+    public int getBuyNumber() {
         return buyNumber;
     }
 
-    public void setBuyNumber(BigDecimal buyNumber) {
+    public void setBuyNumber(int buyNumber) {
         this.buyNumber = buyNumber;
     }
 
-    public BigDecimal getBuyprice() {
+    public double getBuyprice() {
         return buyprice;
     }
 
-    public void setBuyprice(BigDecimal buyprice) {
+    public void setBuyprice(double buyprice) {
         this.buyprice = buyprice;
     }
 
-    public BigDecimal getPid() {
+    public int getPid() {
         return pid;
     }
 
-    public void setPid(BigDecimal pid) {
+    public void setPid(int pid) {
         this.pid = pid;
     }
 
-    public BigDecimal getOrderflas() {
+    public int getOrderflas() {
         return orderflas;
     }
 
-    public void setOrderflas(BigDecimal orderflas) {
+    public void setOrderflas(int orderflas) {
         this.orderflas = orderflas;
     }
+
+	@Override
+	public String toString() {
+		return "\nOrderform [orderid=" + orderid + ", riqi=" + riqi + ", uId="
+				+ uId + ", proNumber=" + proNumber + ", buyNumber=" + buyNumber
+				+ ", buyprice=" + buyprice + ", pid=" + pid + ", orderflas="
+				+ orderflas + "]";
+	}
+
+	public Orderform(int buyNumber, double buyprice, int pid) {
+		this.buyNumber = buyNumber;
+		this.buyprice = buyprice;
+		this.pid = pid;
+	}
+
+	public Orderform() {
+		
+	}
 }

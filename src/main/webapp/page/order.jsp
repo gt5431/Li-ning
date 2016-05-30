@@ -89,21 +89,25 @@
 						}
 					}
 				});
-
+		
+		
 		//点击提交时验证成功信息
 		$("#ordersub").click(function() {
-			alert("提交订单");
+			var buyNumber = $("#buyNumber").text();
+			var buyprice = $("#font_total_amount").text();
+			var pid = $("#pid").val();
+			alert(pid);
 			$.ajax({
 				type : "POST",
 				url : "order_hand.action",
-				data : $("#submitOrder").serialize(),
-				success : function(msg) { //查询成功后弹窗
+				data:{"buynumber":buyNumber,"pidnumber":pid,"buyprice":buyprice},
+				dataType:"JSON",
+				success : function(data) { //查询成功后弹窗
+					alert(data);
 					window.location.href = "orderOk.jsp";
-				}
-
+				} 
 			});
 		});
-
 	});
 </script>
 
@@ -129,7 +133,7 @@
 									style="margin-left: 0px; font-size: 13px; width: 94%;">
 									<span id="name_info"
 										style="float: left; display: inline-block; margin-top: 10px;">${place.shname}&nbsp;&nbsp;&nbsp;收</span>
-									<input type="checkbox"
+									<input type="checkbox" id="pid" value="${place.pid}"
 										style="float: right; display: inline-block; margin-top: 10px;" />
 								</div>
 								<div id="deliver_addr"
@@ -227,7 +231,7 @@
 					<tbody style="border: 2px solid blue;">
 						<c:forEach items="${sessionScope.cartList}" var="product">
 							<tr>
-								<td><a> <img src="" style="width: 40px; height: 40px;" /></a>
+								<td><a> <img src="../${product.color.split(',')[0]}" style="width: 40px; height: 40px;" /></a>
 								</td>
 								<td class="tal"><span> <a target="_blank"
 										href="/shop/goods-320816.html">${product.pro_name}</a>
@@ -259,6 +263,7 @@
 					元</span> -<span>余额支付：0.00元</span> -<span>总花费积分：0</span>
 				</p>
 				<p style="float: right; margin-right: 30px; font-size: 16px;">
+					<font id="buyNumber" hidden="hidden">${sessionScope.cartList.size()}</font>
 					应付总金额： <font id="font_total_amount" class="red"
 						style="font-weight: bold; font-size: 14px; color: red;"><%=sum %></font>元
 				</p>

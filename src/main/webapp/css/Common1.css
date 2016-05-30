@@ -1,6 +1,3 @@
-@charset "utf-8";
-/* CSS Document */
-
 *{
 	padding:0px;
 	margin: 0 auto;
@@ -20,7 +17,7 @@ body{
 	position:fixed;
 	z-index:800;
 }
-/*å³è¾¹çš„å¯æ”¶ç¼©åˆ—*/
+/*ÓÒ±ßµÄ¿ÉÊÕËõÁĞ*/
 #float_head #content{
 	width:40px;
 	height:577px;
@@ -72,7 +69,7 @@ body{
 #float_head #content .bar img{
 	margin-top:20px;
 }
-/*å³è¾¹çš„å¯æ”¶ç¼©åˆ—*/
+/*ÓÒ±ßµÄ¿ÉÊÕËõÁĞ*/
 
 #float_head a{
 	text-decoration:none;
@@ -161,7 +158,7 @@ body{
 	text-align:center;
 	margin-top:0px;/*14*/
 	font-size:14px;
-	font-family:"å®‹ä½“";
+	font-family:"ËÎÌå";
 	line-height:48px;
 }
 #float_head #comm_logo_contain #comm_contain_left ul li a{
@@ -192,9 +189,9 @@ body{
 	position:relative;
 	top:-13px;
 }
-/*------------------------è¿™é‡Œæ˜¯å¤´éƒ¨æ ·å¼çš„åº•éƒ¨--------------------*/
+/*------------------------ÕâÀïÊÇÍ·²¿ÑùÊ½µÄµ×²¿--------------------*/
 
-/*è¿™é‡Œæ˜¯ä¸­é—´çš„å¼€å§‹éƒ¨åˆ†*/
+/*ÕâÀïÊÇÖĞ¼äµÄ¿ªÊ¼²¿·Ö*/
 #center{
 	width:1349px;
 	height:auto;
@@ -291,7 +288,7 @@ body{
 .banner li div em{
 	background:red none repeat scroll 0 0;
 	color:white;
-	font-family:"é»‘ä½“";
+	font-family:"ºÚÌå";
 	font-size:24px;
 	font-style:normal;
 	font-weight:bold;
@@ -333,7 +330,7 @@ body{
 .banner_buttom h2 {
     width:100%;
     font-size: 26px;
-    font-family: "é»‘ä½“";
+    font-family: "ºÚÌå";
     text-align: center;
     height: 50px;
     line-height: 50px;
@@ -341,10 +338,10 @@ body{
     font-weight: bold;
 }
 
-/*-------------çˆ†æ¬¾æ¨è-------------*/
+/*-------------±¬¿îÍÆ¼ö-------------*/
 #indexContent{
 	width:1349px;
-	height:720px;
+	height:auto;
 	margin-top:10px;
 }
 
@@ -370,7 +367,7 @@ body{
 #indexContent   .hchoice  span{
 	width:237px;
 	height:25px;
-	color:#ee2737;
+	color:#000;
 	text-align:center;
 }
 
@@ -426,7 +423,7 @@ body{
 	height:5px;
 	background:rgb(237,237,237);
 }
-/*-----------è¿™æ˜¯è·‘æ­¥ç³»åˆ—éƒ¨åˆ†-----------*/
+/*-----------ÕâÊÇÅÜ²½ÏµÁĞ²¿·Ö-----------*/
 .indexContent{
 	width:1349px;
 	height:823px;
@@ -603,7 +600,7 @@ body{
 .Run .clear{}
 .indexContent p{}
 
-/*----------è¿™æ˜¯è¿åŠ¨ç³»-----------åˆ—*/
+/*----------ÕâÊÇÔË¶¯Ïµ-----------ÁĞ*/
 .indexCotent_2{
 	width:1349px;
 	height:571px;
@@ -742,10 +739,10 @@ body{
 	width:205px;
 	height:185px;
 }
-/*--ä¸­é—´ç»“æŸ--*/
+/*--ÖĞ¼ä½áÊø--*/
 
 
-/*--------------------è¿™é‡Œæ˜¯åº•éƒ¨æ ·å¼çš„å¼€å§‹-------------------*/
+/*--------------------ÕâÀïÊÇµ×²¿ÑùÊ½µÄ¿ªÊ¼-------------------*/
 #footer_list{
 	width:1349px;
 	height:100px;
@@ -779,7 +776,7 @@ body{
 }
 .content_title {
     color: #575551;
-    font-family: "åæ–‡ç»†é»‘";
+    font-family: "»ªÎÄÏ¸ºÚ";
     font-size: 20px;
     height: 26px;
     line-height: 26px;
@@ -797,7 +794,7 @@ body{
 
 #footer_list #footerBd{
 	color: #969492;
-    font-family: "å®‹ä½“";
+    font-family: "ËÎÌå";
     font-size: 12px;
     height: 60px;
     position: relative;

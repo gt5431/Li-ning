@@ -20,7 +20,10 @@
 	                     {"city":"shanghai","code":"2210444"}
 	              ]
 	        };
- 	</script>
+	      $.ajax({
+	    	  
+	      });
+</script>
 
 </head>
 <body>
@@ -36,12 +39,13 @@
 					<img /> 订单已提交成功，请尽快付款！
 				</h2>
 				<p>
-					您的订单号： <span class="price f14" style="font-family: 微软雅黑;">
-						32016012544277 </span>
+					您的订单号： 
+					<span class="price f14" style="font-family: 微软雅黑;">ABC123XX-
+										${sessionScope.orderform.pid}</span>
 				</p>
 				<p>
 					订单金额： <span class="price f14" style="font-family: 微软雅黑;">
-						569.00 </span>元
+						${sessionScope.orderform.buyprice} </span>元
 				</p>
 			</div>
 			<div id="cent"></div>

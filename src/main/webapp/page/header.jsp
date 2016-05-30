@@ -17,6 +17,7 @@
 				 		<a	href="register.jsp" onclick="register()">注册</a> 
 					</c:otherwise>
 			</c:choose>
+			
         	<script type="text/javascript">
         		function searchInfo(firstSelect,num){
 				var search=$.trim($("#search").val());
@@ -85,20 +86,15 @@
             <span class="row">|</span>
 			<a>
 				<span class="shopping_chart"></span> 
-				<c:choose>
-					<c:when test="${sessionScope.cartList == null}">
-					<span class="shopping_count">(0)</span>
-				</c:when>
-				<c:otherwise>
-					<span class="shopping_count">(${sessionScope.cartList.size()})</span>
-				</c:otherwise>
-				</c:choose>
+				<span class="shopping_count">(0)</span>
+				<span style="color:red;">${sessionScope.errorMsg}</span>
+				<c:remove var="errorMsg"/>
 			</a>
         </div>
         <div id="navigation_right">
         	<a href="MyNing.jsp">会员中心</a>
            	<span>|</span>
-            <a href="#">消息中心</a>
+            <a href="#">会员俱乐部</a>
         </div>
     </div>
     <div id="comm_logo_contain">
@@ -106,7 +102,7 @@
         	<ul>
             	<li><a href="index.jsp"><img src="../images/logo.png"/></a></li>
                 <div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;" class="logo_inter"></div>
-                <li><a class="li_a" style="color:#fff;" href="product.do?oop=findBypage&num=1">所有分类</a><img class="down_img" src="../images/content_down.png"/>
+                <li><a class="li_a" style="color:#fff;" href="pro_findBypage.action?num=1">所有分类</a><img class="down_img" src="../images/content_down.png"/>
                 	<div id="font_content—1" style="display:none;">
                 	<div class="sub_box">
                     	<meta content="text/html" http-equiv="content-type" charset="utf-8" />
@@ -846,14 +842,7 @@
         <div class="solid"><img  src="../images/solid.png"/></div>
         <div id="r_cart" class="bar">
         	<img   src="../images/cart_icon_1.png"/>
-        	<c:choose>
-				<c:when test="${sessionScope.cartList == null}">
-					<span>(0)</span>
-				</c:when>
-				<c:otherwise>
-					<span>(${sessionScope.cartList.size()})</span>
-				</c:otherwise>
-			</c:choose>
+            <span>(0)</span>
         </div>
         <!--购物车隐藏栏-->
         <div id="r_cart_hide" style="display:none; width:213px; height:577px; background:url(../images/cart_background_1.png);">
@@ -871,11 +860,7 @@
                 </div>
                 
                 <div style="width:98%;height:300px;margin-top:8px;margin-right:2px; float:right;">
-                	<span>
-                		<img style="width:40px;height:40px;" class="item" 
-	                            			alt="李宁弧四代植绒版男子减震跑鞋ARHJ049-2" src="../images/small1_img.png" />
-	                    <span>1233</span>
-	               </span>
+                	
                 </div>
                 <div style="width:94%;height:26px; background:#CCC;float:right; margin-top:0px;margin-right:6px; font-size:14px;">
                 	<span style="float:left; margin-left:6px; margin-top:2px;">已选择<span style="color:red;">0</span>件商品</span>

@@ -8,11 +8,4 @@ public interface PlaceMapper {
 
 	int insertPlaceById(Place place);
 	
-	
-    /*int deleteByPrimaryKey(BigDecimal pid);
-    int insert(Place record);
-    int insertSelective(Place record);
-    Place selectByPrimaryKey(BigDecimal pid);
-    int updateByPrimaryKeySelective(Place record);
-    int updateByPrimaryKey(Place record);*/
 }

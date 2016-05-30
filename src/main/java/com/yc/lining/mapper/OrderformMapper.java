@@ -7,6 +7,5 @@ public interface OrderformMapper {
 
     int insertSelective(Orderform record);
 
-	int insertOrderById();
-
+	int insertOrderById(Orderform orderform);
 }

@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yc.lining.mapper.OrderformMapper" >
   
-  <insert id="insertOrderById" parameterType="com.yc.lining.entity.Orderform" >
-    insert into ORDERFORM (ORDERID, RIQI, U_ID,PRO_NUMBER, BUY_NUMBER, BUYPRICE,PID,ORDERFLAS)
-    	values (seq_orderid.nextval,Sysdate,101,#{proNumber},#{buyNumber},#{buyprice},#{pid},1)
+  <insert id="insertOrderById"  parameterType="Orderform">
+    insert into ORDERFORM (ORDERID, RIQI,U_ID,PRO_NUMBER, BUY_NUMBER, BUYPRICE,PID)
+    	values (seq_orderid.nextval,sysdate,101,1,#{buyNumber},#{buyprice},#{pid})
   </insert>
 </mapper>

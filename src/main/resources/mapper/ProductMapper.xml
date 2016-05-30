@@ -2,7 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yc.lining.mapper.ProductMapper">
 	<!-- 查询商品详细信息 -->
-	<select id="findProductDetailsById" parameterType="int" resultType="Product">
+	<select id="findProductDetailsById" parameterType="int"
+		resultType="Product">
 		select * from product where pro_number=#{pro_number}
+	</select>
+
+	<select id="selectAllProduct" resultType="Product">
+		select pro_name,pro_tagprice,color,pro_number from product where typesid=1
+		order by pro_number desc
+	</select>
+	<select id="selectAllTypes" resultType="Typesinfo">
+		select typesid,typename from typesinfo
+	</select>
+	<select id="selectAllProById" parameterType="int" resultType="Product">
+		select typesid,pro_name,pro_tagprice,color,pro_number from product
+		where typesid=#{typesid} order by pro_number desc
+	</select>
+	<select id="selectSprotPro" resultType="Product">
+		select pro_name,pro_tagprice,color,pro_number,rownum from (select * from
+		product order by pro_number desc ) where rownum &lt; 7
+	</select>
+	
+	<select id="getCount" resultType="int">
+		select count(*) from product
+	</select>
+	<select id="getCount1" resultType="int">
+		select count(*) from product where pro_tagprice between  100 and 200
+	</select>
+	<select id="findByPage1" resultType="Product">
+		select color,pro_name,pro_tagprice,pro_number from product order by  pro_number desc
+	</select>
+	<select id="findByPage2" parameterType="pageUtil" resultType="Product">
+		select * from  (select a .*,rownum rn from 
+				(select color,pro_name,pro_tagprice,pro_number from product  order by  pro_number desc)a
+					 where rownum &lt;=${pageSize*pageNo})b where rn&gt;${pageSize*(pageNo-1)}
+	</select>
+	<select id="findByDate1">
+		select color,pro_name,pro_tagprice,pro_number from product order by registertime desc
+	</select>
+	<select id="findByDate2">
+		select *   from(select a .*,rownum rn from
+				(select color,pro_name,pro_tagprice,pro_number from product order by registertime desc )a
+					where rownum &lt;=${pageSize*pageNo})b where rn&gt;${pageSize*(pageNo-1)}
 	</select>
 </mapper>

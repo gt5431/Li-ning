@@ -20,13 +20,14 @@
 	<context:component-scan base-package="com.yc" />
 	<context:property-placeholder  location="classpath:db.properties"/>
 	
+	
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 	p:driverClassName="${jdbc.driverName}" p:url="${jdbc.url}"
 	p:username="${jdbc.username}"  p:password="${jdbc.password}"/>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
 	p:dataSource-ref="dataSource"
-	p:typeAliasesPackage="com.yc.lining.entity"
+	p:typeAliasesPackage="com.yc.lining.entity,com.yc.lining.util"
 	p:mapperLocations="classpath:mapper/*Mapper.xml"/>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
@@ -44,6 +45,5 @@
 				<prop key="mail.smtp.timeout">20000</prop>
 			</props>
 		</property>
-		
 	</bean>
 </beans>
