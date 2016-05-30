@@ -182,7 +182,7 @@
 					<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;"
 						class="logo_inter"></div>
 					<li><a style="color: #fff;" class="li_a"
-						href="product.do?oop=findBypage&num=2">所有分类</a><img
+						href="findAll.action?num=1">所有分类</a><img
 						class="down_img" src="../images/content_down.png" />
 						<div id="font_content—1" style="display: none;">
 							<div class="sub_box">
