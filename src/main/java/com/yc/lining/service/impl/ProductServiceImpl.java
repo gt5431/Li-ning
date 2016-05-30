@@ -35,39 +35,46 @@ public class ProductServiceImpl implements ProductService{
 	public List getSportPro(){
 		return productMapper.selectSprotPro();
 	}
-	/////////////////////////5-30//////////////////////////////////
-
-	@Override
-	public List<Product> findByPage(PageUtil pageUtil) {
-		System.out.println("实现类中的==>"+pageUtil);
-		if(0 == pageUtil.getPageNo() && 0== pageUtil.getPageSize()){
-			return productMapper.findByPage1();
-		}else if(0 != pageUtil.getPageNo()	&&	0 != pageUtil.getPageSize()){
-			System.out.println("调用第二个方法findByPage2");
-			return productMapper.findByPage2(pageUtil);
-		}
-		return null;
-	}
 	
+	@Override
+	public List<ProductBean> findAll() {
+		return productMapper.findAll();
+	}
+
 	@Override
 	public int getCount() {
 		return productMapper.getCount();
 	}
-	
-	//按价格范围   ******需要传参double lowprice,double highprice
+
+
 	@Override
-	public int getCount1() {
-		return productMapper.getCount1();
+	public List<ProductBean> findByType(ProductBean product,PageUtil pageUtil) {
+		return productMapper.findByType(product, pageUtil);
+	}
+
+	@Override
+	public List<ProductBean> findByPriceDesc(PageUtil pageUtil) {
+		return productMapper.findByPriceDesc(pageUtil);
+	}
+	@Override
+	public List<ProductBean> findByDate(PageUtil pageUtil) {
+		return productMapper.findByDate(pageUtil);
+	}
+
+	@Override
+	public List<ProductBean> findByPrice(ProductBean product,PageUtil pageUtil) {
+		System.out.println("最高价==》"+product.getHighPrice());
+		return productMapper.findByPrice(product,pageUtil);
+	}
+
+	@Override
+	public List<ProductBean> findByPage(ProductBean product) {
+		return productMapper.findByPage(product);
+	}
+
+	@Override
+	public List<ProductBean> findPageUtil(PageUtil pageUtil) {
+		return productMapper.findPageUtil(pageUtil);
 	}
 	
-	//按日期查询
-	@Override
-	public List<Product> findByDate(PageUtil pageutil) {
-		if(0 == pageutil.getPageNo() && 0== pageutil.getPageSize()){
-			return productMapper.findByDate1();
-		}else if(0 != pageutil.getPageNo()	&&	0 != pageutil.getPageSize()){
-			return productMapper.findByDate2(pageutil);
-		}
-		return null;
-	}
 }

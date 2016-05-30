@@ -1,7 +1,10 @@
 eclipse.preferences.version=1
 encoding//sql/lining.sql=UTF-8
+<<<<<<< HEAD
 encoding//src/main/java/com/yc/lining/inteceptor/LoginInterceptor.java=UTF-8
 encoding//src/main/java/com/yc/lining/util/MD5Encryption.java=UTF-8
 encoding//src/main/java/com/yc/lining/util/PageUtil.java=UTF-8
+=======
+>>>>>>> refs/remotes/origin/Duanjuan
 encoding//src/main/webapp/css/register.css=UTF-8
 encoding//src/main/webapp/page/product.jsp=UTF-8

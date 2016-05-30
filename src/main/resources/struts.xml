@@ -46,5 +46,23 @@
 		</action>
 		<action name="baokuan" class="baokuanAction" method="getProById">
 		</action>
+		
+		<action name="findAll" class="productAction" method="findAll">
+			<result name="success">product.jsp</result>
+		</action>
+
+		<action name="findByDate" class="productAction" method="findByDate"></action>
+		
+		<action name="findByPriceDesc" class="productAction" method="findByPriceDesc"></action>
+
+		<action name="findByType" class="productAction" method="findByType"></action>
+		
+		<action name="findByPrice" class="productAction" method="findByPrice"></action>
+		
+		<action name="findByPage" class="productAction" method="findByPage">
+			<result	type="json">
+				<param name="root">pageList</param>
+			</result>
+		</action>
 	</package>
 </struts>

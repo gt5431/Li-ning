@@ -4,18 +4,18 @@
 
 <div id="float_head">
 	<div id="list_title_inner">
-    	<div id="navigation_left">
-        	<span class="login">LI-NING&nbsp;&nbsp;李宁</span>
-        	<c:choose>
-					<c:when test="${sessionScope.usersinfo.username != null}">
+		<div id="navigation_left">
+			<span class="login">LI-NING&nbsp;&nbsp;李宁</span>
+			<c:choose>
+				<c:when test="${sessionScope.usersinfo.username != null}">
 						 欢迎您,${sessionScope.usersinfo.username}
 						 <a onClick="loginout()" id="loginout" href="javascript:void(0)">注销</a>
-					</c:when>
-					<c:otherwise>
-						<a href="login.jsp"	onclick="login()" id="loginaa">登录</a> 
-				 		<span class="row">|</span>
-				 		<a	href="register.jsp" onclick="register()">注册</a> 
-					</c:otherwise>
+				</c:when>
+				<c:otherwise>
+					<a href="login.jsp" onclick="login()" id="loginaa">登录</a>
+					<span class="row">|</span>
+					<a href="register.jsp" onclick="register()">注册</a>
+				</c:otherwise>
 			</c:choose>
 			
         	<script type="text/javascript">
@@ -47,6 +47,37 @@
    			},"json");
 	}
 	
+			<script type="text/javascript">
+			
+        	function findByType(index){
+        		var pro_Name=$("#search").val();
+        		alert("index==>"+index);
+        		alert(pro_Name);
+        		 $.post("findByType.action",{pro_name:pro_Name,num:index},function(data){
+        			var val="";
+           				$.each(data[1], function(indexs,items){
+        				val+= '<div id="mainContent_center_center_div1" >'
+                            		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
+                            	    +'<img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block">'
+                                   +' <img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none">'
+                                 	+'<img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none">'
+                                   +' </div>'
+                                    +'<div id="mainContent_center_center_div1_2" class="small_button">'
+                                    +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
+                                    +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
+                                    +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
+                                   +' </div>'
+                                   +' <div id="mainContent_center_center_div1_3">'
+                                +items.pro_name
+                                   +' </div>'
+                                  +'  <div id="mainContent_center_center_div1_4">￥'+items.pro_tagprice+'</div>'
+                       		     +'   </div>'
+        			});
+           				$("#mainContent_center_center").html(val);
+           				$("#pageutil").text("当前第  "+data[0].pageNo+"页/总共"+data[0].totalPages+" 页");
+           				$("#pageutil").attr("flag","findByType");
+           			},"json"); 
+        	}
         	
         	$("#loginout").click(function(){
 				//alert("----13");
@@ -83,13 +114,12 @@
    		});
         	</script>
 
-            <span class="row">|</span>
-			<a>
-				<span class="shopping_chart"></span> 
+			<span class="row">|</span> <a> <span class="shopping_chart"></span>
 				<span class="shopping_count">(0)</span>
 				<span style="color:red;">${sessionScope.errorMsg}</span>
 				<c:remove var="errorMsg"/>
 			</a>
+<<<<<<< HEAD
         </div>
         <div id="navigation_right">
         	<a href="MyNing.jsp">会员中心</a>

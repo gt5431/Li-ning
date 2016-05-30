@@ -19,6 +19,7 @@ public class ProductServiceImplTest {
 
 	@Autowired
 	private ProductService productService;
+	private ProductBean product;
 	
 	@Test
 	public void testProductDetailsById() {
@@ -27,7 +28,6 @@ public class ProductServiceImplTest {
 		System.out.println(product);
 		assertNotNull("查询成功",product);
 	}
-	
 	@Test
 	public void testfindByPage() {
 		PageUtil pageUtil = new PageUtil(1,8);
@@ -35,5 +35,26 @@ public class ProductServiceImplTest {
 		System.out.println(product);
 		assertNotNull("查询成功",product);
 	}
-
+	@Test
+	public void testFindAll() {
+		List<ProductBean> products=productService.findAll();
+		System.out.println(products);
+		assertNotNull(products);
+	}
+	@Test
+	public void getCount() {
+		int num=productService.getCount();
+		System.out.println(num);
+		assertNotNull(num);
+	}
+	@Test
+	public void findByPrice() {
+		PageUtil pageUtil=new PageUtil(1,8);
+		product=new ProductBean();
+		product.setLowPrice(100);
+		product.setHighPrice(300);
+		List<ProductBean> products=productService.findByPrice(product, pageUtil);
+		System.out.println(products);
+		assertNotNull(products);
+	}
 }
