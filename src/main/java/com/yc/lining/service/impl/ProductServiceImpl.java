@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yc.lining.entity.Product;
+import com.yc.lining.entity.ProductBean;
 import com.yc.lining.mapper.ProductMapper;
 import com.yc.lining.service.ProductService;
 import com.yc.lining.util.PageUtil;
@@ -48,8 +49,8 @@ public class ProductServiceImpl implements ProductService{
 
 
 	@Override
-	public List<ProductBean> findByType(ProductBean product,PageUtil pageUtil) {
-		return productMapper.findByType(product, pageUtil);
+	public List<ProductBean> findByType(PageUtil pageUtil) {
+		return productMapper.findByType(pageUtil);
 	}
 
 	@Override
@@ -62,9 +63,8 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<ProductBean> findByPrice(ProductBean product,PageUtil pageUtil) {
-		System.out.println("×î¸ß¼Û==¡·"+product.getHighPrice());
-		return productMapper.findByPrice(product,pageUtil);
+	public List<ProductBean> findByPrice(PageUtil pageUtil) {
+		return productMapper.findByPrice(pageUtil);
 	}
 
 	@Override
@@ -75,6 +75,11 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List<ProductBean> findPageUtil(PageUtil pageUtil) {
 		return productMapper.findPageUtil(pageUtil);
+	}
+
+	@Override
+	public int getCount1() {
+		return productMapper.getCount1();
 	}
 	
 }

@@ -3,6 +3,7 @@ package com.yc.lining.service;
 import java.util.List;
 
 import com.yc.lining.entity.Product;
+import com.yc.lining.entity.ProductBean;
 import com.yc.lining.util.PageUtil;
 
 public interface ProductService {
@@ -23,10 +24,10 @@ public interface ProductService {
 	List<ProductBean> findByPage (ProductBean product);
 
 	//按价格区间查询商品信息
-	List<ProductBean> findByPrice(ProductBean product,PageUtil pageUtil);
+	List<ProductBean> findByPrice(PageUtil pageUtil);
 
 	//根据商品名模糊查询
-	List<ProductBean> findByType(ProductBean product,PageUtil pageUtil);
+	List<ProductBean> findByType(PageUtil pageUtil);
 
 	//按价格降序查询
 	List<ProductBean> findByPriceDesc(PageUtil pageUtil);
@@ -36,6 +37,8 @@ public interface ProductService {
 
 	//按分頁查詢
 	List<ProductBean> findPageUtil(PageUtil pageUtil);
+
+	int getCount1();
 
 }
 

@@ -10,7 +10,7 @@
 <link type="text/css" href="../css/login.css" rel="stylesheet" />
 <script type="text/javascript" src="../js/jquery-1.11.3.js" /></script>
 <script type="text/javascript" src="../js/public.js" /></script>
-<!-- <script type="text/javascript" src="../js/login.js" /></script> -->
+<script type="text/javascript" src="../js/login.js" /></script>
 </head>
 
 <body>
@@ -22,7 +22,7 @@
 		</div>
 		<div id="container_content">
 			<div id="content_login">
-				<form id="loginMyform" method="POST" action="user_login.action">
+				<form id="loginMyform">
 					<label style="color:red;">${sessionScope.loginMsg}</label>
 					<c:remove var="loginMsg" scope="session"/>
 					<div class="line">
@@ -49,12 +49,13 @@
 							class="code" title="看不清楚，点击获得新图片"
 							style="cursor: pointer; height: 39px; padding-right: 30px;"
 							src="../images/yanzhma.jpg" />
-						</span> <span id="yzm_error" class="note">输入的验证码错误</span> <span
+						</span> 
+						<span id="yzm_error" class="note">输入的验证码错误</span> <span
 							id="yzm_error1" class="note">请输入验证码</span>
 					</div>
 					<div class="line"
 						style="margin-top: 20px; float: left; margin-left: 60px;">
-						<input type="submit" id="Login"  value="会员登录"
+						<input type="button" id="Login"  value="会员登录"
 							style="background: rgb(238, 39, 55); width: 200px; height: 50px; border: none; font-size: 16px; color: white;"></input>
 					</div>
 				</form>

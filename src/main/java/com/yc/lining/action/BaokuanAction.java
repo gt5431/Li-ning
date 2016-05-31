@@ -1,7 +1,6 @@
 package com.yc.lining.action;
 
 import java.io.IOException;
-
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Controller;
 
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ModelDriven;
-
 import com.yc.lining.entity.Product;
 import com.yc.lining.service.ProductService;
 import com.yc.lining.service.TypeInfoService;
@@ -51,6 +49,7 @@ public class BaokuanAction implements ModelDriven<Product>,SessionAware{
 		}
 
 	}
+	
 	@Override
 	public Product getModel() {
 		product = new Product();
@@ -59,6 +58,7 @@ public class BaokuanAction implements ModelDriven<Product>,SessionAware{
 
 	@Override
 	public void setSession(Map<String, Object> session) {
+		
 		this.session = session;
 	}
 }

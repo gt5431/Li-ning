@@ -47,6 +47,7 @@ public class UserAction implements ModelDriven<Usersinfo>,SessionAware{
 
 	public String login(){
 		usersinfo = userService.login(usersinfo);
+		System.out.println("µÇÂ¼ÐÅÏ¢Îª==>"+usersinfo);
 		if(usersinfo == null){
 			session.put("loginMsg","µÇÂ¼Ê§°Ü");
 			return "loginFail";
@@ -54,6 +55,10 @@ public class UserAction implements ModelDriven<Usersinfo>,SessionAware{
 			session.put("usersinfo",usersinfo);
 			return "login";
 		}
+	}
+	
+	public void loginout(){
+		session.remove("usersinfo");
 	}
 
 	public String register(){

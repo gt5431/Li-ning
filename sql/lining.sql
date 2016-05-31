@@ -131,18 +131,29 @@ insert into typesinfo values(seq_types.nextval,'裤装');
 insert into typesinfo values(seq_types.nextval,'羽绒服');
 
 --商品基本信息表插入数据
-insert into product values(seq_pronum.nextval,'李宁训练系列男子针织开衫无帽衣领',1,469.00,99.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41',null);
-insert into product values(seq_pronum.nextval,'李宁防水防滑云二代跑步鞋',2,169.00,239.00,null,null,to_date('2015-7-1','yyyy-MM-dd'),to_date('2015-7-30','yyyy-MM-dd'),0,002,100,'女','36,37,38','images/color1.jpg,images/color2.jpg,images/color3.jpg');
-insert into product values(seq_pronum.nextval,'李宁训练系列男子针织开衫无帽衣领',1,969.00,169.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41',null);
-insert into product values(seq_pronum.nextval,'【2015新品】李宁训练系列男子针织开衫无帽衣领',1,299.00,269.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41',null);
-insert into product values(seq_pronum.nextval,'【2015新品】李宁训练系列男子针织开衫无帽衣领',1,369.00,469.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41',null);
-insert into product values(seq_pronum.nextval,'李宁防水防滑云二代跑步鞋',2,369.00,239.00,null,null,to_date('2015-7-1','yyyy-MM-dd'),to_date('2015-7-30','yyyy-MM-dd'),0,002,100,'女','36,37,38','images/color1.jpg,images/color2.jpg,images/color3.jpg');
-insert into product values(seq_pronum.nextval,'【2015新品】李宁训练系列男子针织开衫无帽衣领',1,169.00,169.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41',null);
-insert into product values(seq_pronum.nextval,'【2015新品】李宁训练系列男子针织开衫无帽衣领',1,129.00,69.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41',null);
-insert into product values(seq_pronum.nextval,'【2015新品】李宁训练系列男子针织开衫无帽衣领',1,249.00,169.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41',null);
-insert into product values(seq_pronum.nextval,'李宁防水防滑云二代跑步鞋',2,369.00,239.00,null,null,to_date('2015-7-1','yyyy-MM-dd'),to_date('2015-7-30','yyyy-MM-dd'),0,002,100,'女','36,37,38','images/color1.jpg,images/color2.jpg,images/color3.jpg');
-insert into product values(seq_pronum.nextval,'【2015新品】李宁训练系列男子针织开衫无帽衣领',1,469.00,369.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41',null);
-insert into product values(seq_pronum.nextval,'【2015新品】李宁训练系列男子针织开衫无帽衣领',1,669.00,569.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41',null);
+insert into product values(seq_pronum.nextval,'李宁征荣92 II男子经典休闲鞋',1,215,169,'images/img_1_1.png,images/img_1_2.png,images/img_1_3.png,images/img_1_4.png,images/img_1_5.png',
+'李宁征荣92 II经典休闲鞋，运用简洁的色彩搭配加上复古跑鞋风格，简单大方，经典复古。侧面的李宁品牌标志正是“正交叉转体90度经单环起倒立落下成骑撑”这个被国际体联命名为“李宁交叉”的动作，体现了李宁先生在运动中的创新精神。鞋子上整齐的车线，增添鞋子的品质感。鞋底采用橡胶+EVA复合底，耐磨防滑，使用寿命长。',
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_1_1.jpg,images/color_1_2.jpg,images/color_1_3.jpg');
+insert into product values(seq_pronum.nextval,'李宁男子减震跑鞋',1,256,216,'images/img_2_1.png,images/img_2_2.png,images/img_2_3.jpg,images/img_2_4.png,images/img_2_5.png',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_2_1.jpg,images/color_2_2.jpg,images/color_2_3.jpg');
+
+insert into product values(seq_pronum.nextval,'【2016新品】李宁男子轻质跑鞋',1,189,168,'images/img_3_1.png,images/img_3_2.png,images/img_3_3.png,images/img_3_4.png,images/img_3_5.png',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_3_1.jpg,images/color_3_2.jpg,images/color_3_3.jpg');
+insert into product values(seq_pronum.nextval,'李宁男子城市户外鞋',1,189,168,'images/img_4_1.png,images/img_4_2.png,images/img_4_3.png,images/img_4_4.png,images/img_4_5.png',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_4_1.jpg,images/color_4_2.jpg,images/color_4_3.jpg');
+	
+insert into product values(seq_pronum.nextval,'李宁征荣92 II男子经典休闲鞋',1,365,325,'images/img_5_1.png,images/img_5_2.png,images/img_5_3.png,images/img_5_4.png,images/img_5_5.png',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_5_1.jpg,images/color_5_2.jpg,images/color_5_3.jpg');
+insert into product values(seq_pronum.nextval,'李宁溢彩女子轻质跑鞋',1,325,296,'images/img_6_1.png,images/img_6_2.jpg,images/img_6_3.png,images/img_6_4.png,images/img_6_5.png',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'女','39,40,41','images/color_6_1.jpg,images/color_6_2.jpg,images/color_6_3.jpg');
+insert into product values(seq_pronum.nextval,'李宁Air-Fluid W女子都市健步鞋',1,236,223,'images/img_7_1.png,images/img_7_2.png,images/img_7_3.png,images/img_7_4.jpg,images/img_7_5.jpg',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'女','39,40,41','images/color_7_1.jpg,images/color_7_2.jpg,images/color_7_3.jpg');
+insert into product values(seq_pronum.nextval,'李宁征荣92 II女子经典休闲鞋',1,375,296,'images/img_8_1.jpg,images/img_8_2.jpg,images/img_8_3.jpg,images/img_8_4.jpg,images/img_8_5.jpg',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'女','39,40,41','images/color_8_1.jpg,images/color_8_2.jpg,images/color_8_3.jpg');
+insert into product values(seq_pronum.nextval,'李宁女子城市户外鞋',1,375,296,'images/img_9_1.png,images/img_9_2.png,images/img_9_3.jpg,images/img_9_4.png,images/img_9_5.png',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'女','39,40,41','images/color_9_1.jpg,images/color_9_2.jpg,images/color_9_3.jpg');
+insert into product values(seq_pronum.nextval,'李宁女子轻质冬季防滑跑鞋',1,375,296,'images/img_10_1.jpg,images/img_10_2.jpg,images/img_10_3.png,images/img_10_4.jpg,images/img_10_5.jpg',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'女','39,40,41','images/color_10_1.jpg,images/color_10_2.jpg,images/color_10_3.jpg');
 
 --用户信息表插入数据
 insert into usersinfo values(seq_uid.nextval,'老王','aaa','汪汪汪','男',to_date('1995-12-12','yyyy-MM-dd'),'1099176690@qq.com','15073485093',300.5,500,1000.0);
@@ -189,7 +200,7 @@ select  * from comments;  --|
 		order by pro_number desc
 -----------------------------
 commit;
-delete from typesinfo where typesid>=6;
+delete from product where pro_number=2;
 delete sequence seq_place;
 delete manager;
 update orderform set orderflas=1 where u_id=101
@@ -256,3 +267,4 @@ insert into ORDERFORM (ORDERID, RIQI, U_ID,PRO_NUMBER, BUY_NUMBER, BUYPRICE,PID)
     	values (seq_orderid.nextval,sysdate,101,0,1,216.0,1)
 select * from product where pro_number=15;
 commit;
+select color,pro_name,pro_tagprice,pro_number from product where pro_name like '%男%'

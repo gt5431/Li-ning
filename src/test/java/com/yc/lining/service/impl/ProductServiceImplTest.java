@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.yc.lining.entity.Product;
+import com.yc.lining.entity.ProductBean;
 import com.yc.lining.service.ProductService;
 import com.yc.lining.util.PageUtil;
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,13 +29,7 @@ public class ProductServiceImplTest {
 		System.out.println(product);
 		assertNotNull("查询成功",product);
 	}
-	@Test
-	public void testfindByPage() {
-		PageUtil pageUtil = new PageUtil(1,8);
-		List<Product> product = productService.findByPage(pageUtil);
-		System.out.println(product);
-		assertNotNull("查询成功",product);
-	}
+	
 	@Test
 	public void testFindAll() {
 		List<ProductBean> products=productService.findAll();
@@ -53,7 +48,7 @@ public class ProductServiceImplTest {
 		product=new ProductBean();
 		product.setLowPrice(100);
 		product.setHighPrice(300);
-		List<ProductBean> products=productService.findByPrice(product, pageUtil);
+		List<ProductBean> products=productService.findByPrice(pageUtil);
 		System.out.println(products);
 		assertNotNull(products);
 	}

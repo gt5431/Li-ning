@@ -13,16 +13,16 @@
 <script type="text/javascript" src="../js/public.js" /></script>
 
 <script type="text/javascript">
-    $(function(){
-	    	$(".img_show").mouseover(function(){
-	    		var id =this.id;
-	    		var s =id.split("_")[1]; 
-	    		var  obj = $(this).parent().parent().find("div").first();
-	    		obj.find("img").css("display","none");
-	    		obj.find("#big_top"+s).css("display","block");
+$(function(){
+	$(".img_show").mouseover(function(){
+	    var id =this.id;
+	    var s =id.split("_")[1]; 
+	    var  obj = $(this).parent().parent().find("div").first();
+	    obj.find("img").css("display","none");
+	    obj.find("#big_top"+s).css("display","block");
 	    		
-	    	});
-    });
+	});
+});
   
     function show(index){
     		
@@ -55,24 +55,26 @@
   			}else{
   				alert("fenye--"+index);
   				$.post(
-  					"findByPage.action",
+  					"pro_findByPage.action",
   					{num:index,flag:flag},
   					function(data){
+  						console.info(data[1]);
   						var val="";
   						$.each(data[1], function(indexs,items){
+  							alert(items.color.split(",")[0]);
   							val+= '<div id="mainContent_center_center_div1" >'
   			                    		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
-  			                    	    +'<img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block">'
-  			                           +' <img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none">'
-  			                         	+'<img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none">'
+  			                    	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top1" style="display:block" /></a>'
+  			                           +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top2" style="display:none" /></a>'
+  			                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top3" style="display:none" /></a>'
   			                           +' </div>'
   			                            +'<div id="mainContent_center_center_div1_2" class="small_button">'
-  			                            +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
-  			                            +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
-  			                            +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
+  			                            +'<img src="../'+items.color+'" class="img1" id="img1_1" onMouseOver="show(1)">'
+  			                            +'<img src="../'+items.color+'" class="img2" id="img1_2" onMouseOver="show(2)">'
+  			                            +'<img src="../'+items.color+'" class="img3" id="img1_3" onMouseOver="show(3)">'
   			                           +' </div>'
   			                           +' <div id="mainContent_center_center_div1_3">'
-  			                        +items.pro_name
+  			                        		+items.pro_name
   			                           +' </div>'
   			                          +'  <div id="mainContent_center_center_div1_4">￥'+items.pro_tagprice+'</div>'
   			               		     +'   </div>'
@@ -86,20 +88,21 @@
 		
 	   	//根据价格分页降序排列
 	   	function findByPriceDesc(index){
-	   		alert("index"+index);
-	   			$.post("findByPriceDesc.action",{num:index},function(data){
+	   		
+	   			$.post("pro_findByPriceDesc.action",{num:index},function(data){
+	   				alert("index"+index+"data==>"+data[1].pro_number);
 	   			var val="";
 	   				$.each(data[1], function(indexs,items){
 					val+= '<div id="mainContent_center_center_div1">'
 	                    		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
-	                    	    +'<img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block">'
-	                           +' <img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none">'
-	                         	+'<img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none">'
-	                           +' </div>'
+	                    	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top1" style="display:block" /></a>'
+	                           +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top2" style="display:none" /></a>'
+	                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top3" style="display:none" /></a>'
+	                           +'</div>'
 	                            +'<div id="mainContent_center_center_div1_2" class="small_button">'
-	                            +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
-	                            +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
-	                            +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
+	                            +'<img src="../'+items.color+'" class="img1" id="img1_1" onMouseOver="show(1)">'
+	                            +'<img src="../'+items.color+'" class="img2" id="img1_2" onMouseOver="show(2)">'
+	                            +'<img src="../'+items.color+'" class="img3" id="img1_3" onMouseOver="show(3)">'
 	                           +' </div>'
 	                           +' <div id="mainContent_center_center_div1_3">'
 	                        +items.pro_name
@@ -116,19 +119,19 @@
 	  //根据日期分页查询
 		function findByDate(index){
 		alert("index"+index);
-			$.post("findByDate.action",{num:index},function(data){
+			$.post("pro_findByDate.action",{num:index},function(data){
 			var val="";
 				$.each(data[1], function(indexs,items){
 			val+= '<div id="mainContent_center_center_div1">'
                 		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
-                	    +'<img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block">'
-                       +' <img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none">'
-                     	+'<img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none">'
+                	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top1" style="display:block"></a>'
+                       +' <a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top2" style="display:none"></a>'
+                     	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top3" style="display:none"></a>'
                        +' </div>'
                         +'<div id="mainContent_center_center_div1_2" class="small_button">'
-                        +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
-                        +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
-                        +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
+                        +'<img src="../'+items.color+'" class="img1" id="img1_1" onMouseOver="show(1)">'
+                        +'<img src="../'+items.color+'" class="img2" id="img1_2" onMouseOver="show(2)">'
+                        +'<img src="../'+items.color+'" class="img3" id="img1_3" onMouseOver="show(3)">'
                        +' </div>'
                        +' <div id="mainContent_center_center_div1_3">'
                     +items.pro_name
@@ -144,22 +147,20 @@
 	   	
 	 	//根据名称模糊查询
 		function findByType(index){
-	 		alert("index"+index);
-	 		alert("");
 	 		var pro_Name=$("#search").val();
-			$.post("findByType.action",{num:index,pro_name:pro_Name},function(data){
+			$.post("pro_findByType.action",{num:index,searchName:pro_Name},function(data){
 				var val="";
 	   				$.each(data[1], function(indexs,items){
 					val+= '<div id="mainContent_center_center_div1" >'
 	                    		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
-	                    	    +'<img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block">'
-	                           +' <img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none">'
-	                         	+'<img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none">'
+	                    	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top1" style="display:block"></a>'
+	                           +'<a href="pro_details.action?pro_number='+items.pro_number+'"> <img src="../'+items.color+'" class="big_top" id="big_top2" style="display:none"></a>'
+	                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top3" style="display:none"></a>'
 	                           +' </div>'
 	                            +'<div id="mainContent_center_center_div1_2" class="small_button">'
-	                            +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
-	                            +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
-	                            +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
+	                            +'<img src="../'+items.color+'" class="img1" id="img1_1" onMouseOver="show(1)">'
+	                            +'<img src="../'+items.color+'" class="img2" id="img1_2" onMouseOver="show(2)">'
+	                            +'<img src="../'+items.color+'" class="img3" id="img1_3" onMouseOver="show(3)">'
 	                           +' </div>'
 	                           +' <div id="mainContent_center_center_div1_3">'
 	                        +items.pro_name
@@ -180,21 +181,20 @@
    		
 			var lowPrice=$("#lowPrice").val();
 			var highPrice=$("#highPrice").val();
-			alert("findByPrice---lowPrice==>"+lowPrice);
-			$.post("findByPrice.action",{lowPrice:lowPrice,num:index,highPrice:highPrice},function(data){
+			alert("findByPrice---lowPrice==>"+lowPrice+"---"+highPrice);//{lowPrice:lowPrice,num:index}
+			$.post("pro_findByPrice.action","lowPrice="+lowPrice+"&highPrice="+highPrice+"&num="+index,function(data){
 			var val="";
 				$.each(data[1], function(indexs,items){
-					alert(data[1]);
 					val+= '<div id="mainContent_center_center_div1">'
                 		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
-                	    +'<img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block">'
-                       +' <img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none">'
-                     	+'<img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none">'
+                	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top1" style="display:block"></a>'
+                       +'<a href="pro_details.action?pro_number='+items.pro_number+'"> <img src="" class="big_top" id="big_top2" style="display:none"></a>'
+                     	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="" class="big_top" id="big_top3" style="display:none"></a>'
                        +' </div>'
                         +'<div id="mainContent_center_center_div1_2" class="small_button">'
-                        +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
-                        +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
-                        +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
+                        +'<img src="" class="img1" id="img1_1" onMouseOver="show(1)">'
+                        +'<img src="" useOver="show(2)">'
+                        +'<img src="" class="img3" id="img1_3" onMouseOver="show(3)">'
                        +' </div>'
                        +' <div id="mainContent_center_center_div1_3">'
                     +items.pro_name
@@ -209,14 +209,6 @@
 			
 	}
    	
-
-   	
-	
-   	
-   	
-   	
-  
-	
 		function getid(index){
 			
 			$.ajax({
@@ -285,7 +277,7 @@
 					style="text-decoration: none; color: #000;">新品↓</a></span> <span
 					id="mainContent_center_top3"><a href="javascript:void(0)"
 					style="text-decoration: none; color: #000;">热销↓</a></span> <span
-					id="mainContent_center_top4" onclick="findByPriceDesc(0)"><a
+					id="mainContent_center_top4" onclick="findByPriceDesc()"><a
 					href="javascript:void(0)"
 					style="text-decoration: none; color: #000;">价格↓</a></span>
 
@@ -314,7 +306,9 @@
 					<div id="mainContent_center_center_div1">
 						<div id="mainContent_center_center_div1_1"
 							onClick="getId(${products.pro_number})">
-							<img src="../${products.color.split(",")[0]}">
+							<a href="pro_details.action?pro_number=${products.pro_number}">
+								<img src="../${products.color.split(",")[0]}" />
+							</a>
 						</div>
 						<div id="mainContent_center_center_div1_2">
 							<img src="../${products.color.split(",")[0]}" class="img1">

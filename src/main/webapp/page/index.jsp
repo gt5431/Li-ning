@@ -17,7 +17,6 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	
 	<div id="center">
 		<div id="div_1">
 			<div id="swiper_slide">

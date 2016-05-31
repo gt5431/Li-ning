@@ -1,13 +1,8 @@
 
-function login(){
-	alert("登录");
-	$("#Login").submit();
-}
-
 //刷新验证码
 
 	function recode(){
-		$(".code").attr("src","code.do?t="+Math.random());
+		$(".code").attr("src","code.action?t="+Math.random());
 		$("#checkcode").val("");
 	}
 
@@ -24,6 +19,8 @@ $(function(){
    			url: "user_login.action",
    			data:$("#loginMyform").serialize(),
    			success: function(data){			//查询成功后弹窗
+   				alert(data);
+   				location.href="index.jsp";
    				if(data[0]=="0"){// 失败
 	   				//TODO：弹出提示，清空登录内容框，刷新验证码
 	   				alert("登陆失败 ");

@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yc.lining.mapper.ProductMapper">
 	<!-- 查询商品详细信息 -->
-	<select id="findProductDetailsById" parameterType="int"
-		resultType="Product">
+	<select id="findProductDetailsById" parameterType="Integer"	resultType="Product">
 		select * from product where pro_number=#{pro_number}
 	</select>
 
@@ -23,6 +22,10 @@
 		product order by pro_number desc ) where rownum &lt; 7
 	</select>
 	
+	<select id="getCount" resultType="int">
+		select count(*) from product
+	</select>
+	
  	<select id="findAll" resultType="ProductBean">
  		select pro_name,pro_tagprice,color,pro_number,pro_img,pro_price from product  order by pro_number desc
  	</select>
@@ -39,15 +42,15 @@
 		where rownum &lt;=${pageSize*pageNo} ) b where rn&gt;${pageSize*(pageNo-1)}
 	</select>
 	
-	<select id="findByType" resultType="ProductBean" parameterType="ProductBean">
+	<select id="findByType" resultType="ProductBean" parameterType="PageUtil">
 	select * from(select a .*,rownum rn from 
-		(select color,pro_name,pro_tagprice,pro_number from product where pro_name like '%${pro_name}%') a
+		(select color,pro_name,pro_tagprice,pro_number from product where pro_name like '%${searchName}%') a
 		where rownum &lt;=${pageSize*pageNo} ) b where rn&gt;${pageSize*(pageNo-1)}
 	</select>
 	
-	<select id="findByPrice" resultType="ProductBean" parameterType="ProductBean">
+	<select id="findByPrice" resultType="ProductBean" parameterType="PageUtil">
 	select * from(select a .*,rownum rn from 
-		(select color,pro_name,pro_tagprice,pro_number from product where pro_tagprice between ${lowPrice} and ${highPrice}) a
+		(select color,pro_name,pro_tagprice,pro_number from product where pro_tagprice between ${lowPrice} and ${heighPrice}) a
 		where rownum &lt;${pageNo*pageSize} ) b where rn&gt;${(pageNo-1)*pageSize}
 	</select>
 	

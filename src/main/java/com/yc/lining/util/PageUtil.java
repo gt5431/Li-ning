@@ -1,10 +1,5 @@
 package com.yc.lining.util;
 
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-
 
 //分页
 public class PageUtil {
@@ -12,6 +7,42 @@ public class PageUtil {
 	private int pageSize =8;
 	private int totalSize;  //总计数
 	private int totalPages; //总页数  
+	private double lowPrice;//最低价
+	private double highPrice;//最高价
+	private String searchName;//搜素名
+	
+	public double getHighPrice() {
+		return highPrice;
+	}
+
+	public void setHighPrice(double highPrice) {
+		this.highPrice = highPrice;
+	}
+
+	public String getSearchName() {
+		return searchName;
+	}
+
+	public void setSearchName(String searchName) {
+		this.searchName = searchName;
+	}
+
+	public double getLowPrice() {
+		return lowPrice;
+	}
+
+	public void setLowPrice(double lowPrice) {
+		this.lowPrice = lowPrice;
+	}
+
+	public double getHeighPrice() {
+		return highPrice;
+	}
+
+	public void setHeighPrice(double heighPrice) {
+		this.highPrice = heighPrice;
+	}
+
 	public int getPageNo() {
 		return pageNo;
 	}
@@ -20,7 +51,7 @@ public class PageUtil {
 	public String toString() {
 		return "\nPageUtil [pageNo=" + pageNo + ", pageSize=" + pageSize
 				+ ", totalSize=" + totalSize + ", totalPages=" + totalPages
-				+ "]";
+				+ ", lowPrice=" + lowPrice + ", highPrice=" + highPrice + "]";
 	}
 
 	//下一页
