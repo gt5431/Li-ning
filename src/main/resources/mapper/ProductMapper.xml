@@ -30,7 +30,7 @@
 	<select id="findByPrice" resultType="ProductBean" parameterType="ProductBean">
 	select * from(select a .*,rownum rn from 
 		(select color,pro_name,pro_tagprice,pro_number from product where pro_tagprice between ${lowPrice} and ${highPrice}) a
-		where rownum &lt;${pageNo*pageSize} ) b where rn&gt;${(pageNo-1)*pageSize}
+		where rownum &lt;=8 ) b where rn&gt;0
 	</select>
 	
 	

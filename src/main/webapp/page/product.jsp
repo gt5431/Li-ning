@@ -85,9 +85,10 @@
   		}
 		
 	   	//根据价格分页降序排列
-	   	function findByPriceDesc(index){
+	   	function findByPriceDesc(index,firstSelect){
 	   		alert("index"+index);
-	   			$.post("findByPriceDesc.action",{num:index},function(data){
+	   		alert("firstSelect"+firstSelect);
+	   			$.post("findByPriceDesc.action",{num:index,firstSelect:firstSelect},function(data){
 	   			var val="";
 	   				$.each(data[1], function(indexs,items){
 					val+= '<div id="mainContent_center_center_div1">'
@@ -97,6 +98,7 @@
 	                         	+'<img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none">'
 	                           +' </div>'
 	                            +'<div id="mainContent_center_center_div1_2" class="small_button">'
+	                          
 	                            +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
 	                            +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
 	                            +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
