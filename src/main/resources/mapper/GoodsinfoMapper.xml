@@ -5,5 +5,14 @@
 	<select id="GoodsinfoById" parameterType="Goodsinfo" resultType="Goodsinfo">
 		select * from product where pro_number=#{pro_number}
 	</select>
-	
+	<select id="CollectionById" parameterType="Goodsinfo" resultMap="GoodsinfoMap">
+		select c.u_id,p.pro_number,p.color,p.pro_price from product p inner
+		join
+		collection c on p.pro_number=c.pro_number where u_id=#{u_id}
+	</select>
+	<resultMap type="Goodsinfo" id="GoodsinfoMap">
+		<result property="pro_price" column="pro_price"/>
+		<result property="color" column="color"/>
+	</resultMap>
+
 </mapper>

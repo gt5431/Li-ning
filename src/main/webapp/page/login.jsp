@@ -43,7 +43,7 @@
 						style="text-decoration: none;">忘记密码？</a></span>
 					<div class="line" style="float: left;">
 						<label style="font-weight: bold; margin-top: 14px;">验 证 码:</label>
-						<input type="text" id="checkcode" name="checkcode"
+						<input type="text" id="checkcode"
 							style="margin-left: 10px; margin-top: 18px; width: 100px; height: 38px;" />
 						<span class="fl p8 base"> <img onclick="recode()"
 							class="code" title="看不清楚，点击获得新图片"

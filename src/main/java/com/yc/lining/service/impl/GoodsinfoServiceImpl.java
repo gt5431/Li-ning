@@ -1,5 +1,8 @@
 package com.yc.lining.service.impl;
 
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +17,13 @@ public class GoodsinfoServiceImpl implements GoodsinfoService {
 	
 	@Override
 	public Goodsinfo FindGoodsById(int pro_number) {
-		
 		return goodsinfoMapper.GoodsinfoById(pro_number);
+	}
+
+	@Override
+	public List<Goodsinfo> CollectionById(int u_id) {
+		
+		return goodsinfoMapper.CollectionById(u_id);
 	}
 
 }

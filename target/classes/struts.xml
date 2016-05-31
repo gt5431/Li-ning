@@ -18,7 +18,7 @@
 			</result>
 			<result name="loginFail" type="redirect">page/login.jsp</result>
 			<result name="listAll" type="redirect">page/index.jsp</result>
-			
+			<result name="loginout" type="redirect">page/index.jsp</result>
 		</action>
 	</package>
 </struts>

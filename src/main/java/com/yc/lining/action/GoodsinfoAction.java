@@ -1,5 +1,6 @@
 package com.yc.lining.action;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -9,36 +10,33 @@ import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.yc.lining.entity.Goodsinfo;
-import com.yc.lining.entity.Usersinfo;
+import com.yc.lining.entity.Item;
 import com.yc.lining.service.GoodsinfoService;
-import com.yc.lining.service.UserService;
 
 
 @Controller("goodsinfoAction")
-public class GoodsinfoAction implements ModelDriven<Goodsinfo>,SessionAware{
-
+public class GoodsinfoAction implements SessionAware,ModelDriven<Item>{
+	private Item item;
 	@Autowired
 	private GoodsinfoService goodsinfoService;
-	private Goodsinfo goodsinfo;
 	private Map<String, Object> session;
-
+	
+	
 	public String FindGoods(){
-		//LogManager.getLogger().debug("取到的vsid值=" + item.getVsId());
-		goodsinfo = goodsinfoService.FindGoodsById(15);
-		String [] color =goodsinfo.getColor().split(",");
-		String [] img =goodsinfo.getPro_img().split(",");
-		System.out.println(goodsinfo);
+		System.out.println("查找商品");
+		//LogManager.getLogger().debug("查找商品");
+		//LogManager.getLogger().debug("取到的pro_number值=" + item.getPro_number());
+		System.out.println("pro_number的值"+item.getPro_number());
+		Goodsinfo goodsinfo = goodsinfoService.FindGoodsById(item.getPro_number());
 		session.put("goodsinfo", goodsinfo);
-		session.put("goodsinfocolor", color);
-		System.out.println(color[0]);
-		session.put("goodsinfoimg", img);
+		System.out.println(goodsinfo);
+		System.out.println("查找商品方法结束");
 		return "findgoods";
 	}
-
 	@Override
-	public Goodsinfo getModel() {
-		goodsinfo = new Goodsinfo();
-		return goodsinfo;
+	public Item getModel() {
+		item = new Item();
+		return item;
 	}
 
 	@Override

@@ -20,6 +20,7 @@
 	<context:component-scan base-package="com.yc" />
 	<context:property-placeholder  location="classpath:db.properties"/>
 	
+	
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 	p:driverClassName="${jdbc.driverName}" p:url="${jdbc.url}"
 	p:username="${jdbc.username}"  p:password="${jdbc.password}"/>

@@ -8,7 +8,7 @@
 
 	
 	
-    <span style="display:none;" id="proNum" class="${sessionScope.goodsinfo.pro_number}"></span>
+   <%--  <span style="display:none;" id="proNum" class="${sessionScope.goodsinfo.pro_number}"></span> --%>
     <title>商品详情</title>
 	<link href="../css/login.css" type="text/css" rel="stylesheet"/>
 	<link type="text/css" href="../css/Common1.css" rel="stylesheet" />
@@ -330,25 +330,25 @@ $(function(){
 	<div id="left">
 		<div id="photo">
         	<ul id="photo_li" style="height:300px;">
-            	<li style="display:block"><img src=" ../${sessionScope.goodsinfoimg[0]}"/></li>
-                <li><img src=" ../${sessionScope.goodsinfoimg[1]}"/></li>
-                <li><img src=" ../${sessionScope.goodsinfoimg[2]}"/></li>
-                <li><img src=" ../${sessionScope.goodsinfoimg[3]}"/></li>
-                <li><img src=" ../${sessionScope.goodsinfoimg[4]}"/></li>
+            	<li style="display:block"><img src=" ../${sessionScope.goodsinfo.pro_img.split(",")[0]}"/></li>
+                <li><img src=" ../${sessionScope.goodsinfo.pro_img.split(",")[1]}"/></li>
+                <li><img src=" ../${sessionScope.goodsinfo.pro_img.split(",")[2]}"/></li>
+                <li><img src=" ../${sessionScope.goodsinfo.pro_img.split(",")[3]}"/></li>
+                <li><img src=" ../${sessionScope.goodsinfo.pro_img.split(",")[4]}"/></li>
                 <div id="Browser"></div>
             </ul>
         </div>
         <div id="small_photo">
         	<ul id="smallphoto">
-        	<li><a onMouseOver="click1(0)"><img src=" ../${sessionScope.goodsinfoimg[0]}"/></a></li>
-            <li><a onMouseOver="click1(1)"><img src=" ../${sessionScope.goodsinfoimg[1]}"/></a></li>
-            <li><a onMouseOver="click1(2)"><img src=" ../${sessionScope.goodsinfoimg[2]}"/></a></li>
-            <li><a onMouseOver="click1(3)"><img src=" ../${sessionScope.goodsinfoimg[3]}"/></a></li>
-            <li><a onMouseOver="click1(4)"><img src=" ../${sessionScope.goodsinfoimg[4]}"/></a></li>
+        	<li><a onMouseOver="click1(0)"><img src=" ../${sessionScope.goodsinfo.pro_img.split(",")[0]}"/></a></li>
+            <li><a onMouseOver="click1(1)"><img src=" ../${sessionScope.goodsinfo.pro_img.split(",")[1]}"/></a></li>
+            <li><a onMouseOver="click1(2)"><img src=" ../${sessionScope.goodsinfo.pro_img.split(",")[2]}"/></a></li>
+            <li><a onMouseOver="click1(3)"><img src=" ../${sessionScope.goodsinfo.pro_img.split(",")[3]}"/></a></li>
+            <li><a onMouseOver="click1(4)"><img src=" ../${sessionScope.goodsinfo.pro_img.split(",")[4]}"/></a></li>
         	</ul>
         </div>
         <div id="fenxiang">
-        	<img src="images/fenxiang.png"/>
+        	<img src="../images/fenxiang.png"/>
         </div>
 	</div>
     <div id="mag">
@@ -366,9 +366,9 @@ $(function(){
         </div>
         <div id="main2">
         <ul id="lu2">
-        	 <li onClick="choose_color(0)"><a  title="黑/李宁蓝"><img src="../${sessionScope.goodsinfocolor[0]}"/></a></li>
-            <li onClick="choose_color(1)"><a  title="黑/黄"><img src="../${sessionScope.goodsinfocolor[1]}"/></a></li>
-            <li onClick="choose_color(2)"><a  title="白/马尔斯红"><img src="../${sessionScope.goodsinfocolor[2]}"/></a></li>  
+        	 <li onClick="choose_color(0)"><a  title="黑/李宁蓝"><img src="../${sessionScope.goodsinfo.color.split(",")[0]}"/></a></li>
+            <li onClick="choose_color(1)"><a  title="黑/黄"><img src="../${sessionScope.goodsinfo.color.split(",")[1]}"/></a></li>
+            <li onClick="choose_color(2)"><a  title="白/马尔斯红"><img src="../${sessionScope.goodsinfo.color.split(",")[2]}"/></a></li>  
         </ul>
         </div>
         <div id="choose">
@@ -387,8 +387,8 @@ $(function(){
 	        <input id="quantity_306687" class="quantity" type="text" name="quantity_306687" maxlength="2" size="3" value="1" style="font-family: 微软雅黑;">
 	        <a class="add" href="javascript:void(0)" onclick="goods_buy(1);" style="font-family: 微软雅黑;">+</a>	
 	        <div id="shop">
-		        <a href="javascript:void(0)" title="下单完成后请务必于6个小时内付款，否则订单将自动取消(特殊抢购商品除外)"><img src="images/goumai.png" /></a>
-		        <a href="order.do?op=sendid&id=${sessionScope.goodsinfo.pro_number}" title="下单完成后请务必于6个小时内付款，否则订单将自动取消(特殊抢购商品除外)"><img src="images/jiaru.png"/></a>
+		        <a href="javascript:void(0)" title="下单完成后请务必于6个小时内付款，否则订单将自动取消(特殊抢购商品除外)"><img src="../images/goumai.png" /></a>
+		        <a href="order.do?op=sendid&id=${sessionScope.goodsinfo.pro_number}" title="下单完成后请务必于6个小时内付款，否则订单将自动取消(特殊抢购商品除外)"><img src="../images/jiaru.png"/></a>
 		    </div>
         </div>		
     </div>
@@ -448,12 +448,12 @@ $(function(){
             </div>
         </div>
         <div id="info2" >
-        	<img src="images/jieshao.png">
+        	<img src="../images/jieshao.png">
             <div id="jieshao_wenzi">
             	<pre class="PD_desc" style="word-wrap: break-word;white-space: pre-wrap; ">&nbsp;&nbsp;&nbsp;&nbsp;李宁云三代Smart智能减震跑鞋，通过鞋中底的智能芯片与小米运动APP相结合，可查阅运动记录、对落地方式进行监测，给出统计数据及相关建议帮助跑者提高、参与里程换购、给与购鞋指导。鞋子运用简洁的配色，简单大方。云三代跑鞋统一使用改善后的宽楦；满足不同人群穿着，带来舒适脚感。一体织网布结合无缝工艺，支撑与透气结合，带来舒适的跑步体验。鞋子上的李宁品牌LOGO,做工细致，彰显品牌魅力。鞋底采用橡胶+EVA复合底材质，耐磨防滑。 智能芯片 李宁智能跑鞋，内置智能芯片，记录跑程、热量消耗等数据，以技术改写你的跑步生活 √ 鞋面：纺织品 √ 鞋底：橡胶+EVA复合底 √ 通过鞋中底的智能芯片与小米运动APP相结合，可查阅运动记录、对落地方式进行监测，给出统计数据及相关建议帮助跑者提高、参与里程换购、给与购鞋指导 √ 一体织网布结合无缝工艺，支撑与透气结合，带来舒适的跑步体验 √ 鞋底采用橡胶+EVA复合底材质，耐磨防滑 √ 智能芯片</pre>
             </div>
             <div id="duizhaobiao">
-            	<img src="images/duizhaobiao.png">
+            	<img src="../images/duizhaobiao.png">
             </div>
         </div>
         <div id="info3" style="display:none">
@@ -472,7 +472,7 @@ $(function(){
             </table>
         </div>
         <div id="info4" style="display:none">
-        	<img src="images/xuzhi.png">
+        	<img src="../images/xuzhi.png">
         </div>
     </div>
 </div>

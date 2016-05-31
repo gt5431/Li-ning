@@ -1,20 +1,32 @@
 package com.yc.lining.action;
 
+import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.yc.lining.entity.Collection02;
+import com.yc.lining.entity.Goodsinfo;
+import com.yc.lining.entity.Item;
+import com.yc.lining.entity.Product;
 import com.yc.lining.entity.Usersinfo;
+import com.yc.lining.service.GoodsinfoService;
 import com.yc.lining.service.UserService;
 
 @Controller("userAction")
 public class UserAction implements ModelDriven<Usersinfo>,SessionAware{
+	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private GoodsinfoService goodsinfoService;
+	
 	private Usersinfo usersinfo;
+	private List<Goodsinfo> collection;
 	private Map<String, Object> session;
 	private Usersinfo usersinfo1;
 	
@@ -35,14 +47,24 @@ public class UserAction implements ModelDriven<Usersinfo>,SessionAware{
 	}
 
 	public String login(){
+		LogManager.getLogger().debug("µÇÂ¼");
 		usersinfo = userService.login(usersinfo);
 		if(usersinfo == null){
 			session.put("loginMsg","µÇÂ¼Ê§°Ü");
 			return "loginFail";
 		}else{
 			session.put("usersinfo",usersinfo);
+			collection = goodsinfoService.CollectionById(usersinfo.getUid());
+			System.out.println("ÊÕ²ØÁÐ±í==¡·"+collection);
+			session.put("collection",collection);
 			return "login";
 		}
+	}
+	
+	public String loginout(){
+		session.put("usersinfo",null);
+		session.put("collection",null);
+		return "loginout";
 	}
 	
 	public String register(){

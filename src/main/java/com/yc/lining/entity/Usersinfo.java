@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Usersinfo implements Serializable{
 	private static final long serialVersionUID = -450868104654563968L;
-	private int uid;
+	private int u_id;
 	private String username;
 	private String password;
 	private String realName;
@@ -18,10 +18,10 @@ public class Usersinfo implements Serializable{
 	private String expendTotal;
 	
 	public int getUid() {
-		return uid;
+		return u_id;
 	}
 	public void setUid(int uid) {
-		this.uid = uid;
+		this.u_id = u_id;
 	}
 	public void setUsername(String username) {
 		this.username = username;
@@ -79,7 +79,7 @@ public class Usersinfo implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "\nUsersinfo [uid=" + uid + ", username=" + username
+		return "\nUsersinfo [u_id=" + u_id + ", username=" + username
 				+ ", password=" + password + ", realName=" + realName
 				+ ", sex=" + sex + ", birthday=" + birthday + ", email="
 				+ email + ", phone=" + phone + ", balance=" + balance
