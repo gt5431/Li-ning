@@ -38,6 +38,13 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 	private double highPrice;
 	private String searchName;//搜素名
 	
+	/*private int num;
+	private String  firstSelect;
+	private ProductBean product;
+	private List<ProductBean> list;
+	private PageUtil pageUtil;
+	private List<Object> pageList;*/
+	
 	public double getHighPrice() {
 		return highPrice;
 	}
@@ -190,7 +197,7 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 	
 	public String findAll(){
 		PageUtil pageUtil = (PageUtil) session.get("pageUtil");
-		System.out.println("session111==================="+pageUtil);
+		
 		if(null == pageUtil){
 			pageUtil = new PageUtil();
 			pageUtil.setPageNo(1);
@@ -206,33 +213,10 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 		}else if(4==num){
 			pageUtil.setPageNo(pageUtil.getTotalPages());
 		}
-		System.out.println("session111==================="+pageUtil);
-		session.put("pageUtil", pageUtil);
-		List<ProductBean> list2 = productService.findPageUtil(pageUtil);
 		
-		if("defaultfind".equals(flag)){
-			pageList = new ArrayList<Object>();
-			pageList.add(pageUtil);
-			pageList.add(list2);
-			Gson gson = new Gson();//把对象与json字符串转换对象
-			String jsonResult = gson.toJson(pageList);//把对象转换成json字符串
-			//取到响应对象
-			HttpServletResponse response = ServletActionContext.getResponse();//取到响应对象
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("charset=utf-8");
-			
-			try {
-				PrintWriter out = response.getWriter();
-				out.println(jsonResult);
-				out.flush();
-				out.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}else{
-			session.put("products", list2);
-			return "success";
-		}
+		list3=productService.findPageUtil(pageUtil);
+		session.put("pageUtil", pageUtil);
+		session.put("products", list3);
 		return "success";
 	}
 	
@@ -241,7 +225,7 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 		session.put("num", num);
 		return "num";
 	}
-	
+
 	//根据新品分页查询
 	public void findByDate(){
 		PageUtil pageUtil = (PageUtil) session.get("pageUtil");

@@ -88,9 +88,13 @@ $(function(){
 		
 	   	//根据价格分页降序排列
 	   	function findByPriceDesc(index){
+<<<<<<< HEAD
 	   		
 	   			$.post("pro_findByPriceDesc.action",{num:index},function(data){
 	   				alert("index"+index+"data==>"+data[1].pro_number);
+=======
+	   			$.post("findByPriceDesc.action",{num:index},function(data){
+>>>>>>> origin/Duanjuan
 	   			var val="";
 	   				$.each(data[1], function(indexs,items){
 					val+= '<div id="mainContent_center_center_div1">'
@@ -100,6 +104,7 @@ $(function(){
 	                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none" /></a>'
 	                            +'</div>'
 	                            +'<div id="mainContent_center_center_div1_2" class="small_button">'
+	                          
 	                            +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
 	                            +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
 	                            +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'

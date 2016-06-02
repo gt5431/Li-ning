@@ -47,10 +47,15 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.getCount();
 	}
 
-
 	@Override
 	public List<ProductBean> findByType(PageUtil pageUtil) {
 		return productMapper.findByType(pageUtil);
+	}
+
+
+	@Override
+	public List<ProductBean> findByPrice(PageUtil pageUtil) {
+		return productMapper.findByPrice(pageUtil);
 	}
 
 	@Override
@@ -62,10 +67,6 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.findByDate(pageUtil);
 	}
 
-	@Override
-	public List<ProductBean> findByPrice(PageUtil pageUtil) {
-		return productMapper.findByPrice(pageUtil);
-	}
 
 	@Override
 	public List<ProductBean> findByPage(ProductBean product) {
@@ -81,5 +82,5 @@ public class ProductServiceImpl implements ProductService{
 	public int getCount1() {
 		return productMapper.getCount1();
 	}
-	
+
 }

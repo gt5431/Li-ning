@@ -11,7 +11,6 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.yc.lining.entity.Product;
 import com.yc.lining.entity.Typesinfo;
 import com.yc.lining.entity.Usersinfo;
-import com.yc.lining.service.ProductService;
 import com.yc.lining.service.TypeInfoService;
 import com.yc.lining.service.UserService;
 
@@ -22,8 +21,8 @@ public class UserAction implements ModelDriven<Usersinfo>,SessionAware{
 
 	@Autowired
 	private TypeInfoService typesService;
-	@Autowired
-	private ProductService productService;
+	/*@Autowired
+	private ProductService productService;*/
 
 	private Usersinfo usersinfo;
 	private Map<String, Object> session;
@@ -73,7 +72,7 @@ public class UserAction implements ModelDriven<Usersinfo>,SessionAware{
 		}
 	}
 
-	//爆款推荐--页面加载显示的商品及类型
+	/*//爆款推荐--页面加载显示的商品及类型
 	public String list(){
 		List<Product> products = productService.getAllProduct();
 		List<Typesinfo> types = typesService.getAllTypes();
@@ -84,7 +83,7 @@ public class UserAction implements ModelDriven<Usersinfo>,SessionAware{
 		session.put("Type", types);
 		session.put("Sport", sport);
 		return "listAll";
-	}
+	}*/
 
 	@Override
 	public Usersinfo getModel() {

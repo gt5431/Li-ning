@@ -34,7 +34,7 @@ public class Product implements Serializable{
 	private String proSize;
 
 	private String color;
-	private int Buyamount; //¹ºÂòÊıÁ¿
+	private int Buyamount; //Â¹ÂºÃ‚Ã²ÃŠÃ½ÃÂ¿
 	
 	public int getBuyamount() {
 		return Buyamount;

@@ -1,4 +1,4 @@
-package com.yc.lining.action;
+/*package com.yc.lining.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -64,3 +64,4 @@ public class BaokuanAction implements ModelDriven<Product>,SessionAware{
 }
 
 
+*/

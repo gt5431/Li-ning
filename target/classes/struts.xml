@@ -25,9 +25,8 @@
 		<global-results>
 			<result name="loginInt" type="redirect">page/login.jsp</result>
 		</global-results>
-
-
-
+		
+		
 		<action name="*_*" class="{1}Action" method="{2}">
 			<interceptor-ref name="myStack" />
 		
@@ -46,7 +45,6 @@
 		</action>
 		<action name="code" class="codeAction" method="code">
 		</action>
-		
 		<action name="baokuan" class="baokuanAction" method="getProById">
 		</action>
 		
