@@ -193,9 +193,6 @@ public class ProductBean implements Serializable{
 		}
 		public ProductBean() {
 			
-		}	 
-		
-		
-		
+		}
 		
 }

@@ -85,10 +85,8 @@
   		}
 		
 	   	//根据价格分页降序排列
-	   	function findByPriceDesc(index,firstSelect){
-	   		alert("index"+index);
-	   		alert("firstSelect"+firstSelect);
-	   			$.post("findByPriceDesc.action",{num:index,firstSelect:firstSelect},function(data){
+	   	function findByPriceDesc(index){
+	   			$.post("findByPriceDesc.action",{num:index},function(data){
 	   			var val="";
 	   				$.each(data[1], function(indexs,items){
 					val+= '<div id="mainContent_center_center_div1">'

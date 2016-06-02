@@ -163,12 +163,6 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 	public void findByPriceDesc(){
 		PageUtil pageUtil = (PageUtil) session.get("pageUtil");
 		System.out.println("ssion====================="+pageUtil+"num"+num);
-		if(null==firstSelect||firstSelect.length()<=0){
-			pageUtil=new PageUtil();
-			pageUtil.setPageNo(1);
-			pageUtil.setPageSize(8);
-			pageUtil.setTotalSize(productService.getCount());
-		}else{
 		if(null == pageUtil){
 			pageUtil = new PageUtil();
 			pageUtil.setPageNo(1);
@@ -183,7 +177,6 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 			pageUtil.setPageNo(pageUtil.getNextPageNo());
 		}else if(4==num){
 			pageUtil.setPageNo(pageUtil.getTotalPages());
-		}
 		}
 		pageUtil.setTotalPages(pageUtil.getTotalPages());
 		System.out.println("ssion2====================="+pageUtil);
