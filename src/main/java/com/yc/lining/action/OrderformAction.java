@@ -72,15 +72,16 @@ public class OrderformAction implements ModelDriven<Place>,SessionAware{
 		return "orderSuccess";
 	}
 	
-	public String hand(){
+	public void hand(){
 		System.out.println("pid==>"+pidnumber);
 		Orderform orderform = new Orderform(buynumber,buyprice,pidnumber);
 		int result = orderService.handOrder(orderform);
+		System.out.println(result+"!");
 		if(1==result){
 			session.put("orderform", orderform);
-			return "success";
+			
 		}else{
-			return "HandFail";
+			
 		}
 	}
 	

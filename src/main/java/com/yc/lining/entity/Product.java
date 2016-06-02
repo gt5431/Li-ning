@@ -34,6 +34,15 @@ public class Product implements Serializable{
 	private String proSize;
 
 	private String color;
+	private int Buyamount; //¹ºÂòÊýÁ¿
+	
+	public int getBuyamount() {
+		return Buyamount;
+	}
+
+	public void setBuyamount(int buyamount) {
+		Buyamount = buyamount;
+	}
 
 	public int getPro_number() {
 		return pro_number;
@@ -120,9 +129,11 @@ public class Product implements Serializable{
 		return "\nProduct [pro_number=" + pro_number + ", pro_name=" + pro_name
 				+ ", typesid=" + typesid + ", pro_tagprice=" + pro_tagprice
 				+ ", pro_price=" + pro_price + ", pro_img=" + pro_img
-				+ ", detail=" + detail + ", registerflag=" + registerflag
-				+ ", stock=" + stock + ", proSize=" + proSize + ", color="
-				+ color + "]";
+				+ ", detail=" + detail + ", registertime=" + registertime
+				+ ", removetime=" + removetime + ", registerflag="
+				+ registerflag + ", mid=" + mid + ", stock=" + stock + ", sex="
+				+ sex + ", proSize=" + proSize + ", color=" + color
+				+ ", Buyamount=" + Buyamount + "]";
 	}
 
 	public Product() {

@@ -64,14 +64,14 @@ $(function(){
   							alert(items.color.split(",")[0]);
   							val+= '<div id="mainContent_center_center_div1" >'
   			                    		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
-  			                    	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top1" style="display:block" /></a>'
-  			                           +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top2" style="display:none" /></a>'
-  			                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top3" style="display:none" /></a>'
+  			                    	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block" /></a>'
+  			                           +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none" /></a>'
+  			                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none" /></a>'
   			                           +' </div>'
   			                            +'<div id="mainContent_center_center_div1_2" class="small_button">'
-  			                            +'<img src="../'+items.color+'" class="img1" id="img1_1" onMouseOver="show(1)">'
-  			                            +'<img src="../'+items.color+'" class="img2" id="img1_2" onMouseOver="show(2)">'
-  			                            +'<img src="../'+items.color+'" class="img3" id="img1_3" onMouseOver="show(3)">'
+  			                            +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
+  			                            +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
+  			                            +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
   			                           +' </div>'
   			                           +' <div id="mainContent_center_center_div1_3">'
   			                        		+items.pro_name
@@ -95,20 +95,20 @@ $(function(){
 	   				$.each(data[1], function(indexs,items){
 					val+= '<div id="mainContent_center_center_div1">'
 	                    		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
-	                    	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top1" style="display:block" /></a>'
-	                           +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top2" style="display:none" /></a>'
-	                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top3" style="display:none" /></a>'
-	                           +'</div>'
+	                    	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block" /></a>'
+	                            +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none" /></a>'
+	                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none" /></a>'
+	                            +'</div>'
 	                            +'<div id="mainContent_center_center_div1_2" class="small_button">'
-	                            +'<img src="../'+items.color+'" class="img1" id="img1_1" onMouseOver="show(1)">'
-	                            +'<img src="../'+items.color+'" class="img2" id="img1_2" onMouseOver="show(2)">'
-	                            +'<img src="../'+items.color+'" class="img3" id="img1_3" onMouseOver="show(3)">'
-	                           +' </div>'
-	                           +' <div id="mainContent_center_center_div1_3">'
-	                        +items.pro_name
-	                           +' </div>'
-	                          +'  <div id="mainContent_center_center_div1_4">￥'+items.pro_tagprice+'</div>'
-	               		     +'   </div>'
+	                            +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
+	                            +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
+	                            +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
+	                            +' </div>'
+	                            +' <div id="mainContent_center_center_div1_3">'
+	                            +items.pro_name
+	                            +'</div>'
+	                            +'<div id="mainContent_center_center_div1_4">￥'+items.pro_tagprice+'</div>'
+	               		        +'</div>'
 				});
 	   				$("#mainContent_center_center").html(val);
 	   				$("#pageutil").text("当前第  "+data[0].pageNo+"页/总共"+data[0].totalPages+" 页");
@@ -124,14 +124,14 @@ $(function(){
 				$.each(data[1], function(indexs,items){
 			val+= '<div id="mainContent_center_center_div1">'
                 		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
-                	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top1" style="display:block"></a>'
-                       +' <a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top2" style="display:none"></a>'
-                     	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top3" style="display:none"></a>'
+                	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block"></a>'
+                       +' <a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none"></a>'
+                     	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none"></a>'
                        +' </div>'
                         +'<div id="mainContent_center_center_div1_2" class="small_button">'
-                        +'<img src="../'+items.color+'" class="img1" id="img1_1" onMouseOver="show(1)">'
-                        +'<img src="../'+items.color+'" class="img2" id="img1_2" onMouseOver="show(2)">'
-                        +'<img src="../'+items.color+'" class="img3" id="img1_3" onMouseOver="show(3)">'
+                        +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
+                        +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
+                        +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
                        +' </div>'
                        +' <div id="mainContent_center_center_div1_3">'
                     +items.pro_name
@@ -145,7 +145,7 @@ $(function(){
 			},"json");
 	}
 	   	
-	 	//根据名称模糊查询
+	 	/* //根据名称模糊查询
 		function findByType(index){
 	 		var pro_Name=$("#search").val();
 			$.post("pro_findByType.action",{num:index,searchName:pro_Name},function(data){
@@ -153,14 +153,14 @@ $(function(){
 	   				$.each(data[1], function(indexs,items){
 					val+= '<div id="mainContent_center_center_div1" >'
 	                    		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
-	                    	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top1" style="display:block"></a>'
-	                           +'<a href="pro_details.action?pro_number='+items.pro_number+'"> <img src="../'+items.color+'" class="big_top" id="big_top2" style="display:none"></a>'
-	                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top3" style="display:none"></a>'
+	                    	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block"></a>'
+	                           +'<a href="pro_details.action?pro_number='+items.pro_number+'"> <img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none"></a>'
+	                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none"></a>'
 	                           +' </div>'
 	                            +'<div id="mainContent_center_center_div1_2" class="small_button">'
-	                            +'<img src="../'+items.color+'" class="img1" id="img1_1" onMouseOver="show(1)">'
-	                            +'<img src="../'+items.color+'" class="img2" id="img1_2" onMouseOver="show(2)">'
-	                            +'<img src="../'+items.color+'" class="img3" id="img1_3" onMouseOver="show(3)">'
+	                            +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
+	                            +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
+	                            +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
 	                           +' </div>'
 	                           +' <div id="mainContent_center_center_div1_3">'
 	                        +items.pro_name
@@ -172,29 +172,27 @@ $(function(){
 	   				$("#pageutil").text("当前第  "+data[0].pageNo+"页/总共"+data[0].totalPages+" 页");
 	   				$("#pageutil").attr("flag","findByType");
 	   			},"json");
-		} 	
+		} */ 	
 	   	
 	   	
 	   	
    	//按照价格区间查询
    	function findByPrice(index){
-   		
 			var lowPrice=$("#lowPrice").val();
 			var highPrice=$("#highPrice").val();
-			alert("findByPrice---lowPrice==>"+lowPrice+"---"+highPrice);//{lowPrice:lowPrice,num:index}
 			$.post("pro_findByPrice.action","lowPrice="+lowPrice+"&highPrice="+highPrice+"&num="+index,function(data){
 			var val="";
 				$.each(data[1], function(indexs,items){
 					val+= '<div id="mainContent_center_center_div1">'
                 		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
                 	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top1" style="display:block"></a>'
-                       +'<a href="pro_details.action?pro_number='+items.pro_number+'"> <img src="" class="big_top" id="big_top2" style="display:none"></a>'
-                     	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="" class="big_top" id="big_top3" style="display:none"></a>'
+                       +'<a href="pro_details.action?pro_number='+items.pro_number+'"> <img src="../'+items.color+'" class="big_top" id="big_top2" style="display:none"></a>'
+                     	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top3" style="display:none"></a>'
                        +' </div>'
                         +'<div id="mainContent_center_center_div1_2" class="small_button">'
-                        +'<img src="" class="img1" id="img1_1" onMouseOver="show(1)">'
-                        +'<img src="" useOver="show(2)">'
-                        +'<img src="" class="img3" id="img1_3" onMouseOver="show(3)">'
+                        +'<img src="../'+items.color+'" class="img1" id="img1_1" onMouseOver="show(1)">'
+                        +'<img src="../'+items.color+'" useOver="show(2)">'
+                        +'<img src="../'+items.color+'" class="img3" id="img1_3" onMouseOver="show(3)">'
                        +' </div>'
                        +' <div id="mainContent_center_center_div1_3">'
                     +items.pro_name

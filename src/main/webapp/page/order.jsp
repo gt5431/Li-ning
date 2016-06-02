@@ -90,20 +90,16 @@
 					}
 				});
 		
-		
 		//点击提交时验证成功信息
 		$("#ordersub").click(function() {
 			var buyNumber = $("#buyNumber").text();
 			var buyprice = $("#font_total_amount").text();
 			var pid = $("#pid").val();
-			alert(pid);
 			$.ajax({
-				type : "POST",
-				url : "order_hand.action",
+				type:"POST",
+				url:"order_hand.action",
 				data:{"buynumber":buyNumber,"pidnumber":pid,"buyprice":buyprice},
-				dataType:"JSON",
 				success : function(data) { //查询成功后弹窗
-					alert(data);
 					window.location.href = "orderOk.jsp";
 				} 
 			});
@@ -242,7 +238,7 @@
 								<td>${product.pro_price}元</td>
 								<td>0</td>
 								<td>0元</td>
-								<td>1</td>
+								<td>${product.getBuyamount()}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -256,7 +252,7 @@
 							List<Product> list= (List<Product>) session.getAttribute("cartList");
 							double sum=0.0;
 							for(Product p:list){
-								sum+=p.getPro_price();
+								sum+=p.getPro_price()*p.getBuyamount();
 							}
 					%> 
 					<%=sum %>

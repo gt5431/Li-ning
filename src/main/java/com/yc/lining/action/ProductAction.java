@@ -126,6 +126,12 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 		this.num = num;
 	}
 
+	//用于处理购买数量
+	public void buyAmount(){
+		System.out.println("购买数量==>"+Buyamount);
+		//session.put("Buyamount", Buyamount);
+	}
+	
 	//展示详情
 	public String details(){
 		Product product_1 = productService.ProductDetailsById(product.getPro_number());
@@ -144,13 +150,16 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 		boolean flag = false; //判断是否为同一件商品
 		if(session.get("cartList") == null){
 			Product product1 = productService.ProductDetailsById(product.getPro_number());
+			product1.setBuyamount(Buyamount);
 			list.add(product1);
 		}else{
 			List<Product>  list1 = new ArrayList<Product>();
+			int index=0;
 			list1 = (List<Product>) session.get("cartList");
 			for(int i=0;i<list1.size();i++){
 				if(product.getPro_number() == list1.get(i).getPro_number()){
 					flag =true;
+					index = i;
 				}else{
 					flag =false;
 				}
@@ -158,9 +167,14 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 			
 			if(false ==flag){
 				Product product3 = productService.ProductDetailsById(product.getPro_number());
+				product3.setBuyamount(Buyamount);
 				list.add(product3);
 			}else{
+				Product product3 = new Product();
+				Buyamount= Buyamount+list1.get(index).getBuyamount();
+				product3.setBuyamount(Buyamount);
 				//暂时不处理
+				System.out.println("相同商品的购买数量为++>"+Buyamount);
 			}
 		}
 		session.put("cartList",list);

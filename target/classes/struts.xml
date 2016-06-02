@@ -41,8 +41,8 @@
 			<result name="orderSuccess">order.jsp</result>
 			<result name="Addsuccess" type="redirect">page/order_order.action</result>
 			<result name="Finddetails">goodsinfo.jsp</result>
-			<result name="HandFail" type="redirect">page/order_order.action</result>
-			
+			<!-- <result name="HandFail" type="redirect">page/order_order.action</result> -->
+			<result name="buyAmount"></result>
 		</action>
 		<action name="code" class="codeAction" method="code">
 		</action>

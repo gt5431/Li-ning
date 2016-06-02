@@ -39,8 +39,7 @@
 		}
 
 	}
-
-	//jquery
+	
 	$(function() {
 		var pNum = $("#proNum").attr("class");
 		var buyNum = $("#quantity_306687").val();//当前购买数量
@@ -51,7 +50,7 @@
 
 			$.ajax({
 				type : "POST",
-				url : "pro_cart.action",
+				url : "pro_buyAmount.action",
 				data : {"Buyamount":buyNum},
 				success : function(msg) {
 
@@ -65,7 +64,7 @@
 			var buyNum = $("#quantity_306687").val();//当前购买数量
 			$.ajax({
 				type : "POST",
-				url : "order_order.action",
+				url : "pro_buyAmount.action",
 				data : {"Buyamount":buyNum},
 				success : function(msg) {
 
@@ -73,15 +72,16 @@
 
 			});
 		});
+		
 		$(".add").click(function() {
 			var pNum = $("#proNum").attr("class");
 			var buyNum = $("#quantity_306687").val();//当前购买数量
 			$.ajax({
 				type : "POST",
-				url : "order_order.action",
+				url : "pro_buyAmount.action",
 				data : {"Buyamount":buyNum},
 				success : function(msg) {
-
+					
 				}
 
 			});
@@ -371,8 +371,8 @@
 					<span> ${sessionScope.goodsinfo.pro_name}</span>
 					<p class="a">全场满99包邮</p>
 					<p>商品编码：ABPJ021-4-7</p>
-					<p>吊牌价:￥${sessionScope.goodsinfo.pro_tagprice}.00</p>
-					<p class="b">销售价:￥${sessionScope.goodsinfo.pro_price}.00</p>
+					<p>吊牌价:￥${sessionScope.goodsinfo.pro_tagprice}</p>
+					<p class="b">销售价:￥${sessionScope.goodsinfo.pro_price}</p>
 					<p>折&nbsp;&nbsp;扣:100%节省:￥0</p>
 					<p>选择颜色：</p>
 				</div>

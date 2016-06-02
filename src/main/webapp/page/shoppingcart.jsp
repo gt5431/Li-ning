@@ -21,6 +21,53 @@
 		var Buyamount  
 		window.location.href="order_order.action";
 	}
+	$(function() {
+		var pNum = $("#proNum").attr("class");
+		var buyNum = $("#quantity_306687").val();//当前购买数量
+
+		$("#quantity_306687").blur(function() {
+			var pNum = $("#proNum").attr("class");
+			var buyNum = $("#quantity_306687").val();
+
+			$.ajax({
+				type : "POST",
+				url : "pro_cart.action",
+				data : {"Buyamount":buyNum},
+				success : function(msg) {
+
+				}
+
+			});
+		});
+
+		$(".reduce").click(function() {
+			var pNum = $("#proNum").attr("class");
+			var buyNum = $("#quantity_306687").val();//当前购买数量
+			$.ajax({
+				type : "POST",
+				url : "order_order.action",
+				data : {"Buyamount":buyNum},
+				success : function(msg) {
+
+				}
+
+			});
+		});
+		$(".add").click(function() {
+			var pNum = $("#proNum").attr("class");
+			var buyNum = $("#quantity_306687").val();//当前购买数量
+			alert("点击加的buyNum==>"+buyNum);
+			$.ajax({
+				type : "POST",
+				url : "pro_buyAmount.action",
+				data : {"Buyamount":buyNum},
+				success : function(msg) {
+
+				}
+
+			});
+		});
+	});
 </script>
 </head>
 
@@ -99,12 +146,15 @@
 								<p id="danjia">¥${product.pro_price}</p>
 							</td>
 							<td>
-								<a href="" >-</a>
-	                        	<input class="quantity" value="1" style="top:0;text-align:center;width:30px;"/>
-	                        	<a href="">+</a>
+								<a class="reduce" href="javascript:void(0)" onclick="goods_buy(-1);" 
+											style="font-family: 微软雅黑;">-</a>
+	                        	<input id="quantity_306687" class="quantity" value="${product.getBuyamount()}" 
+	                        				style="top:0;text-align:center;width:30px;"/>
+	                        	<a class="add"  href="javascript:void(0)" onclick="goods_buy(1);"
+											style="font-family: 微软雅黑;">+</a>
 							</td>
 							<td>¥0.00</td>
-							<td><div class="price">¥${product.pro_price*1}</div></td>
+							<td><div class="price">¥${product.pro_price*product.getBuyamount()}</div></td>
 							<td>
 								<div onclick="collecte()"style="margin-bottom:4px;">
 									<a style="text-decoration:none;" class="line" href="javascript:void(0);">收藏</a>
@@ -141,7 +191,7 @@
 										List<Product> list=(List<Product>)session.getAttribute("cartList");
 										double sum=0.0;
 										for(Product p:list){
-											sum+=p.getPro_price();
+											sum+=p.getPro_price()*p.getBuyamount();
 										}
 									%>
 									<%=sum %>
