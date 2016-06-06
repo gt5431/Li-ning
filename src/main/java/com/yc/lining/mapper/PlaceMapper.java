@@ -1,18 +1,11 @@
 package com.yc.lining.mapper;
 
 import com.yc.lining.entity.Place;
-import java.math.BigDecimal;
+import java.util.List;
 
 public interface PlaceMapper {
-    int deleteByPrimaryKey(BigDecimal pid);
+	List<Place> findAddressByUid(int uid);
 
-    int insert(Place record);
-
-    int insertSelective(Place record);
-
-    Place selectByPrimaryKey(BigDecimal pid);
-
-    int updateByPrimaryKeySelective(Place record);
-
-    int updateByPrimaryKey(Place record);
+	int insertPlaceById(Place place);
+	
 }

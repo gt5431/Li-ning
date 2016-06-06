@@ -6,7 +6,7 @@
 		<div id="footer_content">
 			<div class="footer_content_item1">
 				<div class="item_image" style="background-position: -4px -8px;">
-					<img src="images/1-1.png" />
+					<img src="../images/1-1.png" />
 				</div>
 				<div class="item_content">
 					<div class="content_title">获取帮助</div>
@@ -16,7 +16,7 @@
 				</div>
 				<div class="footer_content_item">
 					<div class="item_image" style="background-position: -60px -8px;">
-						<img src="images/2-2.png" />
+						<img src="../images/2-2.png" />
 					</div>
 					<div class="item_content">
 						<div class="content_title">防伪查询</div>
@@ -27,7 +27,7 @@
 				</div>
 				<div class="footer_content_item2">
 					<div class="item_image" style="background-position: -113px -8px;">
-						<img src="images/3-3.png" />
+						<img src="../images/3-3.png" />
 					</div>
 					<div class="item_content">
 						<div class="content_title">售后服务</div>
@@ -66,8 +66,8 @@
 
 		</div>
 		<div id="footer_tip">
-			<a><img src="images/footer1.png" /></a> <a><img
-				src="images/footer2.png" /></a> <a><img src="images/footer3.png" /></a>
+			<a><img src="../images/footer1.png" /></a> <a><img
+				src="../images/footer2.png" /></a> <a><img src="../images/footer3.png" /></a>
 		</div>
 	</div>
 </div>

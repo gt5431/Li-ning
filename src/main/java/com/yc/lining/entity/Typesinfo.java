@@ -1,10 +1,7 @@
 package com.yc.lining.entity;
 
-import java.math.BigDecimal;
-
 public class Typesinfo {
     private int typesid;
-
     private String typename;
 
     public int getTypesid() {

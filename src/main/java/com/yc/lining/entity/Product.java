@@ -1,34 +1,48 @@
 package com.yc.lining.entity;
-public class Product {
-    private int pro_number;
 
-    private String pro_name;
+import java.io.Serializable;
 
-    private int typesid;
+public class Product implements Serializable{
+	private static final long serialVersionUID = 8375699147090209033L;
 
-    private int pro_tagprice;
+	private int pro_number;
 
-    private int proPrice;
+	private String pro_name;
 
-    private String proImg;
+	private int typesid;
 
-    private String detail;
+	private double pro_tagprice;
 
-    private String registertime;
+	private double pro_price;
 
-    private String removetime;
+	private String pro_img;
 
-    private int registerflag;
+	private String detail;
 
-    private int mid;
+	private String registertime;
 
-    private int stock;
+	private String removetime;
 
-    private String sex;
+	private int registerflag;
 
-    private String proSize;
+	private int mid;
 
-    private String color;
+	private int stock;
+
+	private String sex;
+
+	private String proSize;
+
+	private String color;
+	private int Buyamount; //¹ºÂòÊýÁ¿
+	
+	public int getBuyamount() {
+		return Buyamount;
+	}
+
+	public void setBuyamount(int buyamount) {
+		Buyamount = buyamount;
+	}
 
 	public int getPro_number() {
 		return pro_number;
@@ -54,28 +68,28 @@ public class Product {
 		this.typesid = typesid;
 	}
 
-	public int getPro_tagprice() {
+	public double getPro_tagprice() {
 		return pro_tagprice;
 	}
 
-	public void setPro_tagprice(int pro_tagprice) {
+	public void setPro_tagprice(double pro_tagprice) {
 		this.pro_tagprice = pro_tagprice;
 	}
 
-	public int getProPrice() {
-		return proPrice;
+	public double getPro_price() {
+		return pro_price;
 	}
 
-	public void setProPrice(int proPrice) {
-		this.proPrice = proPrice;
+	public void setPro_price(double pro_price) {
+		this.pro_price = pro_price;
 	}
 
-	public String getProImg() {
-		return proImg;
+	public String getPro_img() {
+		return pro_img;
 	}
 
-	public void setProImg(String proImg) {
-		this.proImg = proImg;
+	public void setPro_img(String pro_img) {
+		this.pro_img = pro_img;
 	}
 
 	public String getDetail() {
@@ -86,52 +100,12 @@ public class Product {
 		this.detail = detail;
 	}
 
-	public String getRegistertime() {
-		return registertime;
-	}
-
-	public void setRegistertime(String registertime) {
-		this.registertime = registertime;
-	}
-
-	public String getRemovetime() {
-		return removetime;
-	}
-
-	public void setRemovetime(String removetime) {
-		this.removetime = removetime;
-	}
-
-	public int getRegisterflag() {
-		return registerflag;
-	}
-
-	public void setRegisterflag(int registerflag) {
-		this.registerflag = registerflag;
-	}
-
-	public int getMid() {
-		return mid;
-	}
-
-	public void setMid(int mid) {
-		this.mid = mid;
-	}
-
 	public int getStock() {
 		return stock;
 	}
 
 	public void setStock(int stock) {
 		this.stock = stock;
-	}
-
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
 	}
 
 	public String getProSize() {
@@ -152,14 +126,17 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [pro_number=" + pro_number + ", pro_name=" + pro_name
+		return "\nProduct [pro_number=" + pro_number + ", pro_name=" + pro_name
 				+ ", typesid=" + typesid + ", pro_tagprice=" + pro_tagprice
-				+ ", proPrice=" + proPrice + ", proImg=" + proImg + ", detail="
-				+ detail + ", registertime=" + registertime + ", removetime="
-				+ removetime + ", registerflag=" + registerflag + ", mid="
-				+ mid + ", stock=" + stock + ", sex=" + sex + ", proSize="
-				+ proSize + ", color=" + color + "]";
+				+ ", pro_price=" + pro_price + ", pro_img=" + pro_img
+				+ ", detail=" + detail + ", registertime=" + registertime
+				+ ", removetime=" + removetime + ", registerflag="
+				+ registerflag + ", mid=" + mid + ", stock=" + stock + ", sex="
+				+ sex + ", proSize=" + proSize + ", color=" + color
+				+ ", Buyamount=" + Buyamount + "]";
 	}
 
-   
+	public Product() {
+
+	}
 }

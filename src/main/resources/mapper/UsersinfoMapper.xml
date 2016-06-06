@@ -6,7 +6,15 @@
 		select * from usersinfo where username=#{username} and password=#{password}
 	</select>
 	<!-- 注册操作 -->
+	
 	<insert id="insertUser" parameterType="Usersinfo">
 		insert into usersinfo values(seq_uid.nextval,#{username},#{password},'','男','',#{email},#{phone},0,0,0)
 	</insert>
+	
+	<!-- 根据用户id查找收藏的商品 -->
+	<select id="CollectionById" parameterType="int" resultType="Goodsinfo">
+		select c.u_id,p.pro_number,p.pro_img,p.pro_tagprice from  product p inner join
+			collection c on p.pro_number=c.pro_number where u_id=#{u_id}
+	</select>
+
 </mapper>

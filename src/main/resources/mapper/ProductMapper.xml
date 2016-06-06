@@ -1,16 +1,78 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.yc.lining.mapper.ProductMapper" >
-  <select id="selectAllProduct"  resultType="Product">
-    select pro_name,pro_tagprice,color,pro_number from product where typesid=1 order by pro_number desc 
-  </select>
-  <select id="selectAllTypes" resultType="Typesinfo">
-      select typesid,typename from typesinfo
-  </select>
-  <select id="selectAllProById"  parameterType="int" resultType="Product">
-     select typesid,pro_name,pro_tagprice,color,pro_number from product where typesid=#{typesid} order by pro_number desc 
-  </select>
-  <select id="selectSprotPro" resultType="Product"> 
-    select  pro_name,pro_tagprice,color,pro_number,rownum from (select * from product  order by pro_number desc ) where rownum &lt; 7 
-  </select>
+<mapper namespace="com.yc.lining.mapper.ProductMapper">
+	<!-- 查询商品详细信息 -->
+	<select id="findProductDetailsById" parameterType="Integer"	resultType="Product">
+		select * from product where pro_number=#{pro_number}
+	</select>
+
+	<select id="selectAllProduct" resultType="Product">
+		select pro_name,pro_tagprice,color,pro_number from product where typesid=1
+		order by pro_number desc
+	</select>
+	<select id="selectAllTypes" resultType="Typesinfo">
+		select typesid,typename from typesinfo
+	</select>
+	<select id="selectAllProById" parameterType="int" resultType="Product">
+		select typesid,pro_name,pro_tagprice,color,pro_number from product
+		where typesid=#{typesid} order by pro_number desc
+	</select>
+	<select id="selectSprotPro" resultType="Product">
+		select pro_name,pro_tagprice,color,pro_number,rownum from (select * from
+		product order by pro_number desc ) where rownum &lt; 7
+	</select>
+	
+	<select id="getCount" resultType="int">
+		select count(*) from product
+	</select>
+	
+	<select id="getCount2" resultType="int" parameterType="ProductBean">
+		select count(*) from product where pro_tagprice between ${lowPrice} and ${highPrice}
+	</select>
+	
+	<select id="getCount3" resultType="int" parameterType="ProductBean">
+		select count(*) from product where pro_name like '%${searchName}%'
+	</select>
+	
+ 	<select id="findAll" resultType="ProductBean">
+ 		select pro_name,pro_tagprice,color,pro_number,pro_img,pro_price from product  order by pro_number desc
+ 	</select>
+  
+	<select id="findByDate" resultType="ProductBean">
+	select * from(select a .*,rownum rn from 
+		(select color,pro_name,pro_tagprice,pro_number from product order by registertime desc) a
+		where rownum &lt;=${pageSize*pageNo} ) b where rn&gt;${pageSize*(pageNo-1)}
+	</select>
+	
+	<select id="findByPriceDesc" resultType="ProductBean">
+	select * from(select a .*,rownum rn from 
+		(select color,pro_name,pro_tagprice,pro_number from product order by pro_tagprice desc) a
+		where rownum &lt;=${pageSize*pageNo} ) b where rn&gt;${pageSize*(pageNo-1)}
+	</select>
+	
+	<select id="findByType" resultType="ProductBean" parameterType="PageUtil">
+	select * from(select a .*,rownum rn from 
+		(select color,pro_name,pro_tagprice,pro_number from product where pro_name like '%${searchName}%') a
+		where rownum &lt;=${pageSize*pageNo} ) b where rn&gt;${pageSize*(pageNo-1)}
+	</select>
+	
+	<select id="findByPrice" resultType="ProductBean" parameterType="PageUtil">
+	select * from(select a .*,rownum rn from 
+		(select color,pro_name,pro_tagprice,pro_number from product where pro_tagprice between ${lowPrice} and ${heighPrice}) a
+		where rownum &lt;=${pageNo*pageSize} ) b where rn&gt;${(pageNo-1)*pageSize}
+	</select>
+	
+	
+	<select id="findPageUtil" resultMap="ProductBeanMap">
+		select * from(select a .*,rownum rn from 
+					(select color,pro_name,pro_tagprice,pro_number from product  order by  pro_number desc) a
+				where rownum &lt;=${pageSize*pageNo} ) b where rn&gt;${pageSize*(pageNo-1)}
+	</select>
+	<resultMap type="ProductBean" id="ProductBeanMap">
+		<id property="pro_number" column="pro_number"/>
+		<result property="color" column="color"/>
+		<result property="pro_name" column="pro_name"/>
+		<result property="pro_tagprice" column="pro_tagprice"/>
+	</resultMap>
+  
 </mapper>

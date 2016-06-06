@@ -483,3 +483,49 @@ function  showPicRight(){
 		index=0;
 	}
 }
+//切换商品评论
+function click2(index,pro_number) {
+	$("#main #info #info2").css("display", "none");
+	$("#main #info #info3").css("display", "none");
+	$("#main #info #info4").css("display", "none");
+	$("#main #info #info" + index).css("display", "block");
+	$("#main #info #info1 #head_info1 li").css("background", "#000");
+	$("#main #info #info1 #head_info1 li").eq(index - 2).css("background",
+			"#F03");
+	$.ajax({
+		type : "POST",
+		url : "pinglun.action",
+		data : {"pro_number":pro_number},
+		dataType: "JSON",
+		success : function(data) {
+			   alert(data);
+			   var val= " ";
+			   if(data.length==0){
+				   val="抱歉，宝贝暂时没有评价哦";
+				   $("#info3").html(val);
+			   }else{
+				   for(var i=0;i<data.length;i++){
+				  val+='<table id="table" style="margin-left: 20px; width: 740px;"><tbody>'+
+						'<tr>'+
+							'<td id="td_left">'+
+							 '<div><p>'+data[i].comment_date+'</p></div>'+
+							'</td>'+
+							'<td id="td_left">'+
+							 ' <div><p>'+data[i].comment_content+'</p></div>'+
+							'</td>'+
+							'<td id="td_right">'+
+							   '<div>颜色分类：黑</div>'+
+							'</td>'+
+							'<td id="td_right">'+
+							'<div>'+data[i].username+'</div>'+
+							'</td>'+
+						'</tr>'+
+					'</tbody>'+
+				'</table>'
+				   }
+				   $("#info3").html(val);
+			 }
+		 }
+
+	})
+}

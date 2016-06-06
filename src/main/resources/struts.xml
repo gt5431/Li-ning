@@ -5,12 +5,62 @@
 <struts>
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="true" />
-	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.objectFactory" value="spring"/>
 	<package name="default" namespace="/" extends="json-default">
+	
+		<interceptors>
+			<interceptor name="loginInterceptor"
+				class="com.yc.lining.inteceptor.LoginInterceptor" />
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="loginInterceptor">
+				<param name="includeMethods">order</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<global-results>
+			<result name="loginInt" type="redirect">page/login.jsp</result>
+		</global-results>
+		
+		
 		<action name="*_*" class="{1}Action" method="{2}">
-			<result name="listAll">page/index.jsp</result>
+			<interceptor-ref name="myStack" />
+			<result name="{2}">index.jsp</result>
+		    <result name="listorder">MyNing1.jsp</result>
+			<result name="loginFail" type="redirect">page/login.jsp</result>
+			<result name="listAll" type="redirect">page/index.jsp</result>
+			<result name="Addcart">shoppingcart.jsp</result>
+			<result name="orderSuccess">order.jsp</result>
+			<result name="Addsuccess" type="redirect">page/order_order.action</result>
+			<result name="Finddetails">goodsinfo.jsp</result>
+			<!-- <result name="HandFail" type="redirect">page/order_order.action</result> -->
+			<result name="buyAmount"></result>
+			 <result name="comm">comment.jsp</result>
+		    <result name="commsuccess">commSuccess.jsp</result>
+		    <result name="commfail">error.jsp</result>
+		</action>
+	    <action name="code" class="codeAction" method="code">
+		</action>
+		
+		
+		<action name="findByDate" class="proAction" method="findByDate"></action>
+		
+		<action name="findByPriceDesc" class="proAction" method="findByPriceDesc"></action>
+
+		<action name="findByType" class="proAction" method="findByType"></action>
+		
+		<action name="findByPrice" class="proAction" method="findByPrice"></action>
+		
+		<action name="findByPage" class="proAction" method="findByPage">
+			<result	type="json">
+				<param name="root">pageList</param>
+			</result>
 		</action>
 		<action name="baokuan" class="baokuanAction" method="getProById">
 		</action>
+	    <action name="pinglun" class="commentDetailAction"  method="detailping">
+	          
+	    </action>
 	</package>
 </struts>

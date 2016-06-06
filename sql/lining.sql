@@ -1,11 +1,12 @@
-drop table orderform;--订单表
-drop table collection;--收藏表
-drop table place;--地址表
-drop table usersinfo;--个人信息表
-drop table product;--商品表
-drop table typesinfo;--类型表
-drop table manager;--管理员表
-drop table comments;--评论表
+drop table orderform;
+
+drop table collection;
+drop table place;
+drop table usersinfo;
+drop table product;
+drop table typesinfo;
+drop table manager;
+drop table comments;
 
 drop sequence seq_pronum;
 drop sequence seq_uid;
@@ -14,6 +15,7 @@ drop sequence seq_types;
 drop sequence seq_manager;
 drop sequence seq_place;
 drop sequence seq_collection;
+drop  sequence  seq_commentsid;
 --管理员表
 create table manager(
        mid int primary key,
@@ -21,6 +23,7 @@ create table manager(
        mpwd varchar2(20)
 );
 create sequence seq_manager start with 001 increment by 1;
+    	select o.orderid,o.riqi,o.pro_number,p.pro_name,p.color from orderform o,product p where commentsflag=0 and o.pro_number=p.pro_number and u_id=102
 
 --商品类型表
 create table typesinfo(
@@ -37,7 +40,7 @@ create  table  product(                --商品基本信息表
 	pro_price    int,							--销售价(2016-1-10增加)
     pro_img   varchar2(200),                            --商品介绍图片（路径）5
     detail varchar2(500),                                --商品的细节信息（介绍文字）6
-    registertime varchar2(20),                                    --上架日期7
+    registertime varchar2(20),                                   --上架日期7
     removetime varchar2(20),                                     --下架日期8
     registerflag int,                              --是否已下架9
     mid int ,                                             --操作员10
@@ -52,23 +55,24 @@ create sequence seq_pronum start with 1 increment by 1;
 
 
 
+       select comment_content,c.u_id,u.username  from  comments c,usersinfo u  where orderid in(select orderid  from orderform where pro_number=1) and c.u_id= u.u_id; 
 
 create table usersinfo(                     --用户信息表
     u_id     int primary key,              --用户编号
-    u_name varchar(20) ,                    --登录名
-    pwd    varchar(20),                    --密码
-    realname varchar(10),                  --真实姓名
+    username varchar(20) ,                    --登录名
+    password    varchar(20),                    --密码
+    realName varchar(10),                  --真实姓名
     sex   varchar2(8) constraint sex1_check  check(sex in('男','女','保密') ) , --性别
     birthday date,               --生日
     email    varchar2(20),       --邮箱
-    tel_number varchar2(20),              --手机号码     
+    phone varchar2(20),              --手机号码     
     balance   varchar2(10),         --余额
     score int,                   --积分
-    expenditure  varchar2(10)        --消费总额   
+    expendTotal  varchar2(10)        --消费总额   
 );
 create sequence seq_uid start with 101 increment by 1;
 
- 
+
 
 create table place(                      --收货地址表
        pid int primary key,                          --设置主键
@@ -82,7 +86,7 @@ create table place(                      --收货地址表
 create sequence seq_place start with 1 increment by 1;
 
 create table collection(             --用户收藏表
-       collection_id int primary key,            --收藏编号
+       collection_id int,            --收藏编号
         u_id int,
        pro_number int,
        constraint fk_uid foreign key(u_id) references usersinfo(u_id),
@@ -90,31 +94,36 @@ create table collection(             --用户收藏表
 );
 create sequence seq_collection start with 1 increment by 1;
 
+       select comment_content,comment_date,username from  comments c,usersinfo u  where orderid in(select orderid  from orderform where pro_number=1) and c.u_id= u.u_id; 
 
 create table orderform(         --订单
-       orderid int primary key,              --订单编号
-       riqi   date,    --购买日期
-       u_id int ,               --用户编号
-       pro_number int,              --商品编号
+       orderid int primary key ,              --订单编号
+        riqi   date,    --购买日期
+        u_id int ,               --用户编号
+        pro_number int,              --商品编号
         buy_number int,         --购买数量
         buyprice int,         -- 购买价格
         pid int,
-        orderflas int,
+        orderflag int,
+        commentflag int,
       constraint fk_p foreign key(pid) references place(pid),
      constraint fk1_id foreign key(pro_number) references  product(pro_number),
      constraint fk2_id foreign key(u_id) references  usersinfo(u_id)
 );
 create sequence seq_orderid start with 1 increment by 1;
 
-create table comments(--评论表
-       comments_id int primary key,
+ --评论表
+create table comments(
+       comment_id int primary key,
        orderid int ,
-       coment varchar2(100)，
+       comment_date date,
+       comment_content varchar2(200),
 	   u_id int,
-	   pro_number int
-	   constraint fk_comm foreign key(pid) references place(pid),
-
+	   constraint uk_id foreign key(u_id) references usersinfo(u_id),
+	   constraint uk_comm foreign key(orderid) references orderform(orderid)
 );
+create sequence seq_commentsid start with 1 increment by 1;
+
 
 
 --管理员表插入数据
@@ -122,47 +131,48 @@ insert into manager values(seq_manager.nextval,'刘赞','a');
 insert into manager values(seq_manager.nextval,'段娟','a');
 insert into manager values(seq_manager.nextval,'郭涛','a');
 insert into manager values(seq_manager.nextval,'沈源','an');
-insert into manager values(seq_manager.nextval,'罗红梅','a');
+insert into manager values(seq_manager.nextval,'sy','a');
 commit
 --商品类型表插入数据
 insert into typesinfo values(seq_types.nextval,'篮球鞋');
 insert into typesinfo values(seq_types.nextval,'跑步鞋');
-insert into typesinfo values(seq_types.nextval,'休闲鞋');
-insert into typesinfo values(seq_types.nextval,'新品');
-insert into typesinfo values(seq_types.nextval,'服装');
+insert into typesinfo values(seq_types.nextval,'网球鞋');
+insert into typesinfo values(seq_types.nextval,'T恤');
+insert into typesinfo values(seq_types.nextval,'卫衣');
+insert into typesinfo values(seq_types.nextval,'裤装');
+insert into typesinfo values(seq_types.nextval,'羽绒服');
 commit
 --商品基本信息表插入数据
-insert into product values(seq_pronum.nextval,'李宁训练系列男子针织开衫无帽衣领',1,469.00,99.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_1_1.jpg,images/color_1_2.jpg,images/color_1_3.jpg');
-insert into product values(seq_pronum.nextval,'李宁防水防滑云二代跑步鞋',2,169.00,239.00,null,null,to_date('2015-7-1','yyyy-MM-dd'),to_date('2015-7-30','yyyy-MM-dd'),0,002,100,'女','36,37,38','images/color1.jpg,images/color2.jpg,images/color3.jpg');
-insert into product values(seq_pronum.nextval,'李宁训练系列男子针织开衫无帽衣领',3,969.00,169.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_1_1.jpg,images/color_1_2.jpg,images/color_1_3.jpg');
-insert into product values(seq_pronum.nextval,'【2015新品】李宁训练系列男子针织开衫无帽衣领',3,299.00,269.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_1_1.jpg,images/color_1_2.jpg,images/color_1_3.jpg');
-insert into product values(seq_pronum.nextval,'【2015新品】李宁训练系列男子针织开衫无帽衣领',1,369.00,469.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_1_1.jpg,images/color_1_2.jpg,images/color_1_3.jpg');
-insert into product values(seq_pronum.nextval,'李宁防水防滑云二代跑步鞋',2,369.00,239.00,null,null,to_date('2015-7-1','yyyy-MM-dd'),to_date('2015-7-30','yyyy-MM-dd'),0,002,100,'女','36,37,38','images/color1.jpg,images/color2.jpg,images/color3.jpg');
-insert into product values(seq_pronum.nextval,'【2015新品】李宁训练系列男子针织开衫无帽衣领',1,169.00,169.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color1.jpg,images/color2.jpg,images/color3.jpg');
-insert into product values(seq_pronum.nextval,'【2015新品】李宁训练系列男子针织开衫无帽衣领',3,129.00,69.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_1_1.jpg,images/color_1_2.jpg,images/color_1_3.jpg');
-insert into product values(seq_pronum.nextval,'【2015新品】李宁训练系列男子针织开衫无帽衣领',1,249.00,169.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color1.jpg,images/color2.jpg,images/color3.jpg');
-insert into product values(seq_pronum.nextval,'李宁防水防滑云二代跑步鞋',2,369.00,239.00,null,null,to_date('2015-7-1','yyyy-MM-dd'),to_date('2015-7-30','yyyy-MM-dd'),0,002,100,'女','36,37,38','images/color1.jpg,images/color2.jpg,images/color3.jpg');
-insert into product values(seq_pronum.nextval,'【2015新品】李宁训练系列男子针织开衫无帽衣领',5,469.00,369.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_1_1.jpg,images/color_1_2.jpg,images/color_1_3.jpg');
-insert into product values(seq_pronum.nextval,'【2015新品】李宁训练系列男子针织开衫无帽衣领',4,669.00,569.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_6_1.jpg,images/color_6_2.jpg,images/color_6_3.jpg');
-insert into product values(seq_pronum.nextval,'【2015新品】李宁训练系列男子针织开衫无帽衣领',4,669.00,569.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_6_1.jpg,images/color_6_2.jpg,images/color_6_3.jpg');
-insert into product values(seq_pronum.nextval,'【2015新品】李宁训练系列男子针织开衫无帽衣领',4,669.00,569.00,null,null,to_date('2015-5-1','yyyy-MM-dd'),to_date('2015-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_5_1.jpg,images/color_5_2.jpg,images/color_5_3.jpg');
+insert into product values(seq_pronum.nextval,'李宁征荣92 II男子经典休闲鞋',1,215,169,'images/img_1_1.png,images/img_1_2.png,images/img_1_3.png,images/img_1_4.png,images/img_1_5.png',
+'李宁征荣92 II经典休闲鞋，运用简洁的色彩搭配加上复古跑鞋风格，简单大方，经典复古。侧面的李宁品牌标志正是“正交叉转体90度经单环起倒立落下成骑撑”这个被国际体联命名为“李宁交叉”的动作，体现了李宁先生在运动中的创新精神。鞋子上整齐的车线，增添鞋子的品质感。鞋底采用橡胶+EVA复合底，耐磨防滑，使用寿命长。',
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_1_1.jpg,images/color_1_2.jpg,images/color_1_3.jpg');
+insert into product values(seq_pronum.nextval,'李宁男子减震跑鞋',1,256,216,'images/img_2_1.png,images/img_2_2.png,images/img_2_3.jpg,images/img_2_4.png,images/img_2_5.png',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_2_1.jpg,images/color_2_2.jpg,images/color_2_3.jpg');
 
-commit
-    select  pro_name,pro_tagprice,color,pro_number,rownum from (select * from product  order by pro_number desc ) where rownum<7
+insert into product values(seq_pronum.nextval,'【2016新品】李宁男子轻质跑鞋',1,189,168,'images/img_3_1.png,images/img_3_2.png,images/img_3_3.png,images/img_3_4.png,images/img_3_5.png',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_3_1.jpg,images/color_3_2.jpg,images/color_3_3.jpg');
+insert into product values(seq_pronum.nextval,'李宁男子城市户外鞋',1,189,168,'images/img_4_1.png,images/img_4_2.png,images/img_4_3.png,images/img_4_4.png,images/img_4_5.png',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_4_1.jpg,images/color_4_2.jpg,images/color_4_3.jpg');
+	
+insert into product values(seq_pronum.nextval,'李宁征荣92 II男子经典休闲鞋',1,365,325,'images/img_5_1.png,images/img_5_2.png,images/img_5_3.png,images/img_5_4.png,images/img_5_5.png',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'男','39,40,41','images/color_5_1.jpg,images/color_5_2.jpg,images/color_5_3.jpg');
+insert into product values(seq_pronum.nextval,'李宁溢彩女子轻质跑鞋',1,325,296,'images/img_6_1.png,images/img_6_2.jpg,images/img_6_3.png,images/img_6_4.png,images/img_6_5.png',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'女','39,40,41','images/color_6_1.jpg,images/color_6_2.jpg,images/color_6_3.jpg');
+insert into product values(seq_pronum.nextval,'李宁Air-Fluid W女子都市健步鞋',1,236,223,'images/img_7_1.png,images/img_7_2.png,images/img_7_3.png,images/img_7_4.jpg,images/img_7_5.jpg',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'女','39,40,41','images/color_7_1.jpg,images/color_7_2.jpg,images/color_7_3.jpg');
+insert into product values(seq_pronum.nextval,'李宁征荣92 II女子经典休闲鞋',1,375,296,'images/img_8_1.jpg,images/img_8_2.jpg,images/img_8_3.jpg,images/img_8_4.jpg,images/img_8_5.jpg',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'女','39,40,41','images/color_8_1.jpg,images/color_8_2.jpg,images/color_8_3.jpg');
+insert into product values(seq_pronum.nextval,'李宁女子城市户外鞋',1,375,296,'images/img_9_1.png,images/img_9_2.png,images/img_9_3.jpg,images/img_9_4.png,images/img_9_5.png',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'女','39,40,41','images/color_9_1.jpg,images/color_9_2.jpg,images/color_9_3.jpg');
+insert into product values(seq_pronum.nextval,'李宁女子轻质冬季防滑跑鞋',1,375,296,'images/img_10_1.jpg,images/img_10_2.jpg,images/img_10_3.png,images/img_10_4.jpg,images/img_10_5.jpg',null,
+to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'女','39,40,41','images/color_10_1.jpg,images/color_10_2.jpg,images/color_10_3.jpg');
 
-delete from typesinfo;
-delete from product;
-delete from orderform;
-delete from collection;
-delete from place;
-
-
-select * from typesinfo;
 --用户信息表插入数据
 insert into usersinfo values(seq_uid.nextval,'老王','aaa','汪汪汪','男',to_date('1995-12-12','yyyy-MM-dd'),'1099176690@qq.com','15073485093',300.5,500,1000.0);
 insert into usersinfo values(seq_uid.nextval,'老李','aaa','李克强','男',to_date('1995-11-12','yyyy-MM-dd'),'2099176690@qq.com','15173485093',0,300,2000.0);
 insert into usersinfo values(seq_uid.nextval,'老金','aaa','金三胖','男',to_date('1995-10-12','yyyy-MM-dd'),'3099176690@qq.com','15273485093',0,500,800.0);
 commit
+
 
 
 --收货地址表插入数据
@@ -175,16 +185,22 @@ commit
 insert into collection values(seq_collection.nextval,101,1);
 insert into collection values(seq_collection.nextval,102,1);
 insert into collection values(seq_collection.nextval,103,2);
+insert into collection values(seq_collection.nextval,101,2);
 commit
 --订单表插入数据
-insert into orderform values(seq_orderid.nextval,Sysdate,101,1,1,'99.00',1,1);
-insert into orderform values(seq_orderid.nextval,to_date('2016-1-1','yyyy-MM-dd'),101,1,1,'199.00',2,1);
-insert into orderform values(seq_orderid.nextval,to_date('2016-1-2','yyyy-MM-dd'),102,2,2,'399.00',3,1);
-insert into orderform values(seq_orderid.nextval,to_date('2016-1-3','yyyy-MM-dd'),103,3,3,'269.00',4,1);
+insert into orderform values(seq_orderid.nextval,Sysdate,101,1,1,'99.00',1,1,0);
+insert into orderform values(seq_orderid.nextval,to_date('2016-1-1','yyyy-MM-dd'),101,1,1,'199.00',2,1,0);
+insert into orderform values(seq_orderid.nextval,to_date('2016-1-2','yyyy-MM-dd'),102,2,2,'399.00',3,1,0);
+insert into orderform values(seq_orderid.nextval,to_date('2016-1-3','yyyy-MM-dd'),103,3,3,'269.00',4,1,0);
 commit
 --评论表插入数据
-insert into comments values(1,'好！');
-insert into comments values(2,'差评！');
+insert into comments values(seq_commentsid.nextval,1,sysdate,'宝贝很好',101);
+insert into comments values(seq_commentsid.nextval,3,sysdate,'物流比较慢',102);
+insert into comments values(seq_commentsid.nextval,2,sysdate,'不好',102);
+insert into comments values(seq_commentsid.nextval,1,sysdate,'鞋子不错，下次再来',103);
+insert into comments values(seq_commentsid.nextval,2,sysdate,'物流好快',102);
+commit
+       select comment_content,c.u_id,u.username  from  comments c,usersinfo u  where orderid in(select orderid  from orderform where pro_number=1) and c.u_id= u.u_id; 
 
 
 -----需要手动插入的数据表
@@ -198,9 +214,12 @@ select * from orderform;  --|
 select * from place;	  --|
 select * from collection; --|
 select  * from comments;  --|
+
+	select pro_name,pro_tagprice,color,pro_number from product where typesid=1 and pro_number < 11
+		order by pro_number desc
 -----------------------------
 commit;
-
+delete from product where pro_number=2;
 delete sequence seq_place;
 delete manager;
 update orderform set orderflas=1 where u_id=101
@@ -252,12 +271,23 @@ insert into product values(seq_pronum.nextval,'李宁女子城市户外鞋',1,37
 to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'女','39,40,41','images/color_9_1.jpg,images/color_9_2.jpg,images/color_9_3.jpg');
 insert into product values(seq_pronum.nextval,'李宁女子轻质冬季防滑跑鞋',1,375,296,'images/img_10_1.jpg,images/img_10_2.jpg,images/img_10_3.png,images/img_10_4.jpg,images/img_10_5.jpg',null,
 to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'女','39,40,41','images/color_10_1.jpg,images/color_10_2.jpg,images/color_10_3.jpg');
+commit;
 	
 	select c.u_id,p.pro_number,p.pro_img,p.pro_tagprice from  product p inner join collection c on p.pro_number=c.pro_number where u_id=101
 	
 insert into orderform values(seq_orderid.nextval,to_date('2015-7-1','yyyy-MM-dd'),101,18,4,375,1,1)	
 select * from product
 select * from orderform
-
+select * from usersinfo
 select * from place
+select * from collection
 select * from(select a .*,rownum rn from (select  orderid,to_char(riqi,'yyyy-MM-dd'),u_id,pro_number,buy_number,buyprice,pid,orderflas from orderform order by orderid asc)a)
+insert into ORDERFORM (ORDERID, RIQI, U_ID,PRO_NUMBER, BUY_NUMBER, BUYPRICE,PID)
+    	values (seq_orderid.nextval,sysdate,101,0,1,216.0,1)
+select * from product where pro_number=15;
+commit;
+select color,pro_name,pro_tagprice,pro_number from product where pro_name like '%男%'
+select count(*) from product where pro_tagprice between 1 and 300
+
+select c.u_id,p.pro_number,p.pro_img,p.pro_tagprice from  product p inner join
+			collection c on p.pro_number=c.pro_number where u_id=101

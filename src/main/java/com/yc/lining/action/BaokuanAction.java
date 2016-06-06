@@ -1,72 +1,65 @@
+package com.yc.lining.action;
 
-
-	package com.yc.lining.action;
-
-	import java.io.IOException;
-
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-	import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.LogManager;
-	import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-	import com.google.gson.Gson;
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ModelDriven;
-
 import com.yc.lining.entity.Product;
-import com.yc.lining.entity.Typesinfo;
-import com.yc.lining.entity.Usersinfo;
 import com.yc.lining.service.ProductService;
 import com.yc.lining.service.TypeInfoService;
-import com.yc.lining.service.UserService;
 
-	@Controller("baokuanAction")
-	public class BaokuanAction implements ModelDriven<Product>,SessionAware{
-		@Autowired
-		private TypeInfoService typeService;
-	    @Autowired
-		private ProductService proService;
-		
-		private Product product;
-		private Map<String, Object> session;
-		
-		//çˆ†æ¬¾æ¨èä¸‹çš„åˆ†ç±»å•†å“
-		public void getProById(){
-			LogManager.getLogger().debug("å–åˆ°çš„å•†å“ç±»å‹ï¼š" + product.getTypesid());
-			//å–åˆ°å“åº”çš„æ•°æ®ï¼Œæ ¹æ®ä¹¦ç­¾idå–åˆ°å¯¹åº”çš„ç½‘ç«™
-			List<Product> pro = proService.getAllProById(product.getTypesid());
-			Gson gson = new Gson();//æŠŠå¯¹è±¡ä¸jsonå­—ç¬¦ä¸²è½¬æ¢å¯¹è±¡
-			String jsonResult = gson.toJson(pro);//æŠŠå¯¹è±¡è½¬æ¢æˆjsonå­—ç¬¦ä¸²
-			//å–åˆ°å“åº”å¯¹è±¡
-			HttpServletResponse response = ServletActionContext.getResponse();//å–åˆ°å“åº”å¯¹è±¡
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("charset=utf-8");
-			
-			try {
-				PrintWriter out = response.getWriter();
-				out.println(jsonResult);
-				out.flush();
-				out.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		@Override
-		public Product getModel() {
-			product = new Product();
-			return product;
+@Controller("baokuanAction")
+public class BaokuanAction implements ModelDriven<Product>,SessionAware{
+	@Autowired
+	private TypeInfoService typesService;
+	@Autowired
+	private ProductService productService;
+
+	private Product product;
+	private Map<String, Object> session;
+
+	//±¬¿îÍÆ¼öÏÂµÄ·ÖÀàÉÌÆ·
+	public void getProById(){
+		//È¡µ½ÏìÓ¦µÄÊı¾İ£¬¸ù¾İÊéÇ©idÈ¡µ½¶ÔÓ¦µÄÍøÕ¾
+		List<Product> pro = productService.getAllProById(product.getTypesid());
+		Gson gson = new Gson();//°Ñ¶ÔÏóÓëjson×Ö·û´®×ª»»¶ÔÏó
+		String jsonResult = gson.toJson(pro);//°Ñ¶ÔÏó×ª»»³Éjson×Ö·û´®
+		//È¡µ½ÏìÓ¦¶ÔÏó
+		HttpServletResponse response = ServletActionContext.getResponse();//È¡µ½ÏìÓ¦¶ÔÏó
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("charset=utf-8");
+
+		try {
+			PrintWriter out = response.getWriter();
+			out.println(jsonResult);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
-		@Override
-		public void setSession(Map<String, Object> session) {
-			this.session = session;
-		}
+	}
+	
+	@Override
+	public Product getModel() {
+		product = new Product();
+		return product;
 	}
 
+	@Override
+	public void setSession(Map<String, Object> session) {
+		
+		this.session = session;
+	}
+}
 
