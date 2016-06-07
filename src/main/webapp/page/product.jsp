@@ -9,72 +9,96 @@
 
 <link href="../css/Common1.css" rel="stylesheet" type="text/css"></link>
 <link href="../css/Product.css" rel="stylesheet" type="text/css"></link>
+<link type="text/css" href="../css/comm_header.css" rel="stylesheet" />
+
 <script type="text/javascript" src="../js/jquery-1.11.3.js" /></script>
 <script type="text/javascript" src="../js/public.js" /></script>
+<script type="text/javascript" src="../js/login.js" /></script>
+<script type="text/javascript" src="../js/global.js" /></script>
 
 <script type="text/javascript">
-$(function(){
-	$(".img_show").mouseover(function(){
-	    var id =this.id;
-	    var s =id.split("_")[1]; 
-	    var  obj = $(this).parent().parent().find("div").first();
-	    obj.find("img").css("display","none");
-	    obj.find("#big_top"+s).css("display","block");
+    $(function(){
+	    	$(".img_show").mouseover(function(){
+	    		var id =this.id;
+	    		var s =id.split("_")[1]; 
+	    		var  obj = $(this).parent().parent().find("div").first();
+	    		obj.find("img").css("display","none");
+	    		obj.find("#big_top"+s).css("display","block");
 	    		
-	});
-});
+	    	});
+	    	
+	////////页面一加载就刷新的部分 
+	        $.ajax({
+	        	type:"POST",
+	        	url:"findByPage.action?num=1",
+	        	dataType:"JSON",
+	        	success:function(data){
+	        		var val="";
+	    			$.each(data[1], function(indexs,items){
+	    				val+= '<div id="mainContent_center_center_div1" >'
+	    		         +'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
+	    		         +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block"></a>'
+	    		         +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none"></a>'
+	    		         +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none"></a>'
+	    		         +' </div>'
+	    		         +'<div id="mainContent_center_center_div1_2" class="small_button">'
+	    		         +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)"></a>'
+	    		         +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)"></a>'
+	    		         +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)"></a>'
+	    		         +' </div>'
+	    		         +' <div id="mainContent_center_center_div1_3">'
+	    		         +items.pro_name
+	    		         +'</div>'
+	    		         +'<div id="mainContent_center_center_div1_4">￥'+items.pro_tagprice+'</div>'
+	    		         +'</div>'
+	    			});
+	    			$("#mainContent_center_center").html(val);
+	    			$("#pageutil").text("当前第  "+data[0].pageNo+"页/总共"+data[0].totalPages+" 页");
+	        	}
+	        });
+    });
   
     function show(index){
-    		
-			 for(var i=1;i<=3;i++){
-			 	 
-			 	var id ="#big_top"+i;
-			 	
-			       if(i==index){
-			       	   document.getElementById("big_top"+index).style.display='block';
-			       	  
-			       }else{
-			       	document.getElementById("big_top"+i).style.display='none';
-			    
-			       	}
+		for(var i=1;i<=3;i++){
+			 var id ="#big_top"+i;
+			 if(i==index){
+			    document.getElementById("big_top"+index).style.display='block';
+			 }else{
+			   	document.getElementById("big_top"+i).style.display='none';
 			 }
-		}	
-		
-		
-		function findPageUtil(index){
-			var flag=$("#pageutil").attr("flag");
-			alert(flag);
-  			if(flag=="findByPrice"){
-  				findByPrice(index);
-  			}else if(flag=="ByPriceDesc"){
+		}
+	}	
+    
+	function findPageUtil(index){
+		var flag=$("#pageutil").attr("flag");
+  		if(flag=="findByPrice"){
+  			findByPrice(index);
+  		}else if(flag=="ByPriceDesc"){
   				findByPriceDesc(index);
-  			}else if(flag=="findByDate"){
+  		}else if(flag=="findByDate"){
   				findByDate(index);
-  			}else if(flag=="findByType"){
-  				findByType(index);
-  			}else{
-  				alert("fenye--"+index);
+  		}else if(flag=="findByType"){
+  				searchInfo(index);
+  		}else{
   				$.post(
-  					"pro_findByPage.action",
+  					"findByPage.action",
   					{num:index,flag:flag},
   					function(data){
-  						console.info(data[1]);
   						var val="";
   						$.each(data[1], function(indexs,items){
-  							alert(items.color.split(",")[0]);
   							val+= '<div id="mainContent_center_center_div1" >'
   			                    		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
-  			                    	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block" /></a>'
-  			                           +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none" /></a>'
-  			                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none" /></a>'
+  			                    	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block"></a>'
+  			                           +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none"></a>'
+  			                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none"></a>'
   			                           +' </div>'
   			                            +'<div id="mainContent_center_center_div1_2" class="small_button">'
-  			                            +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
-  			                            +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
-  			                            +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
+  			                            +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)"></a>'
+  			                            +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)"></a>'
+  			                            +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)"></a>'
   			                           +' </div>'
   			                           +' <div id="mainContent_center_center_div1_3">'
-  			                        		+items.pro_name
+  			                        +items.pro_name
   			                           +' </div>'
   			                          +'  <div id="mainContent_center_center_div1_4">￥'+items.pro_tagprice+'</div>'
   			               		     +'   </div>'
@@ -88,32 +112,29 @@ $(function(){
 		
 	   	//根据价格分页降序排列
 	   	function findByPriceDesc(index){
-<<<<<<< HEAD
-	   		
-	   			$.post("pro_findByPriceDesc.action",{num:index},function(data){
-	   				alert("index"+index+"data==>"+data[1].pro_number);
-=======
+	   		$("#lowPrice").val("");
+			$("#highPrice").val("");
+			$("#search").val("");
 	   			$.post("findByPriceDesc.action",{num:index},function(data){
->>>>>>> origin/Duanjuan
 	   			var val="";
 	   				$.each(data[1], function(indexs,items){
 					val+= '<div id="mainContent_center_center_div1">'
 	                    		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
-	                    	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block" /></a>'
-	                            +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none" /></a>'
-	                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none" /></a>'
-	                            +'</div>'
+	                    	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block"></a>'
+	                           +'<a href="pro_details.action?pro_number='+items.pro_number+'"> <img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none"></a>'
+	                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none"></a>'
+	                           +' </div>'
 	                            +'<div id="mainContent_center_center_div1_2" class="small_button">'
 	                          
-	                            +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
-	                            +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
-	                            +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
-	                            +' </div>'
-	                            +' <div id="mainContent_center_center_div1_3">'
-	                            +items.pro_name
-	                            +'</div>'
-	                            +'<div id="mainContent_center_center_div1_4">￥'+items.pro_tagprice+'</div>'
-	               		        +'</div>'
+	                            +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)"></a>'
+	                            +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)"></a>'
+	                            +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)"></a>'
+	                           +' </div>'
+	                           +' <div id="mainContent_center_center_div1_3">'
+	                        +items.pro_name
+	                           +' </div>'
+	                          +'  <div id="mainContent_center_center_div1_4">￥'+items.pro_tagprice+'</div>'
+	               		     +'   </div>'
 				});
 	   				$("#mainContent_center_center").html(val);
 	   				$("#pageutil").text("当前第  "+data[0].pageNo+"页/总共"+data[0].totalPages+" 页");
@@ -123,8 +144,10 @@ $(function(){
 		
 	  //根据日期分页查询
 		function findByDate(index){
-		alert("index"+index);
-			$.post("pro_findByDate.action",{num:index},function(data){
+			$("#lowPrice").val("");
+			$("#highPrice").val("");
+			$("#search").val("");
+			$.post("findByDate.action",{num:index},function(data){
 			var val="";
 				$.each(data[1], function(indexs,items){
 			val+= '<div id="mainContent_center_center_div1">'
@@ -134,9 +157,9 @@ $(function(){
                      	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none"></a>'
                        +' </div>'
                         +'<div id="mainContent_center_center_div1_2" class="small_button">'
-                        +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
-                        +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
-                        +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
+                        +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)"></a>'
+                        +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)"></a>'
+                        +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)"></a>'
                        +' </div>'
                        +' <div id="mainContent_center_center_div1_3">'
                     +items.pro_name
@@ -150,89 +173,64 @@ $(function(){
 			},"json");
 	}
 	   	
-	 	/* //根据名称模糊查询
-		function findByType(index){
-	 		var pro_Name=$("#search").val();
-			$.post("pro_findByType.action",{num:index,searchName:pro_Name},function(data){
-				var val="";
-	   				$.each(data[1], function(indexs,items){
-					val+= '<div id="mainContent_center_center_div1" >'
-	                    		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
-	                    	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block"></a>'
-	                           +'<a href="pro_details.action?pro_number='+items.pro_number+'"> <img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none"></a>'
-	                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none"></a>'
-	                           +' </div>'
-	                            +'<div id="mainContent_center_center_div1_2" class="small_button">'
-	                            +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
-	                            +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
-	                            +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
-	                           +' </div>'
-	                           +' <div id="mainContent_center_center_div1_3">'
-	                        +items.pro_name
-	                           +' </div>'
-	                          +'  <div id="mainContent_center_center_div1_4">￥'+items.pro_tagprice+'</div>'
-	               		     +'   </div>'
-				});
-	   				$("#mainContent_center_center").html(val);
-	   				$("#pageutil").text("当前第  "+data[0].pageNo+"页/总共"+data[0].totalPages+" 页");
-	   				$("#pageutil").attr("flag","findByType");
-	   			},"json");
-		} */ 	
-	   	
-	   	
-	   	
    	//按照价格区间查询
    	function findByPrice(index){
+   			$("#search").val("");
 			var lowPrice=$("#lowPrice").val();
 			var highPrice=$("#highPrice").val();
-			$.post("pro_findByPrice.action","lowPrice="+lowPrice+"&highPrice="+highPrice+"&num="+index,function(data){
-			var val="";
-				$.each(data[1], function(indexs,items){
-					val+= '<div id="mainContent_center_center_div1">'
-                		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
-                	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top1" style="display:block"></a>'
-                       +'<a href="pro_details.action?pro_number='+items.pro_number+'"> <img src="../'+items.color+'" class="big_top" id="big_top2" style="display:none"></a>'
-                     	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color+'" class="big_top" id="big_top3" style="display:none"></a>'
-                       +' </div>'
-                        +'<div id="mainContent_center_center_div1_2" class="small_button">'
-                        +'<img src="../'+items.color+'" class="img1" id="img1_1" onMouseOver="show(1)">'
-                        +'<img src="../'+items.color+'" useOver="show(2)">'
-                        +'<img src="../'+items.color+'" class="img3" id="img1_3" onMouseOver="show(3)">'
-                       +' </div>'
-                       +' <div id="mainContent_center_center_div1_3">'
-                    +items.pro_name
-                       +' </div>'
-                      +'  <div id="mainContent_center_center_div1_4">￥'+items.pro_tagprice+'</div>'
-           		     +'   </div>'
-		});
-				$("#mainContent_center_center").html(val);
-				$("#pageutil").text("当前第  "+data[0].pageNo+"页/总共"+data[0].totalPages+" 页");
-				$("#pageutil").attr("flag","findByPrice");
+			$.post("findByPrice.action",{lowPrice:lowPrice,num:index,highPrice:highPrice},function(data){
+				var val= "";
+				if(null == data[1] || 0 == data[1].length){
+					val+= '很抱歉，没有您所要的相关数据!! :)';
+					$("#mainContent_center_center").html(val);
+	   				$("#pageutil").text("当前第  "+1+"页/总共"+1+" 页");
+	   				$("#pageutil").attr("flag","findByType");
+				}else{
+					$.each(data[1], function(indexs,items){
+						val+= '<div id="mainContent_center_center_div1">'
+	                		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
+	                	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block"></a>'
+	                       +' <a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none"></a>'
+	                     	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none"></a>'
+	                       +' </div>'
+	                        +'<div id="mainContent_center_center_div1_2" class="small_button">'
+	                        +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)"></a>'
+	                        +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)"></a>'
+	                        +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)"></a>'
+	                       +' </div>'
+	                       +' <div id="mainContent_center_center_div1_3">'
+	                    +items.pro_name
+	                       +' </div>'
+	                      +'  <div id="mainContent_center_center_div1_4">￥'+items.pro_tagprice+'</div>'
+	           		     +'   </div>'
+					});
+					$("#mainContent_center_center").html(val);
+					$("#pageutil").text("当前第  "+data[0].pageNo+"页/总共"+data[0].totalPages+" 页");
+					$("#pageutil").attr("flag","findByPrice");
+				}
 			},"json");
-			
 	}
+   
    	
-		function getid(index){
-			
-			$.ajax({
-		 				type:"POST",
-		 				url:"goods.do",
-		 				data:"oop=look&id="+index,
-		 				success:function(data){
+function getid(index){
+	$.ajax({
+		type:"POST",
+		url:"goods.do",
+		data:"oop=look&id="+index,
+		success:function(data){
 		 					
-	 					}
-	 				});
-			
-			$.ajax({
-		 				type:"POST",
-		 				url:"goods.do",
-		 				data:"oop=finddetails&id="+index,
-		 				success:function(data){
-		 					window.location.href="goodsinfo.jsp";
-	 					}
-	 				});
-		}
-    </script>
+	 	}
+	});
+	$.ajax({
+		 type:"POST",
+		 url:"goods.do",
+		 data:"oop=finddetails&id="+index,
+		 success:function(data){
+		 	window.location.href="goodsinfo.jsp";
+	 	 }
+	});
+}
+</script>
 </head>
 
 <body>
@@ -280,7 +278,7 @@ $(function(){
 					style="text-decoration: none; color: #000;">新品↓</a></span> <span
 					id="mainContent_center_top3"><a href="javascript:void(0)"
 					style="text-decoration: none; color: #000;">热销↓</a></span> <span
-					id="mainContent_center_top4" onclick="findByPriceDesc()"><a
+					id="mainContent_center_top4" onclick="findByPriceDesc(0)"><a
 					href="javascript:void(0)"
 					style="text-decoration: none; color: #000;">价格↓</a></span>
 
@@ -299,39 +297,19 @@ $(function(){
 								style="text-decoration: none; color: #000;">确定</a> </span>
 						</div>
 					</form>
-
 				</div>
-
 			</div>
 
 			<div id="mainContent_center_center">
-				<c:forEach items="${sessionScope.products}" var="products">
-					<div id="mainContent_center_center_div1">
-						<div id="mainContent_center_center_div1_1"
-							onClick="getId(${products.pro_number})">
-							<a href="pro_details.action?pro_number=${products.pro_number}">
-								<img src="../${products.color.split(",")[0]}" />
-							</a>
-						</div>
-						<div id="mainContent_center_center_div1_2">
-							<img src="../${products.color.split(",")[0]}" class="img1">
-							<img src="../${products.color.split(",")[1]}" class="img2">
-							<img src="../${products.color.split(",")[2]}" class="img3">
-						</div>
-						<div id="mainContent_center_center_div1_3">
-							${products.pro_name}</div>
-						<div id="mainContent_center_center_div1_4">￥${products.pro_tagprice}</div>
-					</div>
-				</c:forEach>
+				
 			</div>
-
 			<div id="page">
 				<center>
 					<span onclick="findPageUtil(1)">首页</span> 
 					<span onclick="findPageUtil(2)">上一页</span> 
-					<span onclick="findPageUtil(3)">下一页</span>
+					<span onclick="findPageUtil(3)">下一页</span> 
 					<span onclick="findPageUtil(4)">尾页</span> 
-					<span id="pageutil" flag="defaultfind">当前第${sessionScope.pageUtil.pageNo}页/总共${sessionScope.pageUtil.totalPages} 页</span>
+					<span id="pageutil"></span>
 				</center>
 			</div>
 		</div>

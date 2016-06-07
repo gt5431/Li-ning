@@ -8,9 +8,13 @@
 <title>登录页面</title>
 <link type="text/css" href="../css/Common1.css" rel="stylesheet" />
 <link type="text/css" href="../css/login.css" rel="stylesheet" />
+<link type="text/css" href="../css/comm_header.css" rel="stylesheet" />
+
 <script type="text/javascript" src="../js/jquery-1.11.3.js" /></script>
 <script type="text/javascript" src="../js/public.js" /></script>
 <script type="text/javascript" src="../js/login.js" /></script>
+<script type="text/javascript" src="../js/login.js" /></script>
+<script type="text/javascript" src="../js/global.js" /></script>
 </head>
 
 <body>
@@ -41,15 +45,14 @@
 					</div>
 					<span style="margin-left: 60px;"><a href="ForgetPwd.jsp"
 						style="text-decoration: none;">忘记密码？</a></span>
-					<div class="line" style="float: left;">
+					<div class="line" style="float:left;">
 						<label style="font-weight: bold; margin-top: 14px;">验 证 码:</label>
 						<input type="text" id="checkcode" name="checkcode"
-							style="margin-left: 10px; margin-top: 18px; width: 100px; height: 38px;" />
-						<span class="fl p8 base"> <img onclick="recode()"
+							style="margin-left: 10px;width: 100px; height: 38px;" />
+						 <img onclick="recode()"
 							class="code" title="看不清楚，点击获得新图片"
-							style="cursor: pointer; height: 39px; padding-right: 30px;"
+							style="cursor: pointer; height: 39px;margin-left:30px;"
 							src="../images/yanzhma.jpg" />
-						</span> 
 						<span id="yzm_error" class="note">输入的验证码错误</span> <span
 							id="yzm_error1" class="note">请输入验证码</span>
 					</div>

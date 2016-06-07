@@ -718,6 +718,15 @@ body{
     line-height: 16px;
     width:100%;
 }
+.Sport_list .rl_name{
+	width:120px;
+	height:16px;
+	overflow: hidden;
+}
+
+.Sport_list .rl_category{
+	color:red;
+}
 .Sport_list li a em {
     display: block;
     float: right;
@@ -741,12 +750,15 @@ body{
 }
 /*--中间结束--*/
 
-
+#exterFooter{
+	width:88%;
+	height:500px;
+	border: blue 2px solid;
+}
 /*--------------------这里是底部样式的开始-------------------*/
 #footer_list{
 	width:1349px;
 	height:100px;
-	/*margin-bottom:26px;*/
 }
 
 #footer_list #footer{

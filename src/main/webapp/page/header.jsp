@@ -6,6 +6,7 @@
 	<div id="list_title_inner">
 		<div id="navigation_left">
 			<span class="login">LI-NING&nbsp;&nbsp;李宁</span>
+			<input id="UidHidden"  hidden="hidden" value="${sessionScope.usersinfo.u_id}" />
 			<c:choose>
 				<c:when test="${sessionScope.usersinfo.username != null}">
 						 欢迎您,${sessionScope.usersinfo.username}
@@ -20,31 +21,40 @@
 
 <script type="text/javascript">
     function searchInfo(index){
+    	$("#lowPrice").val("");
+		$("#highPrice").val("");
     	var pro_Name=$("#search").val();
-		 $.post("pro_findByType.action",{searchName:pro_Name,num:index},function(data){
+		 $.post("findByType.action",{searchName:pro_Name,num:index},function(data){
 			var val="";
-   				$.each(data[1], function(indexs,items){
-				val+= '<div id="mainContent_center_center_div1" >'
-                    		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
-                    	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block"></a>'
-                           +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none"></a>'
-                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none"></a>'
-                           +' </div>'
-                            +'<div id="mainContent_center_center_div1_2" class="small_button">'
-                            +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
-                            +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
-                            +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
-                           +' </div>'
-                           +' <div id="mainContent_center_center_div1_3">'
-                        +items.pro_name
-                           +' </div>'
-                          +'  <div id="mainContent_center_center_div1_4">￥'+items.pro_tagprice+'</div>'
-               		     +'   </div>'
-			});
-   				$("#mainContent_center_center").html(val);
-   				$("#pageutil").text("当前第  "+data[0].pageNo+"页/总共"+data[0].totalPages+" 页");
+			if(0 == data[1].length || null == data[1]){
+				val+= '很抱歉，没有您所要的相关数据!! :)';
+				$("#mainContent_center_center").html(val);
+				$("#pageutil").text("当前第  "+1+"页/总共"+1+" 页");
    				$("#pageutil").attr("flag","findByType");
-   			},"json");
+			}else{
+				$.each(data[1], function(indexs,items){
+					val+= '<div id="mainContent_center_center_div1" >'
+	                    		+'<div id="mainContent_center_center_div1_1" onClick="getid('+items.pro_number+')">'
+	                    	    +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[0]+'" class="big_top" id="big_top1" style="display:block"></a>'
+	                           +'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[1]+'" class="big_top" id="big_top2" style="display:none"></a>'
+	                         	+'<a href="pro_details.action?pro_number='+items.pro_number+'"><img src="../'+items.color.split(",")[2]+'" class="big_top" id="big_top3" style="display:none"></a>'
+	                           +' </div>'
+	                            +'<div id="mainContent_center_center_div1_2" class="small_button">'
+	                            +'<img src="../'+items.color.split(",")[0]+'" class="img1" id="img1_1" onMouseOver="show(1)">'
+	                            +'<img src="../'+items.color.split(",")[1]+'" class="img2" id="img1_2" onMouseOver="show(2)">'
+	                            +'<img src="../'+items.color.split(",")[2]+'" class="img3" id="img1_3" onMouseOver="show(3)">'
+	                           +' </div>'
+	                           +' <div id="mainContent_center_center_div1_3">'
+	                        +items.pro_name
+	                           +' </div>'
+	                          +'  <div id="mainContent_center_center_div1_4">￥'+items.pro_tagprice+'</div>'
+	               		     +'   </div>'
+				});
+	   				$("#mainContent_center_center").html(val);
+	   				$("#pageutil").text("当前第  "+data[0].pageNo+"页/总共"+data[0].totalPages+" 页");
+	   				$("#pageutil").attr("flag","findByType");
+			}
+   		},"json");
 	}
 $("#loginout").click(function(){
 	$.ajax({
@@ -57,31 +67,41 @@ $("#loginout").click(function(){
 		}
 	});
 });
-        	$.ajax({
-   			type: "POST",
-   			url: "Collection.do",
-   			data: "col=findAllcol",
-   			dataType:"JSON",
-   			success: function(msg){			//查询成功后弹窗
-   				var item = msg.collectList;
-   				var valuee='';
-				
-   				for(var i=0;i<item.length;i++){
-   					valuee +='<img src="'+item[i].pro_img.split(",")[0]+'" onClick="getid('+item[i].pro_number+')" style="width:90px; height:90px; margin-left:50px;">'+
-                		'<p style="color:#FFF; margin-left:62px; margin-top:10px">￥'+item[i].pro_tagprice+'</p>';
-   				}
-   				$("#r_view_hide   #liulan").html(valuee);
-   			}
-   		});
-        	</script>
+
+
+var u_id=0;
+u_id = $("#UidHidden").val();
+//刷新收藏栏
+$.ajax({
+		type: "POST",
+		url: "collectionById.action",
+		data:"u_id="+u_id,
+		dataType:"JSON",
+		success: function(data){			//查询成功后弹窗
+			var item = data;
+			var valuee='';
+			if(null ==item){
+				valuee+="您暂时还没有收藏商品";
+			}else{
+				for(var i=0;i<item.length;i++){
+					valuee +='<a href="pro_details.action?pro_number='+item[i].pro_number+'">'+
+							 '<img src="../'+item[i].pro_img.split(",")[0]+'" style="width:90px; height:90px; margin-left:50px;"></a>'+
+							 '<p style="color:#FFF; margin-left:50px;">'+item[i].pro_tagprice+'</p>';
+				}
+			}
+			$("#r_view_hide #liulan").html(valuee);
+		}
+});
+</script>
 
 			<span class="row">|</span> <a> <span class="shopping_chart"></span>
-				<span class="shopping_count">(0)</span> <span style="color: red;">${sessionScope.errorMsg}</span>
+				<span class="shopping_count">(${sessionScope.cartList.size()})</span> 
+				<span style="color: red;">${sessionScope.errorMsg}</span>
 				<c:remove var="errorMsg" />
 			</a>
 		</div>
 		<div id="navigation_right">
-			<a href="MyNing.jsp">会员中心</a> <span>|</span> <a href="#">会员俱乐部</a>
+			<a href="MyNing.jsp">会员中心</a> <span>|</span> <a href="#">消息中心</a>
 		</div>
 	</div>
 	<div id="comm_logo_contain">
@@ -90,111 +110,103 @@ $("#loginout").click(function(){
 				<li><a href="index.jsp"><img src="../images/logo.png" /></a></li>
 				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;"
 					class="logo_inter"></div>
-				<li><a class="li_a" style="color: #fff;" href="findAll?num=1">所有分类</a><img
+				<li><a class="li_a" style="color: #fff;" href="product.jsp">所有分类</a><img
 					class="down_img" src="../images/content_down.png" />
 					<div id="font_content—1" style="display: none;">
 						<div class="sub_box">
-							<meta content="text/html" http-equiv="content-type"
-								charset="utf-8" />
-							<title>所有分类</title>
 							<style>
-#font_content—1  .sub_box .box_1 {
-	float: left;
-	border-left: 1px solid #ccc;
-	margin-top: 40px;
-	margin-left: 80px;
-}
-
-#font_content—1  .sub_box  .box_2 {
-	float: left;
-	border-left: 1px solid #ccc;
-	margin-top: 40px;
-}
-
-#font_content—1	.sub_box  .box_3 {
-	float: left;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	margin-top: 40px;
-}
-
-#font_content—1	.sub_box  a {
-	font-size: 12px;
-	color: rgb(64, 64, 64);
-	display: block;
-	margin-left: 20px;
-	line-height: 20px;
-}
-
-#font_content—1  .boxAll {
-	text-align: center;
-	margin-left: 40px;
-}
-
-#font_content—1  .boxAll img {
-	margin-left: 40px;
-	margin-top: 30px;
-}
-
-#font_content—1  .logo_down {
-	width: 92%;
-	height: 123px;
-	font-family: 'Microsoft YaHei UI';
-	background: #CCC;
-	text-align: center;
-	margin-left: 74px;
-	margin-top: 12px;
-}
-
-#font_content—1  .logo_down .first_img {
-	margin-top: 16px;
-	margin-left: 6px;
-}
-
-#font_content—1  .logo_down .last_img {
-	margin-top: -14px;
-	margin-left: 6px;
-}
-</style>
-							<div
-								style="width: 1348px; height: 540px; background: rgb(246, 246, 246); font-family: 'Microsoft YaHei UI'; text-align: left;">
+								#font_content—1  .sub_box .box_1 {
+									float: left;
+									border-left: 1px solid #ccc;
+									margin-top: 40px;
+									margin-left: 80px;
+								}
+								
+								#font_content—1  .sub_box  .box_2 {
+									float: left;
+									border-left: 1px solid #ccc;
+									margin-top: 40px;
+								}
+								
+								#font_content—1	.sub_box  .box_3 {
+									float: left;
+									border-left: 1px solid #ccc;
+									border-right: 1px solid #ccc;
+									margin-top: 40px;
+								}
+								
+								#font_content—1	.sub_box  a {
+									font-size: 12px;
+									color: rgb(64, 64, 64);
+									display: block;
+									margin-left: 20px;
+									line-height: 20px;
+								}
+								
+								#font_content—1  .boxAll {
+									text-align: center;
+									margin-left: 40px;
+								}
+								
+								#font_content—1  .boxAll img {
+									margin-left: 40px;
+									margin-top: 30px;
+								}
+								
+								#font_content—1  .logo_down {
+									width: 92%;
+									height: 123px;
+									font-family: 'Microsoft YaHei UI';
+									background: #CCC;
+									text-align: center;
+									margin-left: 74px;
+									margin-top: 12px;
+								}
+								
+								#font_content—1  .logo_down .first_img {
+									margin-top: 16px;
+									margin-left: 6px;
+								}
+								
+								#font_content—1  .logo_down .last_img {
+									margin-top: -14px;
+									margin-left: 6px;
+								}
+							</style>
+							<div style="width: 1348px; height: 540px; background: rgb(246, 246, 246); font-family: 'Microsoft YaHei UI'; text-align: left;">
 								<div class="boxAll">
 									<div class="box_1" style="width: 180px; height: 224px;">
-										<a class="box_head"
-											style="font-size: 28px; color: red; margin-bottom: 20px;">男鞋</a>
-										<a>跑步鞋</a> <a href="http://www.baidu.com">篮球鞋</a> <a>运动生活鞋</a>
-										<a>网球鞋</a> <a>都市轻运动鞋</a> <a>训练鞋</a> <a>羽毛球鞋</a> <a>户外鞋</a> <a>凉鞋/拖鞋</a>
+										<a class="box_head" 
+												style="font-size: 28px; color: red; margin-bottom: 20px;">男鞋</a>
+										<a>跑步鞋</a> 
+										<a href="http://www.baidu.com">篮球鞋</a>
+										<a>休闲鞋</a>
 									</div>
 									<div class="box_2" style="width: 197px; height: 224px;">
 										<a class="box2_head"
 											style="font-size: 28px; color: red; margin-bottom: 20px;">女鞋</a>
-										<a>跑步鞋</a> <a>运动生活鞋</a> <a>训练鞋</a> <a>网球鞋</a> <a>都市轻运动鞋</a> <a>羽毛球鞋</a>
-										<a>户外鞋</a> <a>凉鞋/拖鞋</a>
+										<a>跑步鞋</a> 
+										<a href="http://www.baidu.com">篮球鞋</a>
+										<a>休闲鞋</a>
 									</div>
 									<div class="box_2" style="width: 197px; height: 224px;">
 										<a class="box_head"
 											style="font-size: 28px; color: red; margin-bottom: 20px;">男装</a>
-										<a>T恤/Polo衫/背心</a> <a>卫衣</a> <a>外套/马甲</a> <a>比赛服</a> <a>紧身服</a>
-										<a>裤装</a> <a>棉装</a> <a>羽绒服</a>
+										<a>T恤/Polo衫/背心</a> <a>卫衣</a><a>羽绒服</a>
 									</div>
 									<div class="box_2" style="width: 179px; height: 224px;">
 										<a class="box_head"
 											style="font-size: 28px; color: red; margin-bottom: 20px;">女装</a>
-										<a>T恤/Polo衫/背心</a> <a>卫衣</a> <a>外套/马甲</a> <a>紧身服</a> <a>裙装</a>
-										<a>裤装</a> <a>棉装</a> <a>羽绒服</a> <a>其他服装</a>
+										<a>T恤/Polo衫/背心</a> <a>卫衣</a><a>羽绒服</a>
 									</div>
 									<div class="box_2" style="width: 197px; height: 224px;">
 										<a class="box_head"
 											style="font-size: 28px; color: red; margin-bottom: 20px;">配件</a>
-										<a>袜子</a> <a>包</a> <a>帽子</a> <a>护具</a> <a>手套/围巾</a>
 									</div>
 									<div class="box_3" style="width: 197px; height: 224px;">
 										<a class="box_head"
 											style="font-size: 28px; color: red; margin-bottom: 20px;">器材</a>
-										<a>羽毛球拍</a> <a>羽毛球</a> <a>羽毛球配件</a> <a>乒乓球拍</a> <a>乒乓套胶</a> <a>乒乓球台</a>
-										<a>乒乓球</a>
 									</div>
-
 									<img src="../images/fl-0929_02.jpg" /> <img
 										src="../images/fl-0929_04.jpg" /> <img
 										src="../images/fl-0929_06.jpg" /> <img
@@ -203,7 +215,6 @@ $("#loginout").click(function(){
 										src="../images/fl-0929_12.jpg" /> <img
 										src="../images/fl-0929_14.jpg" /> <img
 										src="../images/fl-0929_16.jpg" />
-
 								</div>
 
 								<div class="logo_down">
@@ -222,124 +233,49 @@ $("#loginout").click(function(){
 							</div>
 						</div>
 					</div></li>
-				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;"
-					class="logo_inter"></div>
-				<li><a style="color: #fff;" class="li_a2">新品</a><img
-					class="down_img" src="../images/content_down.png" /></li>
-				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;"
-					class="logo_inter"></div>
-				<li><a class="li_a3" style="color: #fff;" href="#nanzi.html">男子</a><img
-					class="down_img" src="../images/content_down.png" />
+				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;" class="logo_inter"></div>
+				<li>
+					<a style="color: #fff;" class="li_a2">新品</a>
+					<img class="down_img" src="../images/content_down.png" />
+				</li>
+				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;" class="logo_inter"></div>
+				<li>
+					<a class="li_a3" style="color: #fff;" href="#nanzi.html">男子</a>
+					<img class="down_img" src="../images/content_down.png" />
 					<div id="font_content—3"
 						style="display: none; background: rgb(246, 246, 246);">
 						<div class="sub_box">
-							<meta content="text/html" http-equiv="content-type"
-								charset="utf-8" />
-							<title>男子</title>
 							<style>
-#font_content—3  .sub_box .box_1 {
-	float: left;
-	border-left: 1px solid #ccc;
-	margin-top: 40px;
-	margin-left: 80px;
-}
-
-#font_content—3  .sub_box  .box_2 {
-	float: left;
-	border-left: 1px solid #ccc;
-	margin-top: 40px;
-}
-
-#font_content—3	.sub_box  .box_3 {
-	float: left;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	margin-top: 40px;
-}
-
-#font_content—3	.sub_box  a {
-	font-size: 12px;
-	color: rgb(64, 64, 64);
-	display: block;
-	line-height: 20px;
-	text-align: left;
-}
-</style>
-							<div
-								style="width: 1349px; height: 354px; background: rgb(246, 246, 246); font-family: '宋体';">
-								<div class="box_1" style="width: 180px; height: 224px;">
-									<a class="box_head"
-										style="font-size: 28px; color: red; margin-bottom: 20px;">主推专题</a>
-									<a>新品上市</a> <a>热卖商品</a> <a>炫彩中长袜</a> <a>篮球大尺码专区</a>
-								</div>
-								<div class="box_2" style="width: 197px; height: 224px;">
-									<a class="box2_head"
-										style="font-size: 28px; color: red; margin-bottom: 20px;">鞋类</a>
-									<a>跑步鞋</a> <a>篮球鞋</a> <a>运动生活鞋</a> <a>网球鞋</a> <a>都市轻运动鞋</a> <a>训练鞋</a>
-									<a>羽毛球鞋</a> <a>户外鞋</a> <a>凉鞋/拖鞋</a>
-								</div>
-								<div class="box_2" style="width: 197px; height: 224px;">
-									<a class="box_head"
-										style="font-size: 28px; color: red; margin-bottom: 20px;">服装</a>
-									<a>T恤/Polo衫/背心</a> <a>卫衣</a> <a>外套/马甲</a> <a>比赛服</a> <a>紧身服</a>
-									<a>裤装</a> <a>棉装</a> <a>羽绒服</a> <a>其他服装</a>
-								</div>
-								<div class="box_2" style="width: 197px; height: 224px;">
-									<a class="box_head"
-										style="font-size: 28px; color: red; margin-bottom: 20px;">配件</a>
-									<a>袜子</a> <a>包</a> <a>帽子</a> <a>护具</a> <a>手套/围巾</a> <a>配饰</a>
-								</div>
-								<div class="box_3" style="width: 197px; height: 224px;">
-									<a class="box_head"
-										style="font-size: 28px; color: red; margin-bottom: 20px;">系列</a>
-									<a>lining-新活力系列</a> <a>CBA-球迷专属定制</a> <a>智跑生活触手可得</a> <a>CBA-新赛季新装备</a>
-									<a>李宁弓虽篮球鞋</a> <a>LNG-型自首尔</a>
-								</div>
-
-							</div>
-						</div>
-					</div></li>
-				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;"
-					class="logo_inter"></div>
-				<li><a class="li_a4" style="color: #fff;" href="#nvzi.html">女子</a><img
-					class="down_img" src="../images/content_down.png" />
-					<div id="font_content—4" style="display: none;">
-						<div class="sub_box">
-							<meta content="text/html" http-equiv="content-type"
-								charset="utf-8" />
-							<title>女子</title>
-							<style>
-#font_content—4  .sub_box .box_1 {
-	float: left;
-	border-left: 1px solid #ccc;
-	margin-top: 40px;
-	margin-left: 80px;
-	color: black;
-}
-
-#font_content—4  .sub_box  .box_2 {
-	float: left;
-	border-left: 1px solid #ccc;
-	margin-top: 40px;
-}
-
-#font_content—4	.sub_box  .box_3 {
-	float: left;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	margin-top: 40px;
-}
-
-#font_content—4	.sub_box  a {
-	font-size: 12px;
-	color: black;
-	display: block;
-	margin-left: 20px;
-	line-height: 20px;
-}
-</style>
-							<div
-								style="width: 1349px; height: 354px; background: rgb(246, 246, 246); font-family: 'Microsoft YaHei UI'; text-align: left;">
+								#font_content—3  .sub_box .box_1 {
+									float: left;
+									border-left: 1px solid #ccc;
+									margin-top: 40px;
+									margin-left: 80px;
+									color: black;
+								}
+								
+								#font_content—3  .sub_box  .box_2 {
+									float: left;
+									border-left: 1px solid #ccc;
+									margin-top: 40px;
+								}
+								
+								#font_content—3	.sub_box  .box_3 {
+									float: left;
+									border-left: 1px solid #ccc;
+									border-right: 1px solid #ccc;
+									margin-top: 40px;
+								}
+								
+								#font_content—3	.sub_box  a {
+									font-size: 12px;
+									color: black;
+									display: block;
+									margin-left: 20px;
+									line-height: 20px;
+								}
+							</style>
+							<div style="width: 1349px; height: 354px; background: rgb(246, 246, 246); font-family: 'Microsoft YaHei UI'; text-align: left;">
 								<div class="box_1" style="width: 180px; height: 224px;">
 									<a class="box_head"
 										style="font-size: 28px; color: red; margin-bottom: 20px;">主推专题</a>
@@ -348,286 +284,192 @@ $("#loginout").click(function(){
 								<div class="box_2" style="width: 197px; height: 224px;">
 									<a class="box2_head"
 										style="font-size: 28px; color: red; margin-bottom: 20px;">鞋类</a>
-									<a>跑步鞋</a> <a>运动生活鞋</a> <a>训练鞋</a> <a>网球鞋</a> <a>都市轻运动鞋</a> <a>羽毛球鞋</a>
-									<a>户外鞋</a> <a>凉鞋/拖鞋</a>
+									<a>跑步鞋</a> <a>篮球鞋</a><a>休闲鞋</a>
 								</div>
 								<div class="box_2" style="width: 197px; height: 224px;">
 									<a class="box_head"
 										style="font-size: 28px; color: red; margin-bottom: 20px;">服装</a>
-									<a>T恤/Polo衫/背心</a> <a>卫衣</a> <a>外套/马甲</a> <a>比赛服</a> <a>紧身服</a>
-									<a>裙装</a> <a>裤装</a> <a>棉装</a> <a>羽绒服</a> <a>其他服装</a>
+									<a>T恤/Polo衫/背心</a> <a>卫衣</a> <a>羽绒服</a><a>其他服装</a>
+								</div>
+								
+								<div class="box_3" style="width: 197px; height: 224px;">
+									<a class="box_head"
+										style="font-size: 28px; color: red; margin-bottom: 20px;">系列</a>
+									<a>lining-新活力系列</a> <a>CBA-球迷专属定制</a> <a>智跑生活触手可得</a> <a>CBA-新赛季新装备</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;" class="logo_inter"></div>
+				<li>
+					<a class="li_a4" style="color: #fff;" href="#nvzi.html">女子</a>
+					<img class="down_img" src="../images/content_down.png" />
+					<div id="font_content—4" style="display: none;">
+						<div class="sub_box">
+							<style>
+								#font_content—4  .sub_box .box_1 {
+									float: left;
+									border-left: 1px solid #ccc;
+									margin-top: 40px;
+									margin-left: 80px;
+									color: black;
+								}
+								#font_content—4  .sub_box  .box_2 {
+									float: left;
+									border-left: 1px solid #ccc;
+									margin-top: 40px;
+								}
+								#font_content—4	.sub_box  .box_3 {
+									float: left;
+									border-left: 1px solid #ccc;
+									border-right: 1px solid #ccc;
+									margin-top: 40px;
+								}
+								#font_content—4	.sub_box  a {
+									font-size: 12px;
+									color: black;
+									display: block;
+									margin-left: 20px;
+									line-height: 20px;
+								}
+							</style>
+							<div style="width: 1349px; height: 354px; background: rgb(246, 246, 246); font-family: 'Microsoft YaHei UI'; text-align: left;">
+								<div class="box_1" style="width: 180px; height: 224px;">
+									<a class="box_head"
+										style="font-size: 28px; color: red; margin-bottom: 20px;">主推专题</a>
+									<a>新品上市</a> <a>热卖商品</a>
+								</div>
+								<div class="box_2" style="width: 197px; height: 224px;">
+									<a class="box2_head"
+										style="font-size: 28px; color: red; margin-bottom: 20px;">鞋类</a>
+									<a>跑步鞋</a> <a>运动生活鞋</a><a>休闲鞋</a>
 								</div>
 								<div class="box_2" style="width: 197px; height: 224px;">
 									<a class="box_head"
-										style="font-size: 28px; color: red; margin-bottom: 20px;">配件</a>
-									<a>袜子</a> <a>包</a> <a>帽子</a> <a>护具</a> <a>手套/围巾</a> <a>配饰</a>
+										style="font-size: 28px; color: red; margin-bottom: 20px;">服装</a>
+									<a>T恤/Polo衫/背心</a> <a>卫衣</a><a>羽绒服</a> <a>其他服装</a>
 								</div>
 								<div class="box_3" style="width: 197px; height: 224px;">
 									<a class="box_head"
 										style="font-size: 28px; color: red; margin-bottom: 20px;">系列</a>
 									<a>lining-新活力系列</a> <a>型走冬日 温暖一冬</a> <a>智跑生活 触手可得</a> <a>LNG-型自首尔</a>
 								</div>
-
 							</div>
 						</div>
 					</div></li>
-				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;"
-					class="logo_inter"></div>
-				<li><a style="color: #fff;" class="li_a5">运动</a><img
-					class="down_img" src="../images/content_down.png" />
+				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;" class="logo_inter"></div>
+				<li>
+					<a style="color: #fff;" class="li_a5">运动</a>
+					<img class="down_img" src="../images/content_down.png" />
 					<div id="font_content—5" style="display: none;">
 						<div class="sub_box">
-							<meta content="text/html" http-equiv="content-type"
-								charset="utf-8" />
-							<title>运动</title>
 							<style>
-#font_content—5 .sub_box .box_1 {
-	float: left;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	margin-top: 30px;
-	margin-left: 80px;
-}
-
-#font_content—5 .sub_box .box_2 {
-	float: left;
-	border-right: 1px solid #ccc;
-	margin-top: 30px;
-	margin-left: 20px;
-}
-
-#font_content—5	.sub_box  a {
-	font-size: 12px;
-	display: block;
-	margin-left: 20px;
-	line-height: 20px;
-}
-
-#font_content—5	.sub_box p {
-	font-family: "Microsoft YaHei UI";
-	font-size: 20px;
-	font-weight: 600;
-	color: red;
-}
-</style>
-							<div
-								style="width: 1349px; height: 200px; background: rgb(246, 246, 246); font-family: 'Microsoft YaHei UI'; text-align: center;">
+								#font_content—5 .sub_box .box_1 {
+									float: left;
+									border-left: 1px solid #ccc;
+									border-right: 1px solid #ccc;
+									margin-top: 30px;
+									margin-left: 80px;
+								}
+								
+								#font_content—5 .sub_box .box_2 {
+									float: left;
+									border-right: 1px solid #ccc;
+									margin-top: 30px;
+									margin-left: 20px;
+								}
+								
+								#font_content—5	.sub_box  a {
+									font-size: 12px;
+									display: block;
+									margin-left: 20px;
+									line-height: 20px;
+								}
+								
+								#font_content—5	.sub_box p {
+									font-family: "Microsoft YaHei UI";
+									font-size: 20px;
+									font-weight: 600;
+									color: red;
+								}
+							</style>
+							<div style="width: 1349px; height: 200px; background: rgb(246, 246, 246); font-family: 'Microsoft YaHei UI'; text-align: center;">
 								<div class="box_1" style="width: 200px; height: 154px;">
-									<a> <img with="135px" height="115px" alt="篮球"
-										src="../images/basketball.png" />
+									<a>
+										<img with="135px" height="115px" alt="篮球" src="../images/basketball.png" />
 									</a>
 									<p style="font-family: 'Microsoft YaHei UI';">篮球</p>
 								</div>
 								<div class="box_2" style="width: 200px; height: 154px;">
-									<a> <img with="135px" height="115px" alt="跑步"
-										src="../images/run.png" />
+									<a> 
+										<img with="135px" height="115px" alt="跑步" src="../images/run.png" />
 									</a>
 									<p style="font-family: 'Microsoft YaHei UI';">跑步</p>
 								</div>
 								<div class="box_2" style="width: 200px; height: 154px;">
-									<a> <img with="135px" height="115px" alt="运动生活"
-										src="../images/lnss.png" />
+									<a> 
+										<img with="135px" height="115px" alt="运动生活" src="../images/lnss.png" />
 									</a>
 									<p style="font-family: 'Microsoft YaHei UI';">运动生活</p>
 								</div>
 								<div class="box_2" style="width: 200px; height: 154px;">
-									<a> <img with="135px" height="115px" alt="训练"
-										src="../images/life.png" />
+									<a> 
+										<img with="135px" height="115px" alt="训练" src="../images/life.png" />
 									</a>
 									<p style="font-family: 'Microsoft YaHei UI';">训练</p>
 								</div>
 								<div class="box_2" style="width: 200px; height: 154px;">
-									<a> <img with="135px" height="115px" alt="羽毛球"
-										src="../images/5846D07192F71FBADD5311F16C4BB81C.png" />
+									<a> 
+										<img with="135px" height="115px" alt="羽毛球" src="../images/5846D07192F71FBADD5311F16C4BB81C.png" />
 									</a>
 									<p style="font-family: 'Microsoft YaHei UI';">羽毛球</p>
 								</div>
-
 							</div>
 						</div>
 					</div></li>
-				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;"
-					class="logo_inter"></div>
-				<li><a style="color: #fff;" class="li_a6">韦德</a><img
-					class="down_img" src="../images/content_down.png" />
-					<div id="font_content—6" style="display: none;">
-						<div class="sub_box">
-							<meta content="text/html" http-equiv="content-type"
-								charset="utf-8" />
-							<title>韦德</title>
-							<style>
-#font_content—6  .sub_box .box_1 {
-	float: left;
-	border-left: 1px solid #ccc;
-	margin-top: 40px;
-	margin-left: 80px;
-}
-
-#font_content—6  .sub_box  .box_2 {
-	float: left;
-	border-left: 1px solid #ccc;
-	margin-top: 40px;
-}
-
-#font_content—6	.sub_box  .box_3 {
-	float: left;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	margin-top: 40px;
-}
-
-#font_content—6	.sub_box  a {
-	font-size: 12px;
-	display: block;
-	margin-left: 20px;
-	line-height: 20px;
-}
-</style>
-
-							<div
-								style="width: 1349px; height: 354px; background: rgb(246, 246, 246); font-family: 'Microsoft YaHei UI'; text-align: left;">
-								<div class="box_1" style="width: 180px; height: 224px;">
-									<a class="box_head"
-										style="font-size: 28px; color: red; margin-bottom: 20px;">专题</a>
-									<a>韦德之道全系列</a> <a>韦德之道4系列专业篮球比赛鞋</a> <a>新品上市</a> <a>热卖商品</a>
-								</div>
-								<div class="box_2" style="width: 197px; height: 224px;">
-									<a class="box2_head"
-										style="font-size: 28px; color: red; margin-bottom: 20px;">鞋类</a>
-									<a>韦德之道</a> <a>篮球训练鞋</a> <a>篮球比赛鞋</a> <a>篮球文化鞋</a>
-								</div>
-								<div class="box_2" style="width: 197px; height: 224px;">
-									<a class="box_head"
-										style="font-size: 28px; color: red; margin-bottom: 20px;">服装</a>
-									<a>T恤/Polo衫/背心</a> <a>外套/马甲</a> <a>比赛服</a> <a>裤装</a> <a>棉装</a>
-									<a>羽绒服</a> <a>卫衣</a>
-								</div>
-								<div class="box_2" style="width: 197px; height: 224px;">
-									<a class="box_head"
-										style="font-size: 28px; color: red; margin-bottom: 20px;">配件</a>
-									<a>袜子</a> <a>包</a> <a>帽子</a> <a>护具</a> <a>手套/围巾</a>
-								</div>
-								<div class="box_3" style="width: 197px; height: 224px;">
-									<a class="box_head"
-										style="font-size: 28px; color: red; margin-bottom: 20px;">器材</a>
-									<a>篮球</a>
-								</div>
-
-							</div>
-						</div>
-					</div></li>
-				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;"
-					class="logo_inter"></div>
-				<li><a style="color: #fff;" class="li_a7">乐途</a><img
-					class="down_img" src="../images/content_down.png" />
-					<div id="font_content—7" style="display: none;">
-						<div class="sub_box">
-							<meta content="text/html" http-equiv="content-type"
-								charset="utf-8" />
-							<title>乐途</title>
-							<style>
-#font_content—7  .sub_box .box_1 {
-	float: left;
-	border-left: 1px solid #ccc;
-	margin-top: 40px;
-	margin-left: 80px;
-}
-
-#font_content—7  .sub_box  .box_2 {
-	float: left;
-	border-left: 1px solid #ccc;
-	margin-top: 40px;
-}
-
-#font_content—7	.sub_box  .box_3 {
-	float: left;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	margin-top: 40px;
-}
-
-#font_content—7	.sub_box  a {
-	font-size: 12px;
-	display: block;
-	margin-left: 20px;
-	line-height: 20px;
-}
-</style>
-							<div
-								style="width: 1349px; height: 354px; background: rgb(246, 246, 246); font-family: 'Microsoft YaHei UI'; text-align: left;">
-								<div class="box_1" style="width: 180px; height: 224px;">
-									<a class="box_head"
-										style="font-size: 28px; margin-bottom: 20px;">男鞋</a> <a
-										style="color: black;">跑步鞋</a> <a style="color: black;">运动生活鞋</a>
-									<a style="color: black;">户外鞋</a>
-								</div>
-								<div class="box_2" style="width: 197px; height: 224px;">
-									<a class="box2_head"
-										style="font-size: 28px; margin-bottom: 20px; color: red;">女鞋</a>
-									<a style="color: black;">跑步鞋</a> <a style="color: black;">运动生活鞋</a>
-									<a style="color: black;">户外鞋</a>
-								</div>
-								<div class="box_2" style="width: 197px; height: 224px;">
-									<a class="box_head"
-										style="font-size: 28px; margin-bottom: 20px;">男装</a> <a
-										style="color: black;">T恤/Polo衫/背心</a> <a style="color: black;">卫衣</a>
-									<a style="color: black;">外套/马甲</a> <a style="color: black;">裤装</a>
-									<a style="color: black;">棉装</a> <a style="color: black;">羽绒服</a>
-									<a style="color: black;">冲锋衣</a> <a style="color: black;">比赛服</a>
-								</div>
-								<div class="box_2" style="width: 179px; height: 224px;">
-									<a class="box_head"
-										style="font-size: 28px; margin-bottom: 20px;">女装</a> <a>T恤/Polo衫/背心</a>
-									<a>卫衣</a> <a>外套/马甲</a> <a>裤装</a> <a>棉装</a> <a>冲锋衣</a> <a>羽绒服</a>
-								</div>
-								<div class="box_3" style="width: 197px; height: 224px;">
-									<a class="box_head"
-										style="font-size: 28px; color: red; margin-bottom: 20px;">配件</a>
-									<a>袜子</a> <a>包</a>
-								</div>
-
-							</div>
-						</div>
-					</div></li>
-				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;"
-					class="logo_inter"></div>
-
-				<li><a style="color: #fff;" class="li_a8">10K报名</a><img
-					class="down_img" src="../images/content_down.png" /></li>
-
-				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;"
-					class="logo_inter"></div>
+					
+				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;" class="logo_inter"></div>
+				<li>
+					<a style="color: #fff;" class="li_a6">韦德</a>
+					<img class="down_img" src="../images/content_down.png" />
+				</li>
+				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;" class="logo_inter"></div>
+				<li>
+					<a style="color: #fff;" class="li_a7">乐途</a>
+					<img lass="down_img" src="../images/content_down.png" />
+				</li>
+				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;" class="logo_inter"></div>
+				<li>
+					<a style="color: #fff;" class="li_a8">10K报名</a>
+					<img class="down_img" src="../images/content_down.png" /></li>
+				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;" class="logo_inter" ></div>
 
 				<li><a style="color: #fff;" href="#" class="li_a9">更多品牌</a><img
 					class="down_img_end" src="../images/content_down.png" />
 					<div id="font_content—8" style="display: none;">
 						<div class="sub_box">
-							<meta content="text/html" http-equiv="content-type"
-								charset="utf-8" />
-							<title>更多品牌</title>
 							<style>
-#font_content—8  .sub_box .box_1 {
-	float: left;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	margin-top: 24px;
-	margin-left: 14%;
-}
-
-#font_content—8  .sub_box .box_2 {
-	float: left;
-	border-right: 1px solid #ccc;
-	margin-top: 24px;
-	margin-left: 20px;
-}
-
-#font_content—8	.sub_box  a {
-	font-size: 12px;
-	display: block;
-	margin-left: 20px;
-	line-height: 20px;
-}
-</style>
+								#font_content—8  .sub_box .box_1 {
+									float: left;
+									border-left: 1px solid #ccc;
+									border-right: 1px solid #ccc;
+									margin-top: 24px;
+									margin-left: 14%;
+								}
+								#font_content—8  .sub_box .box_2 {
+									float: left;
+									border-right: 1px solid #ccc;
+									margin-top: 24px;
+									margin-left: 20px;
+								}
+								#font_content—8	.sub_box  a {
+									font-size: 12px;
+									display: block;
+									margin-left: 20px;
+									line-height: 20px;
+								}
+							</style>
 							<div
 								style="width: 1349px; height: 102px; background: rgb(246, 246, 246); font-family: 'Microsoft YaHei UI'; text-align: center;">
 								<div class="box_1" style="width: 200px; height: 52px;">
@@ -642,11 +484,10 @@ $("#loginout").click(function(){
 								<div class="box_2" style="width: 200px; height: 52px;">
 									<a><img src="../images/kaisheng.png" /></a>
 								</div>
-
-
 							</div>
 						</div>
-					</div></li>
+					</div>
+				</li>
 			</ul>
 
 		</div>
@@ -657,75 +498,127 @@ $("#loginout").click(function(){
 			</span>
 		</div>
 	</div>
-	<!--第一个层：登录-->
-	<div id="Mywhole"
-		style="display: none; width: 100px; height: 100px; background: red;">
-		<div id="top_left">
-			<span style="font-size: 18px;">登录/注册</span> <span class="close"><img
-				src="../images/close1.jpg" /></span>
+	
+	<!--公共登陆注册层-->
+	<div id="login_main" class="comm_pop" style="top:48px;display:none;">
+
+	<div class="eb_div" style="width:640px;background:white;">
+	
+		<div class="eb_title">
+			<span style="font-size:14px;font-weight: bold;line-height: 32px;">登录/注册</span>
+			<span class="eb_close" title="关闭" onclick="customer.close_login();">关闭</span>
 		</div>
-		<div id="bg_content">
-			<div id="content_first">
-				<span class="login" style="font-size: 16px;">登录</span> <span
-					class="registe" style="font-size: 16px;">注册</span>
+		<div class="eb_opencont" style="height:100%;">
+			<div id="cust_main">
+				<h3 id="h3_open_reglogin">
+					<span class="span_open_login now" onclick="customer.switchover(this, 1);">登 录</span>
+					<span class="span_open_reg" onclick="customer.switchover(this, 2);">注 册</span>
+				</h3>
+				<div id="span_open_login">
+					<div class="blank8"></div>
+					<p class="pspt_back_msg" id="login_login_error"></p>
+					<p class="p_item">
+						<label class="itemtitle">用户名：</label>
+						<input maxlength="60" name="userName" id="login_userName" class="txt" type="text">
+						<span class="pspt_msg" id="login_userName_error"></span>
+					</p>
+					<p class="p_item">
+						<label class="itemtitle">密码：</label>
+						<input maxlength="30" name="pwd" id="login_pwd" class="txt" type="password">
+						<span class="pspt_msg" id="login_pwd_error"></span>
+					</p>
+					<p class="p_item p_item_vcode">
+						<label class="itemtitle">验证码：</label>
+						<input maxlength="4" style="width:77px;float:left;margin-right:5px;" name="yzm" id="login_yzm" class="txt" type="text">
+                                                <span style="float:left;">
+							<img onclick="get_yzm_comm(this);" src="%E6%9D%8E%E5%AE%81%E5%AE%98%E6%96%B9%E7%BD%91%E7%AB%99_files/1f69e0d83e2b2632655e000adb554eea.jpg" id="yzm_img_pop" title="看不清楚，点击获得新图片" style="cursor:pointer;height: 39px;">
+						</span>&nbsp;
+						<span class="pspt_msg" id="login_yzm_error"></span>
+						<input name="mobile" id="mobile" value="" type="hidden">
+					</p>
+					<p class="p_item p_btn">
+						<button class="eb_btn login_btn" id="login_btn_res" type="button" onclick="customer.login(2);"><h3>登 录</h3></button>&nbsp;&nbsp;
+						<a class="c_g" target="_blank" href="http://store.lining.com/shop/getpwd.php">忘记密码？</a>
+					</p>
+					<div class="open_otherlogin" style="margin-left:54px;margin-top:24px;">
+						<h4 class="h4_otherlogin">您也可以使用合作网站帐号登录</h4>
+                        <div class="union_login">
+						    <a href="http://store.lining.com/shop/unionlogin.php?uniontype=alipay" class="union_alipay upay">支付宝</a>
+						    <a href="http://store.lining.com/shop/unionlogin.php?uniontype=sina" class="union_sina upay">新浪微博</a>
+						    <a href="http://store.lining.com/shop/unionlogin.php?uniontype=qq" class="union_qq upay">QQ</a>
+						    <a href="http://store.lining.com/shop/unionlogin.php?uniontype=renren" class="union_renren upay">人人网</a>
+						    <a href="http://store.lining.com/shop/unionlogin.php?uniontype=wanlitong" class="union_wanlitong upay">平安万里通</a>
+						    <a href="http://store.lining.com/shop/unionlogin.php?uniontype=netease" class="union_netease upay">网易</a>
+						    <a href="http://store.lining.com/shop/unionlogin.php?uniontype=weixin" class="union_weixin wpay"></a>
+    
+						</div>
+					</div>
+				</div>
+				<div id="span_open_reg" class="hide">
+					<div class="blank8"></div>
+					<p class="p_item">
+						<label class="itemtitle"><span style="color:red;">*</span>&nbsp;用户名：</label>
+						<input autocomplete="off" maxlength="20" name="reg_userName" id="reg_userName" class="txt" type="text">
+						<span class="pspt_msg" id="reg_userName_error"></span>
+						<span class="reg-newUser-notice"></span>
+					</p>
+					<p class="p_item">
+						<label class="itemtitle"><span style="color:red;">*</span>&nbsp;请设置密码：</label>
+						<input maxlength="20" name="reg_pwd" id="reg_pwd" class="txt" type="password">
+						<span class="pspt_msg" id="reg_pwd_error"></span>
+						<span class="reg-newUser-notice"></span>
+					</p>
+					<p class="p_item">
+						<label class="itemtitle"><span style="color:red;">*</span>&nbsp;请确认密码：</label>
+						<input maxlength="20" name="reg_pwd2" id="reg_pwd2" class="txt" type="password">
+						<span class="pspt_msg" id="reg_pwd2_error"></span>
+						<span class="reg-newUser-notice"></span>
+					</p>
+					<p class="p_item">
+						<label class="itemtitle"><span style="color:red;">*</span>&nbsp;验证手机：</label>
+						<input maxlength="11" name="reg_mobile" id="reg_mobile" class="txt" type="text">
+						<span class="pspt_msg" id="reg_mobile_error"></span>
+						<span class="reg-newUser-notice"></span>
+					</p>
+					<p class="p_item">
+                        <label class="itemtitle"><span style="color:red;">*</span>&nbsp;图案验证码：</label>
+                        <input maxlength="8" name="reg_pic" id="reg_pic" class="txt" style="width:143px;float:left;margin-right:5px;" type="text">
+                        <img onclick="get_yzm_comm(this);" src="%E6%9D%8E%E5%AE%81%E5%AE%98%E6%96%B9%E7%BD%91%E7%AB%99_files/88623c1e858009d8da93691fe5b342f2.jpg" id="yzm_reg_pop" title="看不清楚，点击获得新图片" style="cursor:pointer;height:33px;float:left;">
+                        &nbsp;
+                        <span class="pspt_msg" id="reg_pic_error"></span>
+                        <span class="reg-newUser-notice"></span>
+                    </p>
+					<p class="p_item">
+						<label class="itemtitle"><span style="color:red;">*</span>&nbsp;短信验证码：</label>
+						<input maxlength="20" name="reg_smsCode" id="reg_smsCode" class="txt" style="width:143px;" type="password">
+						<span id="reg_smsSend" onclick="sms.sendSms();">免费获取验证码</span>
+						<span class="pspt_msg" id="reg_smsCode_error"></span>
+					</p>
+					<p class="p_item">
+						<label class="itemtitle">邮箱：</label>
+						<input maxlength="80" name="reg_email" id="reg_email" class="txt" type="text">
+						<span class="pspt_msg_note">备注：邮箱提供后不可修改</span>
+						<span class="reg-newUser-notice"></span>
+					</p>
+					
+					<p class="p_item p_btn">
+						</p><div style="margin:0 0 16px 120px;">
+							<input checked="checked" name="layer_read_rule" style="vertical-align:middle;" type="checkbox">
+							&nbsp;
+							阅读《<a href="http://store.lining.com/shop/help-18.html" target="_blank" style="color:#0778f9;">李宁官方网站服务协议</a>》
+						</div>
+						<button class="reg_btn" type="button" onclick="customer.verify_register(2,2);">
+							立即注册
+						</button>
+					<p></p>
+				</div>
 			</div>
-
-			<div class="blank"></div>
-
-			<div id="content_second">
-				<label class="itemtitle">用户名</label> <input id="login_userName"
-					class="txt" type="text" name="userName" maxlength="60"> <span
-					class="yzN">请输入会员名称</span>
-			</div>
-
-			<div id="third">
-				<label class="itemtitle">密码</label> <input id="login_userPwd"
-					class="txt" type="password" name="userPwd" maxlength="60">
-				<span class="yzP">密码只能是6-30位英文、数字及“_”、“-”组成</span>
-			</div>
-
-			<div id="forth">
-				<label class="itemtitle">验证码</label> <input id="login_userYzm"
-					class="txt_y" type="text" name="userYzm" maxlength="60"> <img
-					src="../images/yanzhma.jpg" class="tp"> <span class="yzM">请输入验证码</span>
-			</div>
-			<div id="five">
-				<div id="login_btn" class="login_btn" type="text">登录</div>
-				<a class="login_mi" href="">忘记密码？</a>
-			</div>
-			<div id="six">您也可以使用合作网站帐号登录</div>
-			<div id="seven">
-				<div class="senven_1">
-					<span><img src="../images/zhifubao.png"><a href=""
-						style="text-decoration: none">支付宝</a></span>
-				</div>
-				<div class="senven_1">
-					<span><img src="../images/weibo.png"><a href=""
-						style="text-decoration: none">新浪微博</a></span>
-				</div>
-				<div class="senven_1">
-					<span><img src="../images/qqlogin.png"><a href=""
-						style="text-decoration: none"></a></span>
-				</div>
-				<div class="senven_1">
-					<span><img src="../images/renren.jpg"><a href=""
-						style="text-decoration: none">人人网</a></span>
-				</div>
-				<div class="senven_1">
-					<span><img src="../images/zhu.png"><a href=""
-						style="text-decoration: none">平安万里通</a></span>
-				</div>
-				<div class="senven_1">
-					<span><img src="../images/yi.png"><a href=""
-						style="text-decoration: none">网易</a></span>
-				</div>
-				<div class="senven_2">
-					<span><img src="../images/weixing.png"><a href=""
-						style="text-decoration: none"></a></span>
-				</div>
-			</div>
+			<div class="blank0"></div>
 		</div>
 	</div>
+</div>
+<!-- 以上为公共登录注册层 -->
+
 	<div id="r_logo_hide"
 		style="margin-top: 252px; display: none; float: right;">
 		<img src="../images/hide_bar_3.png" />
@@ -735,52 +628,6 @@ $("#loginout").click(function(){
 	</div>
 
 	<div id="content" style="display: block;">
-		<!-----------右边登录注册隐藏栏--------------------------------------------------------------------------------------->
-		<div id="bg">
-
-
-			<div id="zhuce" style="display: none;">
-				<div id="zhuce_first" class="zhuce_first">
-					<label class="zhuce_text"><span class="star">*</span>用户名：</label> <span>
-						<input id="reg_userName" class="txt" type="text"
-						name="reg_userName" maxlength="20" autocomplete="off"> <span
-						class="yzP">4-40位字符，支持汉字、字母、数字及字符组合</span>
-					</span>
-
-				</div>
-				<div id="zhuce_second" class="zhuce_second">
-					<label class="zhuce_text"><span class="star">*</span>请设置密码：</label>
-					<input id="reg_userPwd" class="txt" type="password"
-						name="reg_userPwd" maxlength="20" autocomplete="off"> <span
-						class="yzP">密码是由6－20位字符组成，建议两种以上组合</span>
-				</div>
-				<div id="zhuce_third" class="zhuce_second">
-					<label class="zhuce_text"><span class="star">*</span>请确定密码：</label>
-					<input id="reg_userYPwd" class="txt" type="password"
-						name="reg_userYPwd" maxlength="20" autocomplete="off">
-				</div>
-				<div id="zhuce_forth" class="zhuce_second">
-					<label class="zhuce_text"><span class="star">*</span>邮箱：</label> <input
-						id="reg_userYx" class="txt" type="text" name="reg_userYx"
-						maxlength="20" autocomplete="off"> <span class="yzN">请输入正确的邮箱</span>
-				</div>
-				<div id="zhuce_five" class="zhuce_second">
-					<label class="zhuce_text"><span class="star">*</span>验证码：</label> <input
-						id="reg_userYZM" class="txt" type="password" name="reg_userYZM"
-						maxlength="20" autocomplete="off"> <span class="yzN">请输入正确的验证码</span>
-				</div>
-				<div id="yuedu">
-					<input type="checkbox" style="vertical-align: middle;" name="yuedu"
-						checked="" class="yuedu"> <span class="sure">我已阅读《<a
-						href="" style="text-decoration: none">李宁官方网站服务协议</a>》
-					</span>
-				</div>
-				<div id="reg">立刻注册</div>
-			</div>
-		</div>
-		<!------------------------------->
-
-
 		<div id="r_show" class="bar">
 			<img src="../images/show_bar_1.png" />
 		</div>
@@ -792,8 +639,8 @@ $("#loginout").click(function(){
 			<div id="r_lining_hide"
 				style="display: none; width: 216px; height: 180px; margin-left: -205px; margin-top: -40px; background: url(../images/login_background.png) no-repeat;">
 				<p class="personInfo">个人信息</p>
-				<a><img class="hide_loginimg1" src="../images/login.png" /></a> <a><img
-					class="hide_loginimg2" src="../images/register.png" /></a>
+				<img class="hide_loginimg1" src="../images/login.png" />
+				<img class="hide_loginimg2" src="../images/register.png" />
 			</div>
 		</div>
 		<div class="solid">
@@ -825,24 +672,42 @@ $("#loginout").click(function(){
 					src="../images/cart_line.png" />
 			</div>
 
-			<div
-				style="width: 98%; height: 300px; margin-top: 8px; margin-right: 2px; float: right;">
-
+			<div style="width:89%;height: 300px; margin-top: 8px; margin-right: 2px; float:left;">
+				<c:forEach items="${sessionScope.cartList}" var="cart">
+				<div style="margin:0px 0 0 0;color:white;">
+					<table cellspacing="0" cellpadding="0">
+						<tbody>
+							<tr>
+								<td width="12%">
+									<input type="checkbox" checked="" pid="347879" flg="1" name="check_slide_goods">
+								</td>
+								<td width="*">
+									<img width="35" height="35" src="../${cart.color.split(',')[0]}" style="width:30px;height:30px;"/>
+								</td>
+								<td width="29%">
+									<div style="text-align:left;margin-left:14px;">暗红...</div>
+									<div style="height:1px;"></div>
+									<div style="text-align:left;margin-left:14px;">42</div>
+								</td>
+								<td width="15%">1</td>
+								<td width="28%">￥${cart.pro_price}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				</c:forEach>
 			</div>
-			<div
-				style="width: 94%; height: 26px; background: #CCC; float: right; margin-top: 0px; margin-right: 6px; font-size: 14px;">
-				<span style="float: left; margin-left: 6px; margin-top: 2px;">已选择<span
-					style="color: red;">0</span>件商品
-				</span> <span
-					style="float: right; margin-right: 6px; margin-top: 2px; color: red;">￥6.00</span>
+			<div style="width: 94%; height: 26px; background: #CCC; float: right; margin-top: 0px; margin-right: 6px; font-size: 14px;">
+				<span style="float: left; margin-left: 6px; margin-top: 2px;">已选择
+				<span style="color: red;">0</span>件商品
+				</span> 
+				<span style="float: right; margin-right: 6px; margin-top: 2px; color: red;">￥0.00</span>
 			</div>
-			<div
-				style="width: 100%; height: 60px; float: right; margin-top: 10px;">
+			<div style="width: 100%; height: 60px; float: right; margin-top: 10px;">
 				<img src="../images/no_checkout.png" />
 			</div>
 
 		</div>
-
 
 		<div class="solid">
 			<img src="../images/solid.png" />
@@ -867,6 +732,7 @@ $("#loginout").click(function(){
 				<a><img class="hide_loginimg1" src="../images/login.png" /></a> <a><img
 					class="hide_loginimg2" src="../images/register.png" /></a>
 			</div>
+			
 		</div>
 		<div class="solid">
 			<img src="../images/solid.png" />
@@ -875,7 +741,6 @@ $("#loginout").click(function(){
 			<img src="../images/view_1.png" />
 
 		</div>
-		<!--最近浏览隐藏栏-->
 
 		<div id="r_view_hide"
 			style="display: none; width: 213px; height: 577px; background: url(../images/cart_background_1.png); text-align: center;">
@@ -888,11 +753,9 @@ $("#loginout").click(function(){
 				<p
 					style="color: #FFF; line-height: 20px; font-size: 16px; margin-top: 20px; font-weight: bold;">我的收藏</p>
 			</div>
-
-			<div id="liulan" style="width: 50%; height: 106px; float: left;">
-
+			<div id="liulan" style="width:75%;height:106px;float:left;margin-top:10px;">
+			
 			</div>
-
 		</div>
 
 		<div class="solid">
@@ -906,7 +769,6 @@ $("#loginout").click(function(){
 				<p style="margin-top: -36px; margin-left: 20px; line-height: 14px;">
 					售前咨询<br />---------<br />售后咨询
 				</p>
-
 			</div>
 		</div>
 		<div class="solid">

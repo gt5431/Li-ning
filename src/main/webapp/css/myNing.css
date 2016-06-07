@@ -1,36 +1,232 @@
+@charset "utf-8";
+/* CSS Document */
+#member {
+	width: 989px;
+	height: 900px;
+	position: relative;
+	top: 90px;
+	margin-left: 160px;
+	background: #FFF;
+}
+#menber_top_left {
+	margin-left: 15px;
+}
+#member .menu {
+	margin: 0 auto;
+	padding-bottom: 12px;
+	width: 140px;
+	height:auto;
+	background: #FFF;
+	margin-top: 15px;
+}
 
-#member{
-	width:989px;
-	height:600px;
-	position:relative;
-	top:90px;
-	margin-left:180px;
-		
+#member .menu ul {
+	width: auto;
+	margin-left:27px;
+	
 }
-	#menber_top_left{
-	width:168px;
-	height:52px;
+#member .menu ul li {
+	width: auto;
+	list-style: none;
+	padding-top: 10px;
+	font-family: "宋体";
+	width: 180px;
+	font-size:16px;
+	color: #000;
+}
+#member .menu ul  a {
+	text-decoration:none;
+}
+#member #member_left {
+	float: left;
+	width: 200px;
+	background:#FFF;
+}
+#member #member_right {
+	float: left;
+	width: 789px;
+	background:#FFF;
+	display:none;
+}
+#member #member_right1 {
+	float: left;
+	width: 789px;
+	background:#FFF;
+	display:block;
+}
+.kind{
+	padding-bottom:12px;
+	border-bottom: #CCC solid 1px;
+}
+#rule{
+	width:770px;
+	background:#F5F5F5;
+	height:150px;
+	margin-left:20px;
+}
+#rule .r{
+	padding-top:20px;
+	margin-left:20px;
+	font-size:14px;
+	font-weight:bold
+}
+#rule .u{
+     margin-left:20px;
+     font-size:14px;
+	 padding-top:20px;
+}
+#comment{
+	width:770px;
+    background:#F5F5F5;
+    height:auto;
+	margin-top:30px;
+	margin-left:20px;
+}#comment .comm{
+	color:#F00;
+    text-decoration:underline;
+	font-weight:bold;
+	margin-left:20px;
+	padding-top:20px;
+	font-size:16px;
+}#comment  .good_title{
+	margin-left:20px;
+	height:40px;
+	width:700px;
+	margin-top:30px;
+	background:#DADADA;
+}
+#comment  .good_title span{
+   margin-left:100px;
+   line-height:40px;
+   font-size:14px;
+}
+table{
+	margin-top:20px;
+	font-size:14px;
+}#pingjia{
+	width:770px;
+	height:40px;
+	border-bottom:#f40 solid 2px;
+	background:#F4F4F4;
+}
+.title{
+	background-color: #f40;
+    color: #fff;
+    float: left;
+    font-size:16px;
+    font-weight: bold;
+    width:130px;
+    height:40px;
+    text-align: center;
+	line-height:40px;
+	display:inline-block;
+	
+}
+#comment1{
+	width:770px;
+    background:#FFF;
+    height:300px;
+	margin-left:20px;
+	margin-top:30px;
+}
+#picture{
+	margin-left:40px;
+	width:200px;
+	height:150px;
+	background:#FFF;
+	padding-top:40px;
 	float:left;
+}#picture .img1{
+	border:#F00 solid 3px;
+    width:150px;
+    height:150px;
+}#picture p{
+	color:#8080FF;
+	font-size:13px;
+}#comment2{
+	margin-top:30px;
+	float:left;
+	width:370px;
+	background:#FFF;
+}#comment2 span{
+	line-height:2.5;
+	color:#C6C6C6;
+	font-size:13px;
+}#ping{
+	margin-left:430px;
+	width:100px;
+	height:40px;
+	background:#F00;
+	border-collapse:collapse;
+	line-height:40px;
+	color:#FFF;
+	font-size:14px;
+	text-align:center;
+	margin-top:5px;
 }
-	#menber_top_right{
+#ping a{
+	text-decoration:none;
+	color:#FFF;
+}
+textarea:focus{
+	border:double #FF0000 1px;
+}
+
+.black_content{
+	        display:none; 
+            position: absolute; 
+            top: 0%; 
+            left: 0%; 
+            width:3000px; 
+            height:3000px; 
+            background-color:#FFF;
+            -moz-opacity: 0.8; 
+            opacity:0.8; 
+			z-index:1002;
+}.white_content{ 
+            display: none; 
+            position: absolute; 
+            top: 41%; 
+            left: 39%; 
+            border: 2px solid #FFF; 
+            background-color: white; 
+            overflow: auto; 
+	         z-index:1003;
+}.info{
+		color:#000;
+		font-size:18px;
+		font-weight:bold;
+		margin-left:30px;
+		padding-bottom:10px;
+		border-bottom:#000 solid 3px;
+		width:789px;
+}
+#menber_top_right{
 	width:720px;
 	height:52px;
 	float:left;
 	margin-left:100px;
-	
 }
-	
 	#line{
 		margin-top:20px;
-			
-}
+    }
 	#member_content{
-		width:720px;
+		width:600px;
 		height:500px;
 		float:left;
-		margin-left:268px;
+		margin-left:60px;
+		font-size:16px;
 		
-}
+	}
+	#member_content1{
+		margin-top:20px;
+		 width:80px;
+		height:100px;
+		float:left;
+	}
+   #member_content input:focus{
+	   border:#F00 solid 1px;
+   }
 	.second {
     height: 38px;
     margin-left: 20px;
@@ -58,17 +254,19 @@
     width: 200px		
 }
 	.year {
-    height: 20px;
+    height: 31px;
     width: 80px;
 	margin-top:9px;
 }
 	.sex{
 	height: 20px;
 	margin-top:9px;	
+	margin-left:15px;
 }
 	.mbutton{
-		width:100px;
-		height:40px;
+		width:70px;
+		height:30px;
 		float:left;
-		margin-left:180px;
+		margin-left:100px;
+		margin-top:20px;
 }

@@ -3,8 +3,10 @@ package com.yc.lining.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,16 +15,47 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.JedisShardInfo;
+import redis.clients.jedis.ShardedJedis;
+import redis.clients.jedis.ShardedJedisPool;
+
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ModelDriven;
 import com.yc.lining.entity.Product;
 import com.yc.lining.entity.ProductBean;
+import com.yc.lining.entity.Usersinfo;
 import com.yc.lining.service.ProductService;
 import com.yc.lining.util.PageUtil;
 
 @Controller("proAction")
 public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
+	
+	private static ShardedJedisPool pool;
+	static{
+		ResourceBundle bundle=ResourceBundle.getBundle("redis");
+		if(bundle==null){
+			throw new IllegalAccessError("[redis.properties] is not found");
+		}
+		
+		JedisPoolConfig config=new JedisPoolConfig();
+		config.setMaxTotal(Integer.valueOf(bundle.getString("redis.pool.maxActive")));
+		config.setMaxIdle(Integer.valueOf(bundle.getString("redis.pool.maxIdle")));
+		config.setMaxWaitMillis(Integer.valueOf(bundle.getString("redis.pool.maxWait")));
+		config.setTestOnBorrow(Boolean.valueOf(bundle.getString("redis.pool.testOnBorrow")));
+		config.setTestOnReturn(Boolean.valueOf(bundle.getString("redis.pool.testOnReturn")));
 
+		
+		JedisShardInfo jedisShardInfo1=new JedisShardInfo(bundle.getString("redis.ip"),Integer.valueOf(bundle.getString("redis.port")));
+		JedisShardInfo jedisShardInfo2=new JedisShardInfo(bundle.getString("redis.ip1"),Integer.valueOf(bundle.getString("redis.port1")));
+		
+		List<JedisShardInfo> list=new LinkedList<JedisShardInfo>();
+		list.add(jedisShardInfo1);
+		list.add(jedisShardInfo2);
+		
+		 pool=new ShardedJedisPool(config,list);
+	}
+	
 	@Autowired
 	private ProductService productService;
 	private Map<String, Object> session;
@@ -34,47 +67,14 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 	private int num = 0;
 	private String flag ="";
 	private List<ProductBean> list3;
-	private double lowPrice;
-	private double highPrice;
 	private String searchName;//搜素名
 	
-	/*private int num;
-	private String  firstSelect;
-	private ProductBean product;
-	private List<ProductBean> list;
-	private PageUtil pageUtil;
-	private List<Object> pageList;*/
-	
-	public double getHighPrice() {
-		return highPrice;
-	}
-
-	public void setHighPrice(double highPrice) {
-		this.highPrice = highPrice;
-	}
-
 	public String getSearchName() {
 		return searchName;
 	}
 
 	public void setSearchName(String searchName) {
 		this.searchName = searchName;
-	}
-
-	public double getLowPrice() {
-		return lowPrice;
-	}
-
-	public void setLowPrice(double lowPrice) {
-		this.lowPrice = lowPrice;
-	}
-
-	public double getHeighPrice() {
-		return highPrice;
-	}
-
-	public void setHeighPrice(double heighPrice) {
-		this.highPrice = heighPrice;
 	}
 
 	public List<ProductBean> getList3() {
@@ -153,38 +153,78 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 	//加入购物车(做为测试用)
 	@SuppressWarnings("unchecked")
 	public String cart(){
-		System.out.println("加入购物车的数量==>"+Buyamount);
+		Usersinfo usersinfo = (Usersinfo) ServletActionContext.getRequest().getSession().getAttribute("usersinfo");
+		System.out.println("!"+usersinfo);
+		int index=0; //用于找同一件商品的索引
+		int u_id = usersinfo.getU_id(); //首先默认(需要获取)
+		ShardedJedis jedis=pool.getResource();//获取一个jedis对象
+		Gson gson = new Gson();
+		String key = u_id+"_cartList"; //key为jedis的键
 		boolean flag = false; //判断是否为同一件商品
-		if(session.get("cartList") == null){
-			Product product1 = productService.ProductDetailsById(product.getPro_number());
-			product1.setBuyamount(Buyamount);
-			list.add(product1);
+		System.out.println("当前用户id为==>"+u_id);
+		//对redis处理
+		String cartList = jedis.get(key);
+		if(null == cartList || "".equals(cartList)){
+			if(session.get("cartList") == null ){
+				Product product1 = productService.ProductDetailsById(product.getPro_number());
+				product1.setBuyamount(Buyamount);
+				list.add(product1);
+				//还未处理完
+			}else{
+				List<Product>  list1 = new ArrayList<Product>();
+				list1 = (List<Product>) session.get("cartList");
+				for(int i=0;i<list1.size();i++){
+					if(product.getPro_number() == list1.get(i).getPro_number()){
+						flag =true;
+						index = i;
+					}else{
+						flag =false;
+					}
+				}
+				if(false ==flag){
+					Product product3 = productService.ProductDetailsById(product.getPro_number());
+					product3.setBuyamount(Buyamount);
+					list.add(product3);
+				}else{
+					Product product3 = new Product();
+					Buyamount= Buyamount+list1.get(index).getBuyamount();
+					product3.setBuyamount(Buyamount);
+					//暂时不处理
+					System.out.println("相同商品的购买数量为++>"+Buyamount);
+				}
+			}
+			
 		}else{
-			List<Product>  list1 = new ArrayList<Product>();
-			int index=0;
-			list1 = (List<Product>) session.get("cartList");
-			for(int i=0;i<list1.size();i++){
-				if(product.getPro_number() == list1.get(i).getPro_number()){
+			List<Product> listsss = (List<Product>) gson.fromJson(cartList,Object.class);
+			System.out.println("由gson转过来的数据==>"+listsss);
+			for (int i = 0; i < listsss.size(); i++) {
+				if(product.getPro_number() == listsss.get(i).getPro_number()){
 					flag =true;
 					index = i;
 				}else{
 					flag =false;
 				}
 			}
-			
 			if(false ==flag){
 				Product product3 = productService.ProductDetailsById(product.getPro_number());
 				product3.setBuyamount(Buyamount);
 				list.add(product3);
 			}else{
 				Product product3 = new Product();
-				Buyamount= Buyamount+list1.get(index).getBuyamount();
+				Buyamount= Buyamount+listsss.get(index).getBuyamount();
 				product3.setBuyamount(Buyamount);
 				//暂时不处理
 				System.out.println("相同商品的购买数量为++>"+Buyamount);
 			}
 		}
 		session.put("cartList",list);
+		
+		String jsonResult = gson.toJson(list);//把对象转换成json字符串
+		jedis.del(key);
+		jedis.set(key, jsonResult);
+		
+		pool.getResource();//释放
+		pool.returnResource(jedis);
 		return "Addcart";
 	}
 	
@@ -195,8 +235,8 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 		return "searchInfo";
 	}*/
 	
-	public String findAll(){
-		PageUtil pageUtil = (PageUtil) session.get("pageUtil");
+	/*public String findAll(){
+		PageUtil pageUtil = (PageUtil) session.get("pageUtil00");
 		
 		if(null == pageUtil){
 			pageUtil = new PageUtil();
@@ -215,10 +255,10 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 		}
 		
 		list3=productService.findPageUtil(pageUtil);
-		session.put("pageUtil", pageUtil);
+		session.put("pageUtil00", pageUtil);
 		session.put("products", list3);
 		return "success";
-	}
+	}*/
 	
 	public String getCount(){
 		int num=productService.getCount();
@@ -228,7 +268,7 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 
 	//根据新品分页查询
 	public void findByDate(){
-		PageUtil pageUtil = (PageUtil) session.get("pageUtil");
+		PageUtil pageUtil = (PageUtil) session.get("pageUtil01");
 		System.out.println("ssion====================="+pageUtil+"num"+num);
 		if(null == pageUtil){
 			pageUtil = new PageUtil();
@@ -247,7 +287,7 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 		}
 		pageUtil.setTotalPages(pageUtil.getTotalPages());
 		System.out.println("ssion2====================="+pageUtil);
-		session.put("pageUtil", pageUtil);
+		session.put("pageUtil01", pageUtil);
 		List<ProductBean> products=productService.findByDate(pageUtil);
 		pageList = new ArrayList<Object>();
 		pageList.add(pageUtil);
@@ -273,7 +313,7 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 	
 	//按价格降序分页查询
 	public void findByPriceDesc(){
-		PageUtil pageUtil = (PageUtil) session.get("pageUtil");
+		PageUtil pageUtil = (PageUtil) session.get("pageUtil02");
 		System.out.println("ssion====================="+pageUtil+"num===>"+num);
 		if(null == pageUtil){
 			pageUtil = new PageUtil();
@@ -292,7 +332,7 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 		}
 		pageUtil.setTotalPages(pageUtil.getTotalPages());
 		System.out.println("ssion2====================="+pageUtil);
-		session.put("pageUtil", pageUtil);
+		session.put("pageUtil02", pageUtil);
 		List<ProductBean> products=productService.findByPriceDesc(pageUtil);
 		pageList = new ArrayList<Object>();
 		pageList.add(pageUtil);
@@ -316,14 +356,14 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 	
 	//根据商品名分页查询
 	public void findByType(){
-		PageUtil pageUtil = (PageUtil) session.get("pageUtil");
-		System.out.println("ssion====================="+pageUtil+"num"+num);
-		if(null == pageUtil){
+		PageUtil pageUtil = (PageUtil) session.get("pageUtil05");
+		//System.out.println("ssion==第一次的总页数==================="+pageUtil.getTotalPages()+"num----"+num);
+		
 			pageUtil = new PageUtil();
 			pageUtil.setPageNo(1);
 			pageUtil.setPageSize(8);
-			pageUtil.setTotalSize(productService.getCount());
-		}
+			pageUtil.setTotalSize(productService.getCount3(product));
+		
 		if(1==num){
 			pageUtil.setPageNo(1);
 		}else if(2==num){
@@ -334,9 +374,8 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 			pageUtil.setPageNo(pageUtil.getTotalPages());
 		}
 		pageUtil.setTotalPages(pageUtil.getTotalPages());
-		System.out.println("ssion2====================="+pageUtil);
-		session.put("pageUtil", pageUtil);
-		pageUtil.setSearchName(searchName);
+		session.put("pageUtil05", pageUtil);
+		pageUtil.setSearchName(product.getSearchName());
 		System.out.println("所搜的名字==>"+searchName);
 		List<ProductBean> products=productService.findByType(pageUtil);
 		pageList = new ArrayList<Object>();
@@ -362,15 +401,16 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 	}
 	
 	public void findByPrice(){
-		PageUtil pageUtil = (PageUtil) session.get("pageUtil");
-		System.out.println("ssion====================="+pageUtil+"分页num===>"+num);
-		if(null == pageUtil){
+		PageUtil pageUtil = (PageUtil) session.get("pageUtil03");
+		
+		//不管为不为空，每次都要查出总条数
 			pageUtil = new PageUtil();
 			pageUtil.setPageNo(1);
 			pageUtil.setPageSize(8);
-			pageUtil.setTotalSize(productService.getCount());
-		}
-		if(1==num){
+			pageUtil.setTotalSize(productService.getCount2(product));
+			
+		System.out.println("ssion====================="+pageUtil+"分页num===>"+num);
+		if(1==num || 0==num){
 			pageUtil.setPageNo(1);
 		}else if(2==num){
 			pageUtil.setPageNo(pageUtil.getProPageNo());
@@ -381,9 +421,10 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 		}
 		pageUtil.setTotalPages(pageUtil.getTotalPages());
 		System.out.println("ssion2====================="+pageUtil);
-		session.put("pageUtil", pageUtil);
-		pageUtil.setLowPrice(200);
-		pageUtil.setHeighPrice(300);
+		session.put("pageUtil03", pageUtil);
+		
+		pageUtil.setLowPrice(product.getLowPrice());
+		pageUtil.setHeighPrice(product.getHighPrice());
 		System.out.println("ssion2输入价格之后====================="+pageUtil);
 		List<ProductBean> products = productService.findByPrice(pageUtil);
 		pageList = new ArrayList<Object>();
@@ -426,10 +467,10 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 		}
 		list3=productService.findPageUtil(pageUtil);
 		session.put("pageUtil", pageUtil);
-		session.put("list", list);
+		session.put("list", list3);
 		pageList = new ArrayList<Object>();
 		pageList.add(pageUtil);
-		pageList.add(list);
+		pageList.add(list3);
 		System.out.println("productsList==>"+list3);
 		System.out.println("当前的pageUtil内容为==>"+pageUtil);
 		return "success";

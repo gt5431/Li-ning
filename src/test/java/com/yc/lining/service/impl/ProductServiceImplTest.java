@@ -1,4 +1,4 @@
-/*package com.yc.lining.service.impl;
+package com.yc.lining.service.impl;
 
 import static org.junit.Assert.*;
 
@@ -20,7 +20,7 @@ public class ProductServiceImplTest {
 
 	@Autowired
 	private ProductService productService;
-	private ProductBean product;
+	private ProductBean product = new ProductBean();
 	
 	@Test
 	public void testProductDetailsById() {
@@ -52,5 +52,20 @@ public class ProductServiceImplTest {
 		System.out.println(products);
 		assertNotNull(products);
 	}
+	
+	@Test
+	public void getCount1() {
+		int num=productService.getCount1("ÄÐ");
+		System.out.println(num);
+		assertNotNull(num);
+	}
+	
+	@Test
+	public void getCount2() {
+		product.setLowPrice(100);
+		product.setHighPrice(200);
+		int num=productService.getCount2(product);
+		System.out.println(num);
+		assertNotNull(num);
+	}
 }
-*/

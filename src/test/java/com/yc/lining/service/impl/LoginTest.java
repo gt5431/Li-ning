@@ -24,5 +24,4 @@ public class LoginTest {
 		System.out.println(usersinfo);
 		assertNotNull("µÇÂ¼Ê§°Ü",usersinfo);
 	}
-
 }

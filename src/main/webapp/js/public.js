@@ -178,18 +178,16 @@ $(function(){   //#content的7个点击事件
 		$("#r_logo").css("left","0px");
 
 	});
+	
 	//点击查看信息后弹出的div 层#float_head #content .bar  .hide_loginimg1
 	$("#float_head #content .bar  .hide_loginimg1").bind("click",function(){
-		alert("先登录");
-		$("#Mywhole").css("display","block");
-		$("#Mywhole").css("position","relative");
-		$("#Mywhole").css("top","200px");
-		$("#Mywhole").css("left","100px");
-		
+		$("#login_main").css("display","block");
 	});
-	
+	$("#float_head #content .bar  .hide_loginimg2").bind("click",function(){
+		$("#login_main").css("display","block");
+	});
 
-	});
+});
 
 
 //comm_logo_contain 这是所有分类的div sub_bg hide
@@ -267,29 +265,20 @@ $(function(){
 		});
 		$($("#comm_logo_contain #comm_contain_left ul li")[6]).bind({
 			mouseover:function(){
-				$("#font_content—6").css("display","block");
-				$("#font_content—6").css("margin-left","-486px");
-				$("#font_content—6 .box_head").css("color","red");
-				$($("#comm_logo_contain #comm_contain_left ul li")[6]).css("background","rgb(246,246,246)");
+				$($("#comm_logo_contain #comm_contain_left ul li")[6]).css("background","white");
 				$($("#comm_logo_contain #comm_contain_left ul li .li_a6")).css("color","red");
 			},
 			mouseout:function(){
-				$("#font_content—6").css("display","none");
 				$($("#comm_logo_contain #comm_contain_left ul li")[6]).css("background","");
 				$($("#comm_logo_contain #comm_contain_left ul li .li_a6")).css("color","#fff");
 			}
 		});
 		$($("#comm_logo_contain #comm_contain_left ul li")[7]).bind({
 			mouseover:function(){
-				$("#font_content—7").css("display","block");
-				$("#font_content—7").css("margin-left","-567px");/*567px*/
-				$("#font_content—7 .box_head").css("color","red");
-				
-				$($("#comm_logo_contain #comm_contain_left ul li")[7]).css("background","rgb(246,246,246)");
+				$($("#comm_logo_contain #comm_contain_left ul li")[7]).css("background","white");
 				$($("#comm_logo_contain #comm_contain_left ul li .li_a7")).css("color","red");
 			},
 			mouseout:function(){
-				$("#font_content—7").css("display","none");
 				$($("#comm_logo_contain #comm_contain_left ul li")[7]).css("background","");
 				$($("#comm_logo_contain #comm_contain_left ul li .li_a7")).css("color","#fff");
 			}
@@ -499,3 +488,5 @@ function  showPicRight(){
 		index=0;
 	}
 }
+
+

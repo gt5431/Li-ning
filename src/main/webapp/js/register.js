@@ -192,8 +192,8 @@ $(function(){
 	   			url: "user_register.action",
 	   			data:$("#regiterMyform").serialize(),
 	   			dataType:"JSON",
-	   			success: function(msg){			//查询成功后弹窗
-	   				if(msg == null){
+	   			success: function(data){			//查询成功后弹窗
+	   				if(data == null){
 	   					window.location.href="login.jsp";
 	   				}else{
 	   					window.location.href="register.jsp";

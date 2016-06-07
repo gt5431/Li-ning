@@ -31,9 +31,9 @@
 			<interceptor-ref name="myStack" />
 		
 			<result name="{2}">index.jsp</result>
-			<!-- <result	type="json">
+			<result	type="json">
 				<param name="root">usersinfo1</param>
-			</result> -->
+			</result>
 			<result name="loginFail" type="redirect">page/login.jsp</result>
 			<result name="listAll" type="redirect">page/index.jsp</result>
 			<result name="Addcart">shoppingcart.jsp</result>
@@ -43,24 +43,30 @@
 			<!-- <result name="HandFail" type="redirect">page/order_order.action</result> -->
 			<result name="buyAmount"></result>
 		</action>
+		<action name="collection" class="collectionAction" method="Collections">
+			<result name="collection" type="redirect">page/shoppingcart.jsp</result>
+		</action>
+		
+		<action name="collectionById" class="collectionAction" method="findCollectionById">
+			<result	type="json">
+				<param name="root">collectList</param>
+			</result>
+		</action>
+		
 		<action name="code" class="codeAction" method="code">
 		</action>
 		<action name="baokuan" class="baokuanAction" method="getProById">
 		</action>
 		
-		<action name="findAll" class="proAction" method="findAll">
-			<result name="success">product.jsp</result>
-		</action>
+		<action name="findByDate" class="proAction" method="findByDate"></action>
+		
+		<action name="findByPriceDesc" class="proAction" method="findByPriceDesc"></action>
 
-		<action name="pro_findByDate" class="proAction" method="findByDate"></action>
+		<action name="findByType" class="proAction" method="findByType"></action>
 		
-		<action name="pro_findByPriceDesc" class="proAction" method="findByPriceDesc"></action>
-
-		<action name="pro_findByType" class="proAction" method="findByType"></action>
+		<action name="findByPrice" class="proAction" method="findByPrice"></action>
 		
-		<action name="pro_findByPrice" class="proAction" method="findByPrice"></action>
-		
-		<action name="pro_findByPage" class="proAction" method="findByPage">
+		<action name="findByPage" class="proAction" method="findByPage">
 			<result	type="json">
 				<param name="root">pageList</param>
 			</result>

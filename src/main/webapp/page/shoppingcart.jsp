@@ -10,15 +10,34 @@
 <title>订单页面</title>
 <link type="text/css" href="../css/Common1.css" rel="stylesheet" />
 <link type="text/css" href="../css/shoppingcart.css" rel="stylesheet" />
+<link type="text/css" href="../css/comm_header.css" rel="stylesheet" />
+
 <script type="text/javascript" src="../js/jquery-1.11.3.js" /></script>
 <script type="text/javascript" src="../js/public.js" /></script>
+<script type="text/javascript" src="../js/login.js" /></script>
+<script type="text/javascript" src="../js/global.js" /></script>
 <script type="text/javascript">
+	var u_id =0;
+	u_id = $("#UidHidden").val();
+	
+	function collecte(pro_number){
+		$.ajax({
+			type:"POST",
+			data:{u_id:u_id,pro_number:pro_number},
+			url:"collection.action",
+			success:function(msg){
+				alert("收藏成功!!");
+				window.location.href="shoppingcart.jsp";
+			}
+		});
+	}
+	
 	function ContinueShopping(){
 		window.location.href="index.jsp";
 	}
 	
 	function GoCheck(){
-		var Buyamount  
+		var Buyamount=0;
 		window.location.href="order_order.action";
 	}
 	$(function() {
@@ -67,6 +86,24 @@
 
 			});
 		});
+		
+		//全选和全不选
+		$("#chkAll").click(function(){//chkGoods
+			//$("#chkGoods:checked");获取已选中的复选框
+			alert($("#chkAll:checked").val());
+			if(true){
+				$("#chkGoods").attr("checked","checked");
+				$("#chkAll_bottom").attr("checked","checked");
+			}else{
+				$("#chkGoods").attr("checked","");
+				$("#chkAll_bottom").attr("checked","");
+			}
+			
+		});
+		$("#chkAll_bottom").click(function(){
+			$("#chkGoods").attr("checked","checked");
+			$("#chkAll").attr("checked","checked");
+		});
 	});
 </script>
 </head>
@@ -83,8 +120,8 @@
 					<thead
 						style="background: rgb(239, 239, 239); height: 38px; width: 984px;">
 						<tr>
-							<td width="50"><input type="checkbox"
-								style="vertical-align: middle;" name="chkAll" checked="checked"></td>
+							<td width="50"><input type="checkbox" id="chkAll"
+								style="vertical-align: middle;" name="chkAll"></td>
 							<td width="60" style="text-align: left;">全选</td>
 							<td width="*" style="text-align:center; padding: 0 0px 0 5px;">商品</td>
 							<td width="140">规格</td>
@@ -128,7 +165,7 @@
 					<tbody style="background: white; height: 240px;" id="butInfo">
 						<c:forEach items="${sessionScope.cartList}" var="product">
 							<tr>
-							<td><input type="checkbox" checked="checked" id="chkGoods"  name="chkGoods"></td>
+							<td><input type="checkbox" id="chkGoods"  name="chkGoods"></td>
 							<td style="text-align:left;">
 								<a target="_blank" title="李宁弧四代植绒版男子减震跑鞋ARHJ049-2" href="#">
 	                            	<img style="width:60px;height:60px;" class="item" 
@@ -156,7 +193,7 @@
 							<td>¥0.00</td>
 							<td><div class="price">¥${product.pro_price*product.getBuyamount()}</div></td>
 							<td>
-								<div onclick="collecte()"style="margin-bottom:4px;">
+								<div onclick="collecte(${product.pro_number})"style="margin-bottom:4px;">
 									<a style="text-decoration:none;" class="line" href="javascript:void(0);">收藏</a>
 								</div>
 								<div class="relative">
@@ -171,10 +208,9 @@
 					</tbody>
 					<tfoot style="background: rgb(239, 239, 239);">
 						<tr>
-							<td style="text-align: center; height: 52px;"><input
-								type="checkbox" style="vertical-align: middle;"
-								id="chkAll_bottom" onclick="selectAll()" name="chkAll_bottom"
-								checked="checked"></td>
+							<td style="text-align: center; height: 52px;">
+								<input type="checkbox" style="vertical-align: middle;" id="chkAll_bottom" name="chkAll_bottom"/>
+							</td>
 							<td style="text-align: left;">全选</td>
 							<td><span style="color: #CC0000;">X</span> <a
 								style="color: #555555;" href="javascript:void(0);">删除选中商品</a></td>

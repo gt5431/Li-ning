@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yc.lining.mapper.CollectionMapper">
+	
+	<insert id="Collectionn" parameterType="Collection02">
+		insert into collection values(seq_collection.nextval,${u_id},${pro_number})
+	</insert>
+	
+	<!-- 根据用户id查找收藏的商品 -->
+	<select id="CollectionById" parameterType="int" resultType="Goodsinfo">
+		select c.u_id,p.pro_number,p.pro_img,p.pro_tagprice from  product p inner join
+			collection c on p.pro_number=c.pro_number where u_id=#{u_id}
+	</select>
+</mapper>

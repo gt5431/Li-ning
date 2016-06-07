@@ -10,10 +10,13 @@
 <title>订单页面</title>
 <link type="text/css" href="../css/Common1.css" rel="stylesheet" />
 <link type="text/css" href="../css/dingdan.css" rel="stylesheet" />
+<link type="text/css" href="../css/comm_header.css" rel="stylesheet" />
 
 <script type="text/javascript" src="../js/jquery-1.11.3.js" /></script>
 <script type="text/javascript" src="../js/public.js" /></script>
 <script type="text/javascript" src="../js/order.js" /></script>
+<script type="text/javascript" src="../js/login.js" /></script>
+<script type="text/javascript" src="../js/global.js" /></script>
 <script type="text/javascript">
 	$(function() {
 		//刷新收货地址信息
@@ -94,7 +97,7 @@
 		$("#ordersub").click(function() {
 			var buyNumber = $("#buyNumber").text();
 			var buyprice = $("#font_total_amount").text();
-			var pid = $("#pid").val();
+			var pid = $("#pid:checked").val();
 			$.ajax({
 				type:"POST",
 				url:"order_hand.action",

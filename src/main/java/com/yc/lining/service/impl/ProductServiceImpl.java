@@ -79,8 +79,20 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public int getCount1() {
-		return productMapper.getCount1();
+	public int getCount1(String searchName) {
+		System.out.println("业务类中的值为==>"+searchName);
+		return productMapper.getCount1(searchName);
+	}
+
+	@Override
+	public int getCount2(ProductBean product) {
+		return productMapper.getCount2(product);
+	}
+
+	@Override
+	public int getCount3(ProductBean product) {
+		System.out.println("要搜索的类型是==>"+product.getSearchName());
+		return productMapper.getCount3(product);
 	}
 
 }

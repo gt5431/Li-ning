@@ -14,7 +14,7 @@ public interface ProductMapper {
 	List<Product> selectAllProById(int typesid);
 	List<Product> selectSprotPro();
 
-	int getCount1();
+	int getCount1(String searchName);
 	
 	//分页
 	List<Product> findByPage1();//首页刚加载的分页情况
@@ -53,5 +53,9 @@ public interface ProductMapper {
 		 
 		//fenye查詢
 		List<ProductBean> findPageUtil(PageUtil pageUtil);
+
+		int getCount2(ProductBean product);
+
+		int getCount3(ProductBean product);
 		
 }

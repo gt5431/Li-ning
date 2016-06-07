@@ -7,8 +7,7 @@
 	</select>
 
 	<select id="selectAllProduct" resultType="Product">
-		select pro_name,pro_tagprice,color,pro_number from product where typesid=1
-		order by pro_number desc
+		select pro_name,pro_tagprice,color,pro_number from product  order by pro_number desc
 	</select>
 	<select id="selectAllTypes" resultType="Typesinfo">
 		select typesid,typename from typesinfo
@@ -19,11 +18,19 @@
 	</select>
 	<select id="selectSprotPro" resultType="Product">
 		select pro_name,pro_tagprice,color,pro_number,rownum from (select * from
-		product order by pro_number desc ) where rownum &lt; 7
+		product order by pro_number desc ) where rownum &lt;7
 	</select>
 	
 	<select id="getCount" resultType="int">
 		select count(*) from product
+	</select>
+	
+	<select id="getCount2" resultType="int" parameterType="ProductBean">
+		select count(*) from product where pro_tagprice between ${lowPrice} and ${highPrice}
+	</select>
+	
+	<select id="getCount3" resultType="int" parameterType="ProductBean">
+		select count(*) from product where pro_name like '%${searchName}%'
 	</select>
 	
  	<select id="findAll" resultType="ProductBean">
@@ -51,7 +58,7 @@
 	<select id="findByPrice" resultType="ProductBean" parameterType="PageUtil">
 	select * from(select a .*,rownum rn from 
 		(select color,pro_name,pro_tagprice,pro_number from product where pro_tagprice between ${lowPrice} and ${heighPrice}) a
-		where rownum &lt;${pageNo*pageSize} ) b where rn&gt;${(pageNo-1)*pageSize}
+		where rownum &lt;=${pageNo*pageSize} ) b where rn&gt;${(pageNo-1)*pageSize}
 	</select>
 	
 	

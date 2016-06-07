@@ -8,10 +8,12 @@
 <meta charset="utf-8" />
 <link type="text/css" href="../css/shop.css" rel="stylesheet" />
 <link type="text/css" href="../css/Common1.css" rel="stylesheet" />
+<link type="text/css" href="../css/comm_header.css" rel="stylesheet" />
 
 <script type="text/javascript" src="../js/jquery-1.11.3.js" /></script>
 <script type="text/javascript" src="../js/public.js" /></script>
 <script type="text/javascript" src="../js/login.js" /></script>
+<script type="text/javascript" src="../js/global.js" /></script>
 <script type="text/javascript" src="../js/baokuan.js" /></script>
 
 </head>
@@ -162,27 +164,27 @@
 						<div class="run_nav">
 							<p>男子</p>
 							<ul>
-								<li>123</li>
-								<li>农夫说</li>
-								<li>是短发破肚皮</li>
-								<li>农夫说</li>
-								<li>农夫说</li>
-								<li>农夫说</li>
+								<li>跑步鞋</li>
+								<li>休闲鞋</li>
+								<li>运动生活鞋</li>
+								<li>T恤/Polo衫/背心</li>
+								<li>卫衣</li>
+								<li>羽绒服</li>
 							</ul>
 							<p>女子</p>
 							<ul>
-								<li>123</li>
-								<li>农夫说</li>
-								<li>是短发破肚皮</li>
-								<li>农夫说</li>
-								<li>农夫说</li>
-								<li>农夫说</li>
+								<li>跑步鞋</li>
+								<li>休闲鞋</li>
+								<li>运动生活鞋</li>
+								<li>T恤/Polo衫/背心</li>
+								<li>卫衣</li>
+								<li>羽绒服</li>
 							</ul>
 							<p>明星系列</p>
 							<ul>
-								<li>农夫说</li>
-								<li>是短发破肚皮</li>
-								<li>农夫说</li>
+								<li>****</li>
+								<li>****</li>
+								<li>****</li>
 							</ul>
 						</div>
 						<div class="run_banner">
@@ -190,7 +192,7 @@
 						</div>
 						<div class="run_select_bnt">
 							<div class="select_bnt1">
-								<p>韦德产品</p>
+								<p>跑步鞋</p>
 							</div>
 							<div class="select_bnt1">
 								<p>篮球鞋</p>
@@ -198,8 +200,8 @@
 							<div class="select_bnt2">
 								<p>服装</p>
 							</div>
-							<div class="select_bnt2">
-								<p>配件</p>
+							<div class="select_bnt1">
+								<p>休闲鞋</p>
 							</div>
 						</div>
 						<div class="run_list">
@@ -292,27 +294,25 @@
 						<div class="Sport_nav">
 							<p>男子</p>
 							<ul>
-								<li>123</li>
-								<li>农夫说</li>
-								<li>是短发破肚皮</li>
-								<li>农夫说</li>
-								<li>农夫说</li>
-								<li>农夫说</li>
+								<li>休闲鞋</li>
+								<li>运动生活鞋</li>
+								<li>T恤/Polo衫/背心</li>
+								<li>卫衣</li>
+								<li>羽绒服</li>
 							</ul>
 							<p>女子</p>
 							<ul>
-								<li>123</li>
-								<li>农夫说</li>
-								<li>是短发破肚皮</li>
-								<li>农夫说</li>
-								<li>农夫说</li>
-								<li>农夫说</li>
+								<li>跑步鞋</li>
+								<li>运动生活鞋</li>
+								<li>T恤/Polo衫/背心</li>
+								<li>卫衣</li>
+								<li>羽绒服</li>
 							</ul>
 							<p>明星系列</p>
 							<ul>
-								<li>农夫说</li>
-								<li>是短发破肚皮</li>
-								<li>农夫说</li>
+								<li>$$$$</li>
+								<li>$$$$</li>
+								<li>$$$$</li>
 							</ul>
 						</div>
 						<div class="Sport_banner">
@@ -320,16 +320,10 @@
 						</div>
 						<div class="Sport_select_bnt">
 							<div class="select_bnt1">
-								<p>韦德产品</p>
-							</div>
-							<div class="select_bnt1">
-								<p>篮球鞋</p>
+								<p>休闲鞋</p>
 							</div>
 							<div class="select_bnt2">
 								<p>服装</p>
-							</div>
-							<div class="select_bnt2">
-								<p>配件</p>
 							</div>
 						</div>
 
@@ -360,6 +354,7 @@
 
 			</div>
 		</div>
+		<!-- <div id="exterFooter"></div> -->
 		<jsp:include page="footer.jsp"></jsp:include>
 	</div>
 </body>

@@ -3,7 +3,6 @@
 <mapper namespace="com.yc.lining.mapper.OrderformMapper" >
   
   <insert id="insertOrderById"  parameterType="Orderform">
-    insert into ORDERFORM (ORDERID, RIQI,U_ID,PRO_NUMBER, BUY_NUMBER, BUYPRICE,PID)
-    	values (seq_orderid.nextval,sysdate,101,1,#{buyNumber},#{buyprice},#{pid})
+    insert into orderform values (seq_orderid.nextval,sysdate,101,1,#{buyNumber},#{buyprice},#{pid},0,0)
   </insert>
 </mapper>

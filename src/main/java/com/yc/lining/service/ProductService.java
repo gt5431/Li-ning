@@ -38,7 +38,11 @@ public interface ProductService {
 	//∞¥∑÷Ìì≤È‘É
 	List<ProductBean> findPageUtil(PageUtil pageUtil);
 
-	int getCount1();
+	int getCount1(String searchName);
+
+	int getCount2(ProductBean product);
+
+	int getCount3(ProductBean product);
 
 }
 

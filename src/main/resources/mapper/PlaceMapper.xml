@@ -3,7 +3,7 @@
 <mapper namespace="com.yc.lining.mapper.PlaceMapper" >
   
   <select id="findAddressByUid" parameterType="int" resultMap="PlaceMap">
-  	select * from place where u_id= #{u_id}
+  	select * from place where u_id= #{u_id} order by pid desc
   </select>
   <resultMap type="Place" id="PlaceMap">
   	<id property="pid" column="pid"/>

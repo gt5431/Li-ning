@@ -1,5 +1,8 @@
 package com.yc.lining.service;
 
+import java.util.List;
+
+import com.yc.lining.entity.Goodsinfo;
 import com.yc.lining.entity.Usersinfo;
 
 public interface UserService {
@@ -7,4 +10,5 @@ public interface UserService {
 	Usersinfo login(Usersinfo usersinfo);
 	//зЂВс
 	boolean register(Usersinfo usersinfo);
+	
 }

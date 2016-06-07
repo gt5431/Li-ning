@@ -11,8 +11,12 @@
 <link href="../css/login.css" type="text/css" rel="stylesheet" />
 <link type="text/css" href="../css/Common1.css" rel="stylesheet" />
 <link href="../css/shop.css" type="text/css" rel="stylesheet" />
+<link type="text/css" href="../css/comm_header.css" rel="stylesheet" />
+
 <script type="text/javascript" src="../js/jquery-1.11.3.js" /></script>
 <script type="text/javascript" src="../js/public.js" /></script>
+<script type="text/javascript" src="../js/login.js" /></script>
+<script type="text/javascript" src="../js/global.js" /></script>
 <script type="text/javascript">
 	//切换大图片
 	function click1(index) {

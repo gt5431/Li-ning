@@ -26,8 +26,14 @@ public class ProductBean implements Serializable{
 		private int totalPage;//总页数
 		private double lowPrice;
 		private double highPrice;
-	    
-	    
+		private String searchName; //用于模糊查询的名字
+		
+		public String getSearchName() {
+			return searchName;
+		}
+		public void setSearchName(String searchName) {
+			this.searchName = searchName;
+		}
 		public int getPro_number() {
 			return pro_number;
 		}

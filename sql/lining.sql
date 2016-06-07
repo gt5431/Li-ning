@@ -172,6 +172,7 @@ insert into place values(seq_place.nextval,'北京市西路四环',103,'习近�
 insert into collection values(seq_collection.nextval,101,1);
 insert into collection values(seq_collection.nextval,102,1);
 insert into collection values(seq_collection.nextval,103,2);
+insert into collection values(seq_collection.nextval,101,2);
 
 --订单表插入数据
 insert into orderform values(seq_orderid.nextval,Sysdate,101,1,1,'99.00',1,1);
@@ -260,11 +261,16 @@ to_date('2015-5-1','yyyy-MM-dd'),to_date('2016-5-30','yyyy-MM-dd'),0,001,100,'�
 insert into orderform values(seq_orderid.nextval,to_date('2015-7-1','yyyy-MM-dd'),101,18,4,375,1,1)	
 select * from product
 select * from orderform
-
+select * from usersinfo
 select * from place
+select * from collection
 select * from(select a .*,rownum rn from (select  orderid,to_char(riqi,'yyyy-MM-dd'),u_id,pro_number,buy_number,buyprice,pid,orderflas from orderform order by orderid asc)a)
 insert into ORDERFORM (ORDERID, RIQI, U_ID,PRO_NUMBER, BUY_NUMBER, BUYPRICE,PID)
     	values (seq_orderid.nextval,sysdate,101,0,1,216.0,1)
 select * from product where pro_number=15;
 commit;
 select color,pro_name,pro_tagprice,pro_number from product where pro_name like '%男%'
+select count(*) from product where pro_tagprice between 1 and 300
+
+select c.u_id,p.pro_number,p.pro_img,p.pro_tagprice from  product p inner join
+			collection c on p.pro_number=c.pro_number where u_id=101
