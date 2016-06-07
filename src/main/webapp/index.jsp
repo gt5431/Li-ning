@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <body>
-	<h2>Hello World!</h2>
-	<jsp:forward page="user_list.action" />
+	<jsp:forward page="user_list.action"/>
 </body>
 </html>

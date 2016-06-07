@@ -36,7 +36,11 @@ public class ConnTest {
 	@Test
 	public void testConn2() {
 		conn = sqlSessionFactory.openSession(true).getConnection();
+<<<<<<< HEAD
 		assertNotNull("ConnectFail!!",conn);
+=======
+		assertNotNull("Á¬½ÓÊ§°Ü!!",conn);
+>>>>>>> refs/remotes/origin/luohongmei
 	}
 
 

@@ -1,6 +1,4 @@
 package com.yc.lining.util;
-
-
 //分页
 public class PageUtil {
 	private int pageNo =1;

@@ -11,5 +11,4 @@
 		insert into usersinfo values(seq_uid.nextval,#{username},#{password},'','男','',#{email},#{phone},0,0,0)
 	</insert>
 	
-	
 </mapper>

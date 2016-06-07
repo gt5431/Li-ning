@@ -62,4 +62,3 @@ public class BaokuanAction implements ModelDriven<Product>,SessionAware{
 		this.session = session;
 	}
 }
-

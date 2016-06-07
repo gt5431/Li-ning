@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.lining.mapper.CommentsMapper">
+    <insert id="insertComment" parameterType="Comments">
+        insert into comments values(seq_commentsid.nextval,#{orderid},sysdate,#{comment_content},#{u_id})
+    </insert>
+    <select id="selectNoComment" resultType="CommentBean"  parameterType="int">
+    	select o.orderid,o.riqi,o.pro_number,p.pro_name,p.color from orderform o,product p where commentflag=0 and o.pro_number=p.pro_number and u_id=#{u_id}
+    </select>
+     <select id="selectCommentimg" parameterType="int" resultType="CommentBean">
+    	select p.pro_name,p.color,o.orderid from orderform o,product p where  o.pro_number=p.pro_number and o.orderid=#{orderid}
+    </select>
+    <update id="updateOrderComment" parameterType="int">
+        update orderform set commentflag=1 where orderid=#{orderid}
+    </update>
+    <select id="selectCommentByProNum" parameterType="int" resultType="ProComment">
+       select comment_content,comment_date,username from  comments c,usersinfo u  where orderid in(select orderid  from orderform where pro_number=#{pro_number}) and c.u_id= u.u_id 
+    </select>
+</mapper>

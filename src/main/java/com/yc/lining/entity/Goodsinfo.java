@@ -3,10 +3,6 @@ package com.yc.lining.entity;
 import java.io.Serializable;
 
 public class Goodsinfo implements Serializable{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4636354843686237000L;
 	private int pro_number;
 	private String pro_name;

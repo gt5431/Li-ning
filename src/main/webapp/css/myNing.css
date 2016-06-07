@@ -46,6 +46,7 @@
 	float: left;
 	width: 789px;
 	background:#FFF;
+<<<<<<< HEAD
 	display:none;
 }
 #member #member_right1 {
@@ -270,3 +271,146 @@ textarea:focus{
 		margin-left:100px;
 		margin-top:20px;
 }
+=======
+	display:block;
+}
+.kind{
+	padding-bottom:12px;
+	border-bottom: #CCC solid 1px;
+}
+#rule{
+	width:770px;
+	background:#F5F5F5;
+	height:150px;
+	margin-left:20px;
+}
+#rule .r{
+	padding-top:20px;
+	margin-left:20px;
+	font-size:14px;
+	font-weight:bold
+}
+#rule .u{
+     margin-left:20px;
+     font-size:14px;
+	 padding-top:20px;
+}
+#comment{
+	width:770px;
+    background:#F5F5F5;
+    height:auto;
+	margin-top:30px;
+	margin-left:20px;
+}#comment .comm{
+	color:#F00;
+    text-decoration:underline;
+	font-weight:bold;
+	margin-left:20px;
+	padding-top:20px;
+	font-size:16px;
+}#comment  .good_title{
+	margin-left:20px;
+	height:40px;
+	width:700px;
+	margin-top:30px;
+	background:#DADADA;
+}
+#comment  .good_title span{
+   margin-left:100px;
+   line-height:40px;
+   font-size:14px;
+}
+table{
+	margin-top:20px;
+	font-size:14px;
+}#pingjia{
+	width:770px;
+	height:40px;
+	border-bottom:#f40 solid 2px;
+	background:#F4F4F4;
+}
+.title{
+	background-color: #f40;
+    color: #fff;
+    float: left;
+    font-size:16px;
+    font-weight: bold;
+    width:130px;
+    height:40px;
+    text-align: center;
+	line-height:40px;
+	display:inline-block;
+	
+}
+#comment1{
+	width:770px;
+    background:#FFF;
+    height:300px;
+	margin-left:20px;
+	margin-top:30px;
+}
+#picture{
+	margin-left:40px;
+	width:200px;
+	height:150px;
+	background:#FFF;
+	padding-top:40px;
+	float:left;
+}#picture .img1{
+	border:#F00 solid 3px;
+    width:150px;
+    height:150px;
+}#picture p{
+	color:#8080FF;
+	font-size:13px;
+}#comment2{
+	margin-top:30px;
+	float:left;
+	width:370px;
+	background:#FFF;
+}#comment2 span{
+	line-height:2.5;
+	color:#C6C6C6;
+	font-size:13px;
+}#ping{
+	margin-left:430px;
+	width:100px;
+	height:40px;
+	background:#F00;
+	border-collapse:collapse;
+	line-height:40px;
+	color:#FFF;
+	font-size:14px;
+	text-align:center;
+	margin-top:5px;
+}
+#ping a{
+	text-decoration:none;
+	color:#FFF;
+}
+textarea:focus{
+	border:double #FF0000 1px;
+}
+
+.black_content{
+            position: absolute; 
+            top: 15%; 
+            left: 25%; 
+            width:500px; 
+            height:100px; 
+            -moz-opacity: 0.8; 
+            opacity:0.8; 
+			z-index:1002;
+}.white_content{ 
+            position: absolute; 
+            top: 21%; 
+            left: 20%; 
+            border: 2px solid #FFF; 
+            background-color: white; 
+            overflow: auto; 
+	        z-index:1003;
+ }#commsuccess{
+    width:1349px;
+    height:100px;
+ }
+>>>>>>> refs/remotes/origin/luohongmei

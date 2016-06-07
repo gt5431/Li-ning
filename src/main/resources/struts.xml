@@ -42,6 +42,10 @@
 			<result name="Finddetails">goodsinfo.jsp</result>
 			<!-- <result name="HandFail" type="redirect">page/order_order.action</result> -->
 			<result name="buyAmount"></result>
+			
+			<result name="comm">comment.jsp</result>
+		    <result name="commsuccess">commSuccess.jsp</result>
+		    <result name="commfail">error.jsp</result>
 		</action>
 		<action name="collection" class="collectionAction" method="Collections">
 			<result name="collection" type="redirect">page/shoppingcart.jsp</result>
@@ -71,5 +75,9 @@
 				<param name="root">pageList</param>
 			</result>
 		</action>
+		
+		<action name="pinglun" class="commentDetailAction"  method="detailping">
+	          
+	    </action>
 	</package>
 </struts>

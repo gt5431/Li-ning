@@ -237,6 +237,7 @@
 }
 
 #main #info #info3 #table #td_left{
+<<<<<<< HEAD
 	 box-sizing: border-box;
     padding: 16px 10px 16px 6px;
     text-align: left;
@@ -249,6 +250,23 @@
     text-align: left;
     width: 22%;
 	font-size:14px;
+=======
+    text-align: left;
+    width:21%;	
+	font-size:14px;
+	margin-top:20px;
+	padding-bottom:20px;
+	border-bottom:1px solid #c0c0c0;
+	
+}
+#main #info #info3 #table #td_right{
+    padding-bottom:20px;
+    margin-top:20px;
+    text-align: left;
+    width: 22%;
+	font-size:14px;
+	border-bottom:1px solid #c0c0c0;
+>>>>>>> refs/remotes/origin/luohongmei
 }
 #main #info #info4{
 	width:100%;

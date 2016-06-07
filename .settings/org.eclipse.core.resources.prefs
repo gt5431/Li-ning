@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
 >>>>>>>=refs/remotes/origin/Duanjuan
@@ -10,3 +11,26 @@ encoding//src/main/java/com/yc/lining/util/PageUtil.java=UTF-8
 encoding//src/main/webapp/css/comm_header.css=UTF-8
 encoding//src/main/webapp/css/register.css=UTF-8
 encoding//src/main/webapp/page/product.jsp=UTF-8
+=======
+eclipse.preferences.version=1
+encoding//sql/lining.sql=UTF-8
+encoding//src/main/java/com/yc/lining/action/BaokuanAction.java=GBK
+encoding//src/main/java/com/yc/lining/action/CommentAction.java=UTF-8
+encoding//src/main/java/com/yc/lining/action/CommentDetailAction.java=UTF-8
+encoding//src/main/java/com/yc/lining/action/MyningAction.java=UTF-8
+encoding//src/main/java/com/yc/lining/action/OrderformAction.java=GBK
+encoding//src/main/java/com/yc/lining/action/ProductAction.java=GBK
+encoding//src/main/java/com/yc/lining/action/UserAction.java=GBK
+encoding//src/main/java/com/yc/lining/action/codeAction.java=GBK
+encoding//src/main/java/com/yc/lining/inteceptor/LoginInterceptor.java=UTF-8
+encoding//src/main/java/com/yc/lining/mapper/ProductMapper.java=GBK
+encoding//src/main/java/com/yc/lining/service/ProductService.java=GBK
+encoding//src/main/java/com/yc/lining/service/UserService.java=GBK
+encoding//src/main/java/com/yc/lining/service/impl/ComentServiceImpl.java=UTF-8
+encoding//src/main/java/com/yc/lining/service/impl/ProductServiceImpl.java=GBK
+encoding//src/main/java/com/yc/lining/util/PageUtil.java=UTF-8
+encoding//src/main/webapp/css/register.css=UTF-8
+encoding//src/main/webapp/index.jsp=UTF-8
+encoding//src/main/webapp/page/header.jsp=UTF-8
+encoding//src/main/webapp/page/index.jsp=UTF-8
+>>>>>>> refs/remotes/origin/luohongmei
