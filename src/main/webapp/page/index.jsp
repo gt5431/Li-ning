@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -6,17 +5,16 @@
 <html>
 
 <head>
-<meta charset="utf-8" />
-<link type="text/css" href="../css/shop.css" rel="stylesheet" />
-<link type="text/css" href="../css/Common1.css" rel="stylesheet" />
-<link type="text/css" href="../css/comm_header.css" rel="stylesheet" />
-
-<script type="text/javascript" src="../js/jquery-1.11.3.js" /></script>
-<script type="text/javascript" src="../js/public.js" /></script>
-<script type="text/javascript" src="../js/login.js" /></script>
-<script type="text/javascript" src="../js/global.js" /></script>
-<script type="text/javascript" src="../js/baokuan.js" /></script>
-
+	<meta charset="utf-8" />
+	<link type="text/css" href="../css/shop.css" rel="stylesheet" />
+	<link type="text/css" href="../css/Common1.css" rel="stylesheet" />
+	<link type="text/css" href="../css/comm_header.css" rel="stylesheet" />
+	
+	<script type="text/javascript" src="../js/jquery-1.11.3.js" /></script>
+	<script type="text/javascript" src="../js/public.js" /></script>
+	<script type="text/javascript" src="../js/login.js" /></script>
+	<script type="text/javascript" src="../js/global.js" /></script>
+	<script type="text/javascript" src="../js/baokuan.js" /></script>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>

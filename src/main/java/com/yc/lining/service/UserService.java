@@ -10,4 +10,5 @@ public interface UserService {
 	Usersinfo login(Usersinfo usersinfo);
 	//зЂВс
 	boolean register(Usersinfo usersinfo);
+	List<Usersinfo> listAllUser();
 }

@@ -18,7 +18,7 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 	
 	<context:component-scan base-package="com.yc" />
-	<context:property-placeholder  location="classpath:db.properties"/>
+	<context:property-placeholder  location="classpath:db.properties,classpath:mail.properties"/>
 	
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
@@ -34,16 +34,26 @@
 		p:sqlSessionFactoryBeanName="sqlSessionFactory" p:basePackage="com.yc.lining.mapper">
 	</bean>
 	
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager" 
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		p:dataSource-ref="dataSource">
+	</bean>
+	<!-- 配置事务关联 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
 	<!-- 配置邮箱发送bean -->
 	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl" >
-		<property name="host"  value="smtp.qq.com"/>
-		<property name="username"  value="2769328353@qq.com"/>
-		<property name="password" value="gt199410162271"/>
+		<property name="host"  value="${mail.smtp.host}"/>
+		<property name="username"  value="${mail.smtp.username}"/>
+		<property name="password" value="${mail.smtp.password}"/>
+		<property name="defaultEncoding" value="${mail.smtp.defaultEncoding}"/>
 		<property name="javaMailProperties">
 			<props>
-				<prop key="mail.smtp.auth">true</prop>
-				<prop key="mail.smtp.timeout">20000</prop>
+				<prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+				<prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>
 			</props>
 		</property>
+		
 	</bean>
 </beans>

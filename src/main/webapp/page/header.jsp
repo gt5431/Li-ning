@@ -61,7 +61,6 @@ $("#loginout").click(function(){
 		type: "POST",
 		url: "user_loginout.action",
 		success: function(msg){			//查询成功后弹窗
-			alert( "注销成功---");
 			window.location.href="index.jsp";
 			     			
 		}
@@ -92,16 +91,18 @@ $.ajax({
 			$("#r_view_hide #liulan").html(valuee);
 		}
 });
+
+//刷新购物车
 </script>
 
-			<span class="row">|</span> <a> <span class="shopping_chart"></span>
-				<span class="shopping_count">(${sessionScope.cartList.size()})</span> 
+			<span class="row">|</span> <a href="user_mycart.action"> <span class="shopping_chart"></span>
+				<span class="shopping_count">(<c:choose><c:when test="${sessionScope.cartList == null}">0</c:when><c:otherwise>${sessionScope.cartList.size()}</c:otherwise></c:choose>)</span>
 				<span style="color: red;">${sessionScope.errorMsg}</span>
 				<c:remove var="errorMsg" />
 			</a>
 		</div>
 		<div id="navigation_right">
-			<a href="MyNing.jsp">会员中心</a> <span>|</span> <a href="#">消息中心</a>
+			<a href="myning_comment?u_id=${sessionScope.usersinfo.u_id}">会员中心</a> <span>|</span> <a href="#">消息中心</a>
 		</div>
 	</div>
 	<div id="comm_logo_contain">
@@ -647,7 +648,8 @@ $.ajax({
 			<img src="../images/solid.png" />
 		</div>
 		<div id="r_cart" class="bar">
-			<img src="../images/cart_icon_1.png" /> <span>(0)</span>
+			<img src="../images/cart_icon_1.png" />
+			<span>(<c:choose><c:when test="${sessionScope.cartList == null}">0</c:when><c:otherwise>${sessionScope.cartList.size()}</c:otherwise></c:choose>)</span>
 		</div>
 		<!--购物车隐藏栏-->
 		<div id="r_cart_hide"
@@ -656,10 +658,8 @@ $.ajax({
 				style="width: 30px; height: 30px; background: #CCC; text-align: center; float: right;">
 				<img style="margin-top: 3px;" src="../images/close.png" />
 			</div>
-			<div
-				style="width: 100%; height: 60px; text-align: center; float: right;">
-				<p
-					style="color: #FFF; line-height: 20px; font-size: 16px; margin-top: 20px; font-weight: bold;">购物车</p>
+			<div style="width: 100%; height: 60px; text-align: center; float: right;">
+				<p style="color: #FFF; line-height: 20px; font-size: 16px; margin-top: 20px; font-weight: bold;">购物车</p>
 			</div>
 			<div
 				style="width: 100%; height: 46px; float: right; margin-top: 20px;">

@@ -27,7 +27,7 @@
                     <a href="javaScript:void(0)" onClick=""><li>我的订单</li></a>
                     <a href="javaScript:void(0)" onClick=""><li>历史订单</li></a>
                     <a href="javaScript:void(0)" onClick="comment()"><li id="s3">商品已评价</li></a>
-                    <a href="javaScript:void(0)"><li id="s3">商品待评价</li></a>
+                    <a href="javaScript:void(0)" onClick="comment1()"><li id="s3">商品待评价</li></a>
                     <a href="javaScript:void(0)" onClick=""><li>退换货查询</li></a>
                     <a href="javaScript:void(0)" onClick=""><li>投诉进度查询</li></a>
                    </ul>
@@ -100,6 +100,57 @@
                   </table>
                </div>
             </div>
+               <div id="member_right1">
+                      <p class="info">会员信息</p>
+                      <div id="member_content">
+                          <form action="" method="post">
+                            <div id="membber_loginname" class="second">
+                                <label class="roew_style">登录名：</label> <label id="login_name"
+                                    style="color: #F00;height:38px;">aaaa</label>
+                            </div>
+                            <div id="membber_name" class="second">
+                                <label class="roew_style">真实姓名：</label> <input type="text"
+                                    class="rows_style" id="username">
+                            </div>
+                            <div id="membber_sex" class="second">
+                                <label class="roew_style">性别：</label> <input class="sex"
+                                    type="radio" value="0" name="sex" style="font-family: 微软雅黑;">保密
+                                <input class="sex" type="radio" value="1" name="sex"
+                                    style="font-family: 微软雅黑;">男 <input class="sex"
+                                    type="radio" value="2" name="sex" style="font-family: 微软雅黑;">女
+                            </div>
+                            <div id="membber_birth" class="second">
+                                <label id="birth" class="roew_style">生日：</label> <select
+                                    id="birthYear" class="year" name="year" style="font-family: 微软雅黑;">
+                                    <option></option>
+                                </select>年 <select id="birthMonth" class="year" name="month"
+                                    style="font-family: 微软雅黑;">
+                                </select>月 <select id="birthDay" class="year" name="day"
+                                    style="font-family: 微软雅黑;">
+                                </select>日
+                            </div>
+                            <div id="membber_email" class="second">
+                                <label class="roew_style">邮箱：</label> <label id="login_email"
+                                    style="color: #F00;padding-top:20px;">675436321@qq.com</label>
+                            </div>
+                            <div id="membber_mobil" class="second">
+                                <label class="roew_style">手机号码：</label> <input type="text"
+                                    class="rows_style" id="mobil">
+                            </div>
+                            <div id="membber_addr" class="second">
+                                <label class="roew_style">收货地址：</label> <input type="text"
+                                    class="rows_style" id="maddr">
+                            </div>
+                            <div id="membber_button" class="second">
+                                <input type="submit" value="提交修改" id="mbutton" class="mbutton" /> <input
+                                    type="submit" value="返回主页" id="mbutton" class="mbutton" />
+                            </div>
+                            </form>
+		              </div>
+                      <div id="member_content1">
+                           <img src="../images/member_logo.gif"/>
+                      </div>
+                 </div>
         </div>
      <jsp:include page="footer.jsp"></jsp:include>
   </body>

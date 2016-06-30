@@ -9,7 +9,7 @@ import java.util.List;
 public interface ProductMapper {
 
 	Product findProductDetailsById(int proNumber);
-
+	
 	List<Product> selectAllProduct();
 	List<Product> selectAllProById(int typesid);
 	List<Product> selectSprotPro();
@@ -58,4 +58,10 @@ public interface ProductMapper {
 
 		int getCount3(ProductBean product);
 		
+		
+		//houtai
+		List<Product> listAllProduct();
+		int removeProduct(Product product);
+		int updateProduct(Product product);
+		int addProduct(Product product);
 }

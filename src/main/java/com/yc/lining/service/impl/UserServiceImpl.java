@@ -27,4 +27,9 @@ public class UserServiceImpl implements UserService{
 		}
 		return false;
 	}
+
+	@Override
+	public List<Usersinfo> listAllUser() {
+		 return usersinfoMapper.selectAllUsers();
+	}
 }

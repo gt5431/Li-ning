@@ -17,7 +17,7 @@
 			<interceptor-stack name="myStack">
 				<interceptor-ref name="defaultStack" />
 				<interceptor-ref name="loginInterceptor">
-				<param name="includeMethods">order</param>
+				<param name="includeMethods">order,comment</param>
 				</interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
@@ -31,10 +31,13 @@
 			<interceptor-ref name="myStack" />
 		
 			<result name="{2}">index.jsp</result>
-			<result	type="json">
+			<result	type="json" name="userlogin">
 				<param name="root">usersinfo1</param>
 			</result>
-			<result name="loginFail" type="redirect">page/login.jsp</result>
+			<result	type="json" name="productsJson">
+				<param name="root">products</param>
+			</result>
+			
 			<result name="listAll" type="redirect">page/index.jsp</result>
 			<result name="Addcart">shoppingcart.jsp</result>
 			<result name="orderSuccess">order.jsp</result>
@@ -43,9 +46,16 @@
 			<!-- <result name="HandFail" type="redirect">page/order_order.action</result> -->
 			<result name="buyAmount"></result>
 			
+			<result name="listorder">MyNing1.jsp</result>
 			<result name="comm">comment.jsp</result>
 		    <result name="commsuccess">commSuccess.jsp</result>
 		    <result name="commfail">error.jsp</result>
+		    
+		    <result name="deleteSuccess">shoppingcart.jsp</result>
+		    <result name="mycart" type="redirect">page/shoppingcart.jsp</result>
+		    
+		    <result name="mlogin" type="redirect">backlogin/back_login.jsp</result>
+			<result name="mloginSuccess" type="redirect">back/main.jsp</result>
 		</action>
 		<action name="collection" class="collectionAction" method="Collections">
 			<result name="collection" type="redirect">page/shoppingcart.jsp</result>
@@ -79,5 +89,49 @@
 		<action name="pinglun" class="commentDetailAction"  method="detailping">
 	          
 	    </action>
+	    
+	    <!-- HOUTAI -->
+	    <action name="manager_listAllManager" class="managerAction" method="listAllManager">
+			<!-- result的name默认为success -->
+			<result type="json">
+				<param name="root">managers</param>
+			</result>
+			<!-- <result name="cxManagersuccess" type="redirect">back/manager.html</result> -->
+		</action>
+		
+		<action name="manager_addManager" class="managerAction" method="addManager">
+			<result type="json">
+				<param name="root">managers</param>
+			</result>
+		</action>
+		<action name="user02_listAllUser" class="userAction" method="listAllUser">
+			<result type="json">
+				<param name="root">listUsers</param>
+			</result>
+		</action>
+		
+		<action name="type_listAllType" class="typeAction" method="listAllType">
+			<result type="json">
+				<param name="root">types</param>
+			</result>
+		</action>
+		<action name="type_addType" class="typeAction" method="addType">
+			<result type="json">
+				<param name="root">types</param>
+			</result>
+		</action>
+		<action name="orderform_listAllOrder" class="orderformAction" method="listAllOrder">
+			<result type="json">
+				<param name="root">orders</param>
+			</result>
+		</action>
+		<action name="listAllPlace" class="place1Action" method="listAllPlace">
+			<result type="json" name="placeJson">
+				<param name="root">places</param>
+			</result>
+		</action>
+		<!-- <action name="updateProduct" class="product1Action" method="updateProduct">
+			
+		</action> -->
 	</package>
 </struts>

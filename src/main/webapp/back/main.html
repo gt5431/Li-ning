@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>main.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+	<link rel="stylesheet" type="text/css" href="../easyui/css/easyui.css" />
+	<link rel="stylesheet" type="text/css" href="../easyui/css/icon.css" />
+	<script type="text/javascript" src="../easyui/js/jquery.min.js"></script>
+	<script type="text/javascript" src="../easyui/js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../easyui/js/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/showpic.js"></script>
+	<!-- 编辑器 -->
+	<script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" src="../ueditor/ueditor.all.min.js"></script>
+	<script type="text/javascript" src="../ueditor/lang/zh-cn/zh-cn.js"></script>
+	
+	<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$.getJSON("../manager.do?op=l",null,function call(json){
+			$("#showname").html("欢迎"+json[0]['mname']+"登录");
+		
+		});
+	});
+	</script>
+  </head>
+  
+  <body class="easyui-layout">
+
+	<div data-options="region:'north',border:false" id="newslogo"
+		style="height:120px;">
+		<ul>
+			<a id="showname">.....</a>
+			<li><a class="easyui-linkbutton" data-options="plain:true"
+				href="javascript:void(0)">修改密码</a></li>
+			<li><a class="easyui-linkbutton" data-options="plain:true"
+				href="javascript:void(0)">安全退出</a></li>
+		</ul>
+	</div>
+	<div data-options="region:'west',title:'导航'" style="width:180px;">
+		<ul class="easyui-tree" id="menu_tree">
+			<li><span>菜单</span>
+				<ul>
+					<li data-options="state:'closed'"><span>管理员员信息管理</span>
+						<ul>
+							<li id="findManagers_content">查看所有管理员</li>
+
+						</ul></li>
+					<li data-options="state:'closed'"><span>会员信息管理</span>
+						<ul>
+							<li id="findUsers_content">查看所有会员</li>
+
+						</ul></li>
+					<li data-options="state:'closed'"><span>商品类型管理</span>
+						<ul>
+							<li id="selectType_content"><span>查看所有商品类型</span>
+							</li>
+						</ul></li>
+					<li data-options="state:'closed'"><span>商品信息管理</span>
+						<ul>
+							<li id="findProducts_content"><span>查看所有商品</span></li>
+
+						</ul></li>
+
+				</ul></li>
+		</ul>
+	</div>
+	<div data-options="region:'east',split:true,collapsed:true,title:'帮助'"
+		style="width:100px;">
+		<img src="../images/weixin.jpg" width="90px" height="90px" />
+	</div>
+	<div data-options="region:'south'" id="copyright"
+		style="height:50px;background-color:#4D89BB;margin:auto;">
+		<p>
+			<a href="http://www.hyycinfo.com">20班第二组</a>
+		</p>
+	</div>
+	<div data-options="region:'center'">
+		<div id="content_index" class="easyui-tabs" data-options="fit:true"
+			title="内容"></div>
+	</div>
+
+
+
+</body>
+</html>

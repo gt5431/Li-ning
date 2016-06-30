@@ -35,8 +35,8 @@
 			<c:remove var="registerMsg" scope="session"/>
         	<div class="line">
                 <label  class="label" style=" margin-top:14px;width:80px;margin-left:46px;">*用户名:</label>
-                <input type="text" id="username" name="username" 
-                			style="margin-left:18px;width:256px;height:38px;"/>
+                <input type="text" id="username" name="username" placeholder="用户名"
+                			style="padding-left: 16px;width:256px;height:38px;font-size:14px;"/>
                 
             	<span class="error error_user_img"  style="display:none;width:20px;height:20px;margin-top:-30px;margin-left:356px;"><img src="../images/reg_error.png"/></span>
             	<span class="succ succ_user_img"  style="display:none;width:20px;height:20px;margin-top:-30px;margin-left:356px;"><img src="../images/reg_succ.png"/></span>
@@ -47,8 +47,8 @@
             </div>
             <div class="line">
                <label class="label" style=" margin-top:14px;width:80px;margin-left:20px;">*请设置密码:</label>
-               <input type="password" id="userpwd" name="password" 
-               					style="margin-left:18px;width:256px;height:38px;"/>
+               <input type="password" id="userpwd" name="password"  placeholder="请设置密码"
+               					style="padding-left: 16px;width:256px;height:38px;font-size:14px;"/>
                
                	<span class="error error_pass_img"  style="display:none;width:20px;height:20px;margin-top:-30px;margin-left:356px;"><img src="../images/reg_error.png"/></span>
             	<span class="succ succ_pass_img"  style="display:none;width:20px;height:20px;margin-top:-30px;margin-left:356px;"><img src="../images/reg_succ.png"/></span>
@@ -65,8 +65,8 @@
             </div>
             <div class="line" >
              	<label class="label" style="margin-top:14px;width:80px;margin-left:20px;">*请确认密码:</label>
-              	<input type="password"   class="sure  sure_pd"  
-              						style="margin-left:18px;width:256px;height:38px;"/>
+              	<input type="password"   class="sure  sure_pd"   placeholder="请确认密码"
+              						style="padding-left: 16px;width:256px;height:38px;font-size:14px;"/>
             	
             	<span class="error error_sure_img"  style="display:none;width:20px;height:20px;margin-top:-30px;margin-left:356px;"><img src="../images/reg_error.png"/></span>
             	<span class=" sure suret1" style="display:none;width:160px;height:30px;margin-top:-22px;margin-left:400px;">您两次输入的密码不一致</span>
@@ -74,29 +74,29 @@
             
             <div class="line" >
              	<label class="label" style="margin-top:14px;width:80px;margin-left:34px;">*手机号码:</label>
-              	<input type="text"  id="telphone"  name="phone"  value="15886435708"
-              					style="margin-left:18px;width:256px;height:38px;"/>
+              	<input type="text"  id="telphone"  name="phone"  value="15886435708" placeholder="验证手机"
+              					style="padding-left: 16px;width:256px;height:38px;font-size:14px;"/>
               	
               	<span class="checktel" style="display:none;width:160px;height:30px;margin-top:-28px;margin-left:400px;">您输入的手机号码格式非法</span>
             </div>
             
             <div class="line">
             	<label class="label" style=" float:left;margin-top:14px;width:80px;margin-left:28px;">*验证邮箱:</label>
-                <input type="text" id="email"  name="email" value="675436321@qq.com"
-                				style="width:256px;height:38px; margin-left:18px;">
+                <input type="text" id="email"  name="email" value="675436321@qq.com" placeholder="验证邮箱"
+                				style="width:256px;height:38px;padding-left: 16px;font-size:14px;">
                 
                 <span class="sureEmail" style="display:none;width:160px;height:30px;margin-top:-28px;margin-left:400px;">您输入的邮箱格式不正确</span>
                     
             </div>
-            <div style="margin-top:40px;margin-left:160px;width:260px;height:14px;">
+            <div style="padding-top:10px;margin-left:160px;width:260px;height:14px;">
             	<input type="checkbox" id="checkBox"  checked='checked'/>
             	
-            	<span>阅读《《<a href="#">李宁官方网站服务协议</a>》》</span>
+            	<span>阅读《<a href="#" style="color:blue;font-size:14px;">李宁官方网站服务协议</a>》</span>
             </div>
             <!-- <input type="submit" value="用户注册"/> -->
-            <div class="line"   style="margin-top:16px; float:left;margin-left:124px;">
+            <div class="line"   style="margin-top:16px; float:left;margin-left:108px;">
         		<input type="button"   id="regsubmit"  value="用户注册" 
-        				style="width:200px;height:50px;background:rgb(238,39,55);border:none;font-size:16px;color:white;"/>
+        				style="width:274px;height:50px;background:rgb(238,39,55);border:none;font-size:16px;color:white;"/>
             </div>
         </form>
         </div>

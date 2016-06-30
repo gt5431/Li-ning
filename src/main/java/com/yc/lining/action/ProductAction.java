@@ -1,15 +1,20 @@
 package com.yc.lining.action;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +26,7 @@ import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPool;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.opensymphony.xwork2.ModelDriven;
 import com.yc.lining.entity.Product;
 import com.yc.lining.entity.ProductBean;
@@ -132,7 +138,62 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 	public void setNum(int num) {
 		this.num = num;
 	}
-
+	
+	public String deleteById(){
+		int index =0;
+		int u_id;
+		String key ="";
+		Gson gson = new Gson();
+		Usersinfo usersinfo = (Usersinfo) ServletActionContext.getRequest().getSession().getAttribute("usersinfo");
+		
+		if(null == usersinfo){
+			//游客不享有保存购物车记录的功能
+			key ="xxx";
+		}else{
+			u_id = usersinfo.getU_id(); //首先默认(需要获取)
+			key = u_id+"_cartList"; //key为jedis的键
+		}
+		ShardedJedis jedis=pool.getResource();//获取一个jedis对象
+		String cartList = jedis.get(key);
+		Type listType = new TypeToken<List<Product>>(){}.getType();
+		List<Product> listsss=  gson.fromJson(cartList, listType);
+		
+		if("xxx".equals(key)){
+			
+		}else{
+			for (int i = 0; i < listsss.size(); i++) {
+				if(listsss.get(i).getPro_number() == product.getPro_number()){
+					index = i;
+					break;
+				}
+			}
+			listsss.remove(index);
+			String jsonResult = gson.toJson(listsss);//把对象转换成json字符串
+			jedis.del(key);
+			jedis.set(key, jsonResult);
+			
+			pool.getResource();//释放
+			pool.returnResource(jedis);
+		}
+		
+		List<Product>  list1 = new ArrayList<Product>();
+		list1 = (List<Product>) session.get("cartList");
+		for (int i = 0; i < list1.size(); i++) {
+			if(list1.get(i).getPro_number() == product.getPro_number()){
+				index = i;
+				break;
+			}
+		}
+		list1.remove(index);
+		if(list1.size()<=0 || listsss.size()<=0 || null == listsss){
+			session.remove("cartList");
+		}else{
+			session.put("cartList",list1);
+		}
+		
+		return "deleteSuccess";
+	}
+	
 	//用于处理购买数量
 	public void buyAmount(){
 		System.out.println("购买数量==>"+Buyamount);
@@ -153,18 +214,31 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 	//加入购物车(做为测试用)
 	@SuppressWarnings("unchecked")
 	public String cart(){
-		Usersinfo usersinfo = (Usersinfo) ServletActionContext.getRequest().getSession().getAttribute("usersinfo");
-		System.out.println("!"+usersinfo);
-		int index=0; //用于找同一件商品的索引
-		int u_id = usersinfo.getU_id(); //首先默认(需要获取)
-		ShardedJedis jedis=pool.getResource();//获取一个jedis对象
+		
+		int u_id;
+		String key ="";
 		Gson gson = new Gson();
-		String key = u_id+"_cartList"; //key为jedis的键
+		Usersinfo usersinfo = (Usersinfo) ServletActionContext.getRequest().getSession().getAttribute("usersinfo");
+		
+		System.out.println(usersinfo);
+		if(null == usersinfo){
+			//游客不享有保存购物车记录的功能
+			key ="xxx";
+		}else{
+			u_id = usersinfo.getU_id(); //首先默认(需要获取)
+			key = u_id+"_cartList"; //key为jedis的键
+		}
+		int index=0; //用于找同一件商品的索引
+		ShardedJedis jedis=pool.getResource();//获取一个jedis对象
+		
 		boolean flag = false; //判断是否为同一件商品
-		System.out.println("当前用户id为==>"+u_id);
 		//对redis处理
 		String cartList = jedis.get(key);
-		if(null == cartList || "".equals(cartList)){
+		
+		Type listType = new TypeToken<List<Product>>(){}.getType();
+		List<Product> listsss =  gson.fromJson(cartList, listType);
+		
+		if("xxx".equals(key)){
 			if(session.get("cartList") == null ){
 				Product product1 = productService.ProductDetailsById(product.getPro_number());
 				product1.setBuyamount(Buyamount);
@@ -190,75 +264,79 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 					Buyamount= Buyamount+list1.get(index).getBuyamount();
 					product3.setBuyamount(Buyamount);
 					//暂时不处理
+				}
+			}
+			session.put("cartList",list);
+		}else{
+			if(listsss == null){
+				if(session.get("cartList") == null ){
+					Product product1 = productService.ProductDetailsById(product.getPro_number());
+					product1.setBuyamount(Buyamount);
+					listsss = new ArrayList<Product>();
+					listsss.add(product1);
+					//还未处理完
+				}else{
+					List<Product>  list1 = new ArrayList<Product>();
+					list1 = (List<Product>) session.get("cartList");
+					for(int i=0;i<list1.size();i++){
+						if(product.getPro_number() == list1.get(i).getPro_number()){
+							flag =true;
+							index = i;
+						}else{
+							flag =false;
+						}
+					}
+					if(false ==flag){
+						Product product3 = productService.ProductDetailsById(product.getPro_number());
+						product3.setBuyamount(Buyamount);
+						listsss = new ArrayList<Product>();
+						listsss.add(product3);
+					}else{
+						Product product3 = new Product();
+						Buyamount= Buyamount+list1.get(index).getBuyamount();
+						product3.setBuyamount(Buyamount);
+						//暂时不处理
+						System.out.println("相同商品的购买数量为++>"+Buyamount);
+					}
+				}
+			}else{
+				/*List<Product> listsss = (List<Product>) gson.fromJson(cartList,List.class);*/
+				System.out.println(product.getPro_number()+"-------");
+				System.out.println("由gson转过来的数据==>"+listsss);
+				for (int i = 0; i < listsss.size(); i++) {
+					if(product.getPro_number() == listsss.get(i).getPro_number() ){
+						flag =true;
+						index = i;
+					}else{
+						flag =false;
+					}
+				}
+				if(false ==flag){
+					Product product3 = productService.ProductDetailsById(product.getPro_number());
+					product3.setBuyamount(Buyamount);
+					listsss.add(product3);
+				}else{
+					Product product3 = new Product();
+					Buyamount= Buyamount+listsss.get(index).getBuyamount();
+					product3.setBuyamount(Buyamount);
+					//暂时不处理
 					System.out.println("相同商品的购买数量为++>"+Buyamount);
 				}
+				session.put("cartList",listsss);
 			}
 			
-		}else{
-			List<Product> listsss = (List<Product>) gson.fromJson(cartList,Object.class);
-			System.out.println("由gson转过来的数据==>"+listsss);
-			for (int i = 0; i < listsss.size(); i++) {
-				if(product.getPro_number() == listsss.get(i).getPro_number()){
-					flag =true;
-					index = i;
-				}else{
-					flag =false;
-				}
-			}
-			if(false ==flag){
-				Product product3 = productService.ProductDetailsById(product.getPro_number());
-				product3.setBuyamount(Buyamount);
-				list.add(product3);
-			}else{
-				Product product3 = new Product();
-				Buyamount= Buyamount+listsss.get(index).getBuyamount();
-				product3.setBuyamount(Buyamount);
-				//暂时不处理
-				System.out.println("相同商品的购买数量为++>"+Buyamount);
-			}
+			String jsonResult = gson.toJson(listsss);//把对象转换成json字符串
+			jedis.del(key);
+			jedis.set(key, jsonResult);
+			
+			pool.getResource();//释放
+			pool.returnResource(jedis);
 		}
-		session.put("cartList",list);
-		
-		String jsonResult = gson.toJson(list);//把对象转换成json字符串
-		jedis.del(key);
-		jedis.set(key, jsonResult);
-		
-		pool.getResource();//释放
-		pool.returnResource(jedis);
 		return "Addcart";
 	}
 	
 	//////////////多重查询///////////////(PageUtil)session.getAttribute("pageutil");
 	
-	/*//模糊查询
-	public String searchInfo(){
-		return "searchInfo";
-	}*/
-	
-	/*public String findAll(){
-		PageUtil pageUtil = (PageUtil) session.get("pageUtil00");
-		
-		if(null == pageUtil){
-			pageUtil = new PageUtil();
-			pageUtil.setPageNo(1);
-			pageUtil.setPageSize(8);
-			pageUtil.setTotalSize(productService.getCount());
-		}
-		if(1==num){
-			pageUtil.setPageNo(1);
-		}else if(2==num){
-			pageUtil.setPageNo(pageUtil.getProPageNo());
-		}else if(3==num){
-			pageUtil.setPageNo(pageUtil.getNextPageNo());
-		}else if(4==num){
-			pageUtil.setPageNo(pageUtil.getTotalPages());
-		}
-		
-		list3=productService.findPageUtil(pageUtil);
-		session.put("pageUtil00", pageUtil);
-		session.put("products", list3);
-		return "success";
-	}*/
 	
 	public String getCount(){
 		int num=productService.getCount();
@@ -476,6 +554,10 @@ public class ProductAction implements ModelDriven<ProductBean>,SessionAware{
 		return "success";
 	}
 
+	
+	
+	
+	
 	@Override
 	public ProductBean getModel() {
 		product=new ProductBean();

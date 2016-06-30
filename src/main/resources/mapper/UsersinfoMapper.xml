@@ -10,5 +10,21 @@
 	<insert id="insertUser" parameterType="Usersinfo">
 		insert into usersinfo values(seq_uid.nextval,#{username},#{password},'','男','',#{email},#{phone},0,0,0)
 	</insert>
-	
+	<resultMap type="Usersinfo" id="UsersMap">
+		 <id column="u_id" property="u_id"  />
+		 <result column="u_id" property="u_id" />
+		 <result column="username" property="username" />
+		 <result column="password" property="password" />
+		 <result column="realName" property="realName" />
+		 <result column="sex" property="sex" />
+		 <result column="birthday" property="birthday" />
+		 <result column="email" property="email" />
+		 <result column="phone" property="phone" />
+		 <result column="balance" property="balance" /> 
+		 <result column="score" property="score" />
+		 <result column="expendTotal" property="expendTotal" />
+	</resultMap>
+	<select id="selectAllUsers" resultMap="UsersMap">
+		select * from usersinfo
+	</select>
 </mapper>

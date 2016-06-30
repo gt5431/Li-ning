@@ -34,6 +34,15 @@ public class Product implements Serializable{
 	private String proSize;
 
 	private String color;
+	private String typename;
+	public String getTypename() {
+		return typename;
+	}
+
+	public void setTypename(String typename) {
+		this.typename = typename;
+	}
+
 	private int Buyamount; //¹ºÂòÊýÁ¿
 	
 	public int getBuyamount() {
@@ -124,6 +133,46 @@ public class Product implements Serializable{
 		this.color = color;
 	}
 
+	public String getRegistertime() {
+		return registertime;
+	}
+
+	public void setRegistertime(String registertime) {
+		this.registertime = registertime;
+	}
+
+	public String getRemovetime() {
+		return removetime;
+	}
+
+	public void setRemovetime(String removetime) {
+		this.removetime = removetime;
+	}
+
+	public int getRegisterflag() {
+		return registerflag;
+	}
+
+	public void setRegisterflag(int registerflag) {
+		this.registerflag = registerflag;
+	}
+
+	public int getMid() {
+		return mid;
+	}
+
+	public void setMid(int mid) {
+		this.mid = mid;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
 	@Override
 	public String toString() {
 		return "\nProduct [pro_number=" + pro_number + ", pro_name=" + pro_name
@@ -134,6 +183,17 @@ public class Product implements Serializable{
 				+ registerflag + ", mid=" + mid + ", stock=" + stock + ", sex="
 				+ sex + ", proSize=" + proSize + ", color=" + color
 				+ ", Buyamount=" + Buyamount + "]";
+	}
+	
+	
+
+	public Product(String pro_name, int typesid, double pro_tagprice,
+			double pro_price, int stock) {
+		this.pro_name = pro_name;
+		this.typesid = typesid;
+		this.pro_tagprice = pro_tagprice;
+		this.pro_price = pro_price;
+		this.stock = stock;
 	}
 
 	public Product() {

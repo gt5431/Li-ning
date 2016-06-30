@@ -192,13 +192,8 @@ $(function(){
 	   			url: "user_register.action",
 	   			data:$("#regiterMyform").serialize(),
 	   			dataType:"JSON",
-<<<<<<< HEAD
 	   			success: function(data){			//查询成功后弹窗
 	   				if(data == null){
-=======
-	   			success: function(msg){			//查询成功后弹窗
-	   				if(msg == null){
->>>>>>> refs/remotes/origin/luohongmei
 	   					window.location.href="login.jsp";
 	   				}else{
 	   					window.location.href="register.jsp";

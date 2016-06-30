@@ -13,7 +13,6 @@
 <script type="text/javascript" src="../js/jquery-1.11.3.js" /></script>
 <script type="text/javascript" src="../js/public.js" /></script>
 <script type="text/javascript" src="../js/login.js" /></script>
-<script type="text/javascript" src="../js/login.js" /></script>
 <script type="text/javascript" src="../js/global.js" /></script>
 </head>
 
@@ -31,35 +30,35 @@
 					<c:remove var="loginMsg" scope="session"/>
 					<div class="line">
 						<label style="font-weight: bold; margin-top: 14px;">用 户 名:</label>
-						<input type="text" id="username" name="username" value=""
-							style="margin-left: 10px; margin-top: 28px; width: 256px; height: 38px;" />
+						<input type="text" id="username" name="username" value="" placeholder="用户名/邮箱"
+							style="padding-left: 16px; margin-top: 28px; width: 256px; height: 38px;font-size:14px;" />
 						<span id="userName_error" class="note">请输入会员名称</span>
 					</div>
 					<div class="line">
-						<label style="font-weight: bold; margin-top: 14px;">密&nbsp;&nbsp;&nbsp;&nbsp;码:</label> 
-						<input type="password" id="userpwd"	name="password" value=""
-							style="margin-left: 10px; margin-top: 28px; width: 256px; height: 38px;" />
+						<label style="font-weight: bold; margin-top: 14px;">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label> 
+						<input type="password" id="userpwd"	name="password" value="" placeholder="密码"
+							style="padding-left: 14px; margin-top: 28px; width: 256px; height: 38px;font-size:14px;" />
 						<span id="pwd_error" class="note">用户名与密码不匹配</span> <span
 							id="pwd_error1" class="note">请输入密码</span>
 
 					</div>
 					<span style="margin-left: 60px;"><a href="ForgetPwd.jsp"
-						style="text-decoration: none;">忘记密码？</a></span>
+						style="text-decoration: none;color:blue;">忘记密码？</a></span>
 					<div class="line" style="float:left;">
 						<label style="font-weight: bold; margin-top: 14px;">验 证 码:</label>
-						<input type="text" id="checkcode" name="checkcode"
-							style="margin-left: 10px;width: 100px; height: 38px;" />
+						<input type="text" id="checkcode" name="checkcode" placeholder="验证码"
+							style="padding-left: 16px;width: 100px; height: 38px;font-size:14px;" />
 						 <img onclick="recode()"
 							class="code" title="看不清楚，点击获得新图片"
-							style="cursor: pointer; height: 39px;margin-left:30px;"
+							style="cursor: pointer; height: 39px;margin-left:30px;position:relative;top:12px;"
 							src="../images/yanzhma.jpg" />
 						<span id="yzm_error" class="note">输入的验证码错误</span> <span
 							id="yzm_error1" class="note">请输入验证码</span>
 					</div>
 					<div class="line"
-						style="margin-top: 20px; float: left; margin-left: 60px;">
+						style="margin-top: 20px; float: left; margin-left:49px;">
 						<input type="button" id="Login"  value="会员登录"
-							style="background: rgb(238, 39, 55); width: 200px; height: 50px; border: none; font-size: 16px; color: white;"></input>
+							style="background: rgb(238, 39, 55); width: 272px; height: 50px; border: none; font-size: 16px; color: white;"></input>
 					</div>
 				</form>
 			</div>

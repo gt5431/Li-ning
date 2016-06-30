@@ -73,5 +73,37 @@
 		<result property="pro_name" column="pro_name"/>
 		<result property="pro_tagprice" column="pro_tagprice"/>
 	</resultMap>
-  
+  	<resultMap type="Product" id="products">
+ 		<id column="pro_number" property="pro_number" />
+ 		<result column="pro_number" property="pro_number"/>
+ 		<result column="pro_name" property="pro_name"/>
+ 		<result column="pro_tagprice" property="pro_tagprice"/>
+ 		<result column="pro_price" property="pro_price"/>
+ 		<result column="pro_img" property="pro_img"/>
+ 		<result column="detail" property="detail"/>
+ 		<result column="registertime" property="registertime"/>
+ 		<result column="removetime" property="removetime"/>
+ 		<result column="registerflag" property="registerflag"/>
+ 		<result column="mid" property="mid"/>
+ 		<result column="stock" property="stock"/>
+ 		<result column="sex" property="sex"/>
+ 		<result column="pro_size" property="proSize"/>
+ 		<result column="color" property="color"/>
+ 		<result column="typename" property="typename"/>
+ 	</resultMap>
+ 	<select id="listAllProduct" resultMap="products">
+ 		select  * from product p , typesinfo t  where p.typesid=t.typesid order by p.pro_number desc
+ 	</select>
+ 	<update id="removeProduct" parameterType="Product">
+ 		update product set registerflag=1 where pro_number=#{pro_number}
+ 	</update>
+ 	<update id="updateProduct" parameterType="Product">
+ 		update product set pro_name=#{pro_name},typesid=#{typesid},pro_tagprice=#{pro_tagprice},pro_price=#{pro_price},pro_img=#{pro_img},detail=#{detail},
+ 		registertime=to_date(#{registertime},'yyyy-MM-dd'),removetime=to_date(#{removetime},'yyyy-MM-dd'),registerflag=#{registerflag},mid=#{mid},stock=#{stock},sex=#{sex},pro_size=#{proSize},color=#{color} 
+ 		where pro_number=#{pro_number}
+ 	</update>
+ 	<insert id="addProduct" parameterType="Product">
+ 		insert into product values(seq_pronum.nextval,#{pro_name},#{typesid},#{pro_tagprice},#{pro_price},#{pro_img},
+ 		#{detail},sysdate,null,#{registerflag},#{mid},#{stock},#{sex},#{proSize},#{color})
+ 	</insert>
 </mapper>

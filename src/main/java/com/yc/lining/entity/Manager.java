@@ -1,35 +1,48 @@
 package com.yc.lining.entity;
 
-import java.math.BigDecimal;
-
 public class Manager {
-    private BigDecimal mid;
+	private int mid;
 
-    private String mname;
+	private String mname;
 
-    private String mpwd;
+	private String mpwd;
 
-    public BigDecimal getMid() {
-        return mid;
-    }
+	public Manager() {
+	}
 
-    public void setMid(BigDecimal mid) {
-        this.mid = mid;
-    }
+	public Manager(int mid, String mname, String mpwd) {
+		this.mid = mid;
+		this.mname = mname;
+		this.mpwd = mpwd;
+	}
 
-    public String getMname() {
-        return mname;
-    }
+	public int getMid() {
+		return mid;
+	}
 
-    public void setMname(String mname) {
-        this.mname = mname == null ? null : mname.trim();
-    }
+	public void setMid(int mid) {
+		this.mid = mid;
+	}
 
-    public String getMpwd() {
-        return mpwd;
-    }
+	public String getMname() {
+		return mname;
+	}
 
-    public void setMpwd(String mpwd) {
-        this.mpwd = mpwd == null ? null : mpwd.trim();
-    }
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
+
+	public String getMpwd() {
+		return mpwd;
+	}
+
+	public void setMpwd(String mpwd) {
+		this.mpwd = mpwd;
+	}
+
+	@Override
+	public String toString() {
+		return "Manager [mid=" + mid + ", mname=" + mname + ", mpwd=" + mpwd
+				+ "]";
+	}
 }

@@ -1,0 +1,25 @@
+<div id="place_table"></div>
+<script>
+$(function(){
+	var datagrid;
+	var op;
+	var flag;
+	var editRow=undefined;//编辑的行
+	datagrid=$("#place_table").datagrid({
+		url:'listAllPlace.action',
+		pagination:true,//分页属性
+		pageSize:3,//初始化时每页显示的行数
+		pageList:[1,3,5,7,10],//初始化时每页显示的行数列表
+		columns:[[
+			{field:'pid',title:'地址编号',width:100,align:'center'},
+			{field:'placename',title:'地址名',width:100,align:'center'},
+			{field:'u_id',title:'用户编号',width:100,align:'center'},
+			{field:'realname',title:'真实姓名',width:100,align:'center'},
+			{field:'shname',title:'收货人姓名',width:100,align:'center'},
+			{field:'shtel',title:'收货人电话',width:100,align:'center'},
+			{field:'postcode',title:'邮政编码',width:100,align:'center'}
+		]],
+		
+	});
+});
+</script>

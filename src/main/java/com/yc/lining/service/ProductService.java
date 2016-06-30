@@ -43,6 +43,13 @@ public interface ProductService {
 	int getCount2(ProductBean product);
 
 	int getCount3(ProductBean product);
-
+	
+	
+	
+	//houtai
+	List<Product> listAllProduct();
+	boolean removeProduct(Product product);
+	boolean updateProduct(Product product);
+	boolean addProduct(Product product);
 }
 

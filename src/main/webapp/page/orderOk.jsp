@@ -24,20 +24,17 @@
 	                     {"city":"shanghai","code":"2210444"}
 	              ]
 	        };
-	      $.ajax({
-	    	  
-	      });
 </script>
 
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
+	<form action="user_list.action" method="POST">
 	<div id="ok_content">
 		<div class="clearfix" style="font-family: 微软雅黑;">
 			<div id="finish" style="font-family: 微软雅黑;"></div>
 		</div>
-		<div
-			style="text-align: center; border: 1px solid rgb(243, 243, 243); width: 986px; height: 500px;">
+		<div   style="text-align: center; border: 1px solid rgb(243, 243, 243); width: 986px; height: 500px;">
 			<div id="paymentinfo">
 				<h2>
 					<img /> 订单已提交成功，请尽快付款！
@@ -56,11 +53,12 @@
 			<div id="text1">在线支付成功后，请勿关闭支付成功页面，等待返回到商城</div>
 			<div id="button">
 				<input class="payment_submit sprite" type="submit"
-					onclick="Payment.pay();" value="确认无误，立即支付"
-					style="font-family: 微软雅黑;">
+					onclick="pay()" value="确认无误，立即支付"
+					style="font-family: 微软雅黑;" />
 			</div>
 		</div>
 	</div>
+	</form>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

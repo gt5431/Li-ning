@@ -14,6 +14,19 @@
   </resultMap>
   
   <insert id="insertPlaceById"  parameterType="Place">
-  	insert into place values(seq_place.nextval,#{placename},101,#{shname},#{shtel},#{postcode})
+  	insert into place values(seq_place.nextval,#{placename},108,#{shname},#{shtel},#{postcode})
   </insert>
+   <resultMap type="Place1" id="places">
+		 <id column="pid" property="pid"  />
+		 <result column="pid" property="pid" />
+		 <result column="placename" property="placename" />
+		 <result column="u_id" property="u_id" />
+		 <result column="shname" property="shname"/>
+		  <result column="shtel" property="shtel" />
+		   <result column="postcode" property="postcode" /> 
+		 
+</resultMap>
+ <select id="listAllPlace" resultMap="places">
+		select * from place
+	</select>
 </mapper>

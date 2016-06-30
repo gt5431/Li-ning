@@ -104,13 +104,15 @@ create table comments(
        comment_id int primary key,
        orderid int ,
        comment_date date,
-       comment_content varchar2(200) not null,
-	     u_id int,
+       comment_content varchar2(200),
+	   u_id int,
+	   comment_image varchar2(200),
 	   constraint uk_id foreign key(u_id) references usersinfo(u_id),
 	   constraint uk_comm foreign key(orderid) references orderform(orderid)
 );
 create sequence seq_commentsid start with 1 increment by 1;
-
+drop table comments;
+drop sequence seq_commentsid 
 --用户收藏表
 create table collection(             
        collection_id int,            --收藏编号
@@ -207,4 +209,9 @@ delete from orderform  where pro_number>=1;
 --评论表插入数据
 
 commit;
+delete from typesinfo where typesid=6; 
 
+select o.orderid,o.riqi,o.pro_number,p.pro_name,p.color from orderform o,product p where commentsflag=0 and o.pro_number=p.pro_number and u_id=101
+update product set pro_name=#{pro_name},typesid=#{typesid},pro_tagprice=#{pro_tagprice},pro_price=#{pro_price},pro_img=#{pro_img},detail=#{detail},
+ 		registertime=#{registertime},removetime=#{removetime},registerflag=#{registerflag},mid=#{mid},stock=#{stock},sex=#{sex},pro_size=#{proSize},color=#{color} 
+ 		where pro_number=#{pro_number}

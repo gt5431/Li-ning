@@ -29,7 +29,7 @@ public class OrderformServiceImplTest {
 	
 	@Test
 	public void testHandOrder() {
-		Orderform orderform = new Orderform(1,1322.2,2);
+		Orderform orderform = new Orderform(1,100.2,2,2);
 		int result = orderService.handOrder(orderform);
 		System.out.println(result);
 		assertNotNull("收货地址为空",result);

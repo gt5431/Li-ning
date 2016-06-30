@@ -4,4 +4,15 @@
    <select id="selectAllTypes" resultType="Typesinfo">
       select typesid,typename from typesinfo
    </select>
+   <resultMap type="Typesinfo" id="typeslist">
+ 		<id column="typesid" property="typesid" />
+ 		<result column="typesid" property="typesid"/>
+ 		<result column="typename" property="typename" />
+ 	</resultMap>
+ 	<select id="listAllType" resultMap="typeslist">
+ 		select * from typesinfo
+  	</select>
+  	<insert id="addType" parameterType="Typesinfo">
+  		insert into typesinfo values(seq_types.nextval,#{typename})
+  	</insert>
 </mapper>

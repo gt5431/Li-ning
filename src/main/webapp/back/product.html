@@ -1,0 +1,737 @@
+<div id="product_table"></div>
+<script>
+
+	$(function() {
+		var datagrid;
+		var op;
+		var flag;
+		var editRow = undefined;//编辑的行
+		datagrid = $("#product_table")
+				.datagrid(
+						{
+							url : 'product_listAllProduct.action',
+							pagination : true,//分页属性
+							pageSize : 3,//初始化时每页显示的行数
+							pageList : [ 1, 3, 5, 7, 10 ],//初始化时每页显示的行数列表
+							columns : [ [
+									{
+										field : 'pro_number',
+										title : '商品编号',
+										width : 100,
+										align : 'center'
+									},
+									{
+										field : 'pro_name',
+										title : '商品名',
+										width : 100,
+										align : 'center',
+										editor : {
+											type : "text",
+											options : {
+												required : true
+											}
+										}
+									},
+									{
+										field : 'typesid',
+										title : '商品类别编号',
+										width : 100,
+										align : 'center',
+										editor : {
+											type : "text",
+											options : {
+												required : true
+											}
+										}
+									},
+									{
+										field : 'typename',
+										title : '商品类别名',
+										width : 100,
+										align : 'center',
+										editor : {
+											type : "text",
+											options : {
+												required : true
+											}
+										}
+									},
+									{
+										field : 'pro_tagprice',
+										title : '吊牌价',
+										width : 100,
+										align : 'center',
+										editor : {
+											type : "text",
+											options : {
+												required : true
+											}
+										}
+									},
+									{
+										field : 'pro_price',
+										title : '销售价',
+										width : 100,
+										align : 'center',
+										editor : {
+											type : "text",
+											options : {
+												required : true
+											}
+										}
+									},
+									{
+										field : 'pro_img',
+										title : '商品介绍图片',
+										width : 100,
+										align : 'center',
+										editor : {
+											type : "text",
+											options : {
+												required : true
+											}
+										}
+									},
+									{
+										field : 'detail',
+										title : '商品的细节信息',
+										width : 100,
+										align : 'center',
+										editor : {
+											type : "text",
+											options : {
+												required : true
+											}
+										}
+									},
+									{
+										field : 'registertime',
+										title : '上架日期',
+										width : 100,
+										align : 'center',
+										editor : {
+											type : "text",
+											options : {
+												required : true
+											}
+										}
+									},
+									{
+										field : 'removetime',
+										title : '下架日期',
+										width : 100,
+										align : 'center',
+										editor : {
+											type : "text",
+											options : {
+												required : true
+											}
+										}
+									},
+									{
+										field : 'registerflag',
+										title : '是否已下架',
+										width : 100,
+										align : 'center',
+										editor : {
+											type : "text",
+											options : {
+												required : true
+											}
+										},
+										formatter : function(value, row, index) {
+											if (value == 1) {
+												return "已下架";
+											} else if (value == 0) {
+												return "未下架";
+											}
+										}
+									},
+									{
+										field : 'mid',
+										title : '操作员',
+										width : 100,
+										align : 'center',
+										editor : {
+											type : "text",
+											options : {
+												required : true
+											}
+										}
+									},
+									{
+										field : 'stock',
+										title : '库存',
+										width : 80,
+										align : 'center',
+										editor : {
+											type : "text",
+											options : {
+												required : true
+											}
+										}
+									},
+									{
+										field : 'sex',
+										title : '性别',
+										width : 90,
+										align : 'center',
+										editor : {
+											type : "text",
+											options : {
+												required : true
+											}
+										}
+									},
+									{
+										field : 'proSize',
+										title : '尺码',
+										width : 90,
+										align : 'center',
+										editor : {
+											type : "text",
+											options : {
+												required : true
+											}
+										}
+									},
+									{
+										field : 'color',
+										title : '颜色图片',
+										width : 100,
+										align : 'center',
+										editor : {
+											type : "text",
+											options : {
+												required : true
+											}
+										}
+									},
+									{
+										field : 'oparation',
+										title : '用户操作',
+										width : 100,
+										formatter : function(value, row, index) {
+											return '<a href="javascript:findProductDetail('
+													+ row.pro_number
+													+ ')">查看详情</a>';
+										}
+									} ] ],
+							toolbar : [
+									{
+										text : '添加',
+										iconCls : 'icon-add',
+										handler : function() {
+											$("#add_product").dialog("open");
+										}
+									},
+									'-',
+									{
+										text : '编辑',
+										iconCls : 'icon-edit',
+										handler : function() {
+											flag = "修改";
+											var rows = datagrid
+													.datagrid("getChecked")[0];
+											if (rows == undefined) {
+												$.messager.show({
+													title : '温馨提示',
+													msg : '请选择您要修改的数据。。。',
+													timeout : 2000,
+													showType : 'slide'
+												});
+											} else {
+												op = "updateProduct";
+												if (editRows = undefined) {
+													datagrid
+															.datagrid("rejectChanges");
+													datagrid.dategrid(
+															"endEdit", editRow);
+													editRow = undefined;
+												} else {
+													var index = datagrid
+															.datagrid(
+																	"getRowIndex",
+																	rows);
+													datagrid.datagrid(
+															"updateRow", {
+																index : index,
+																row : rows
+															});
+													//打开编辑器
+													datagrid.datagrid(
+															"beginEdit", index);
+													editRow = index;
+												}
+											}
+										}
+									},
+									'-',
+									{
+										text : '下架',
+										iconCls : 'icon-remove',
+										handler : function() {
+											var rows = datagrid
+													.datagrid("getChecked");
+											if (rows.length <= 0) {
+												$.messager.show({
+													title : '温馨提示',
+													msg : '请选择要下架的数据',
+													timeout : 2000,
+													showType : 'slide'
+												});
+											} else {
+												$.messager
+														.confirm(
+																'信息确认',
+																'您确定下架？',
+																function(r) {
+																	if (r) {
+																		alert(rows[0].pro_number);
+																		var proNumber = rows[0].pro_number;
+																		/* for ( var i = 0; i < rows.length; i++) {
+																			proNumbers+= rows[i].proNumber
+																					+ ",";
+																		} */
+																		//将要删除的数据aid发送给服务器端
+																		$.post(
+																						'product_removeProduct.action',
+																						{
+																							pro_number: proNumber
+																						},
+																						function(
+																								data) {
+																							if (data == 1) {
+																								$.messager
+																										.show({
+																											title : '下架提示',
+																											msg : '商品下架成功',
+																											timeout : 2000,
+																											showType : 'slide'
+																										});
+																								datagrid.datagrid("reload");
+																							} else {
+																								$.messager
+																										.alert(
+																												"失败提示",
+																												"商品下架失败");
+																							}
+																						});
+																	}
+																});
+											}
+										}
+									},
+									'-',
+									{
+										text : '保存',
+										iconCls : 'icon-save',
+										handler : function() {
+											datagrid.datagrid("endEdit",
+													editRow);
+											var rows = datagrid
+													.datagrid("getChanges")[0];
+											if (rows == undefined) {
+												datagrid
+														.datagrid("rejectChanges");
+												datagrid
+														.dategrid("unselectAll");
+												editRow = undefined;
+											} else {
+												rows["op"] = op;
+												$
+														.post(
+																"product.do",
+																rows,
+																function(data) {
+																	if (data == 1) {
+																		$.messager
+																				.show({
+																					title : '温馨提示',
+																					msg : '商品'
+																							+ flag
+																							+ '成功',
+																					timeout : 2000,
+																					showType : 'slide'
+																				});
+																	} else {
+																		$.messager
+																				.alert(
+																						"失败提示",
+																						"商品"
+																								+ flag
+																								+ "失败",
+																						"error");
+																	}
+																	rows = null;
+																	datagrid
+																			.datagrid("reload");
+																	datagrid
+																			.datagrid("rejectChanges");
+																	datagrid
+																			.dategrid("unselectAll");
+																});
+											}
+										}
+									} ]
+						});
+
+	});
+	
+</script>
+<style>
+.myinput {
+	width: 200px;
+	border: 1px solid #F63;
+}
+
+label {
+	padding-right: 10px;
+}
+</style>
+<div id="add_product" class="easyui-dialog" title="添加商品"
+	data-options="fit:true,iconCls:'icon-add',resizable:true,modal:true,closed:true">
+
+	<form action="" style="padding:20px;float:left;display:inlink-block;">
+	
+		
+		<label>商品类型</label> <select name="typesid" id="product_types"
+			class="myinput">
+		</select><br />
+		<script type="text/javascript">
+			$(function() {
+				$('#product_types').focus(function() {
+					$('#product_types').combobox({
+						url : 'type_listAllType.action',
+						valueField : 'typesid',
+						textField : 'typename'
+					});
+				});
+			});
+		</script>
+		<label>商品名称:</label><input type="text" name="pro_name" id="pro_name"
+			class="myinput" /><br /> <label>吊牌价:</label><input type="text"
+			name="pro_tagprice" id="pro_tagprice" class="myinput" /><br /> <label>销售价:</label><input
+			type="text" name="pro_price" id="pro_price" class="myinput" /><br />
+
+		<label>商品介绍图片:</label><input type="file" name="pro_pic"
+			id="pro_picture" multiple="multiple"
+			onchange="previewMultipleImage(this,'pic_show')" /><br> <label>商品细节信息:</label>
+		<div>
+			<script id="editor" type="text/plain"
+				style="width:800px;height:400px;"></script>
+		</div>
+		<br /> <label>库存:</label><input type="text" name="stock" id="stock"
+			class="myinput" /><br /> <label>性别:</label><br /> <input
+			type="radio" name="pro_sex" id="pro_sex1" value="男" />男 <input
+			type="radio" name="pro_sex" id="pro_sex2" value="女" />女<br /> <label>尺码:</label><input
+			type="text" name="pro_size" id="pro_size" class="myinput" /><br />
+		<label>颜色图片:</label><input type="file" name="pro_colorpic"
+			id="pro_colorpic" multiple="multiple"
+			onchange="previewMultipleImage(this,'pic_color_show')" /><br />
+		<checkbox name="hehe" value=1 />
+		<a class="easyui-linkbutton" data-options="iconCls:'icon-add'"
+			onclick="addProduct()"></a>
+
+	</form>
+	<div style="float:right;width:380px;margin-right:20px;">
+		<filedset id="pic_show"> <legend>商品介绍图片预览</legend> </filedset>
+	</div>
+	<div style="float:right;width:380px;margin-right:20px;">
+		<filedset id="pic_color_show"> <legend>颜色图片预览</legend> </filedset>
+	</div>
+</div>
+
+
+
+<div id="finddetail" class="easyui-dialog" title="商品详情"
+	data-options="fit:true,iconCls:'icon-add',resizable:true,modal:true,closed:true,onClose:function(){$('#product_table').datagrid('reload');}">
+	<form action="product_updateProduct.action" method="post" enctype="multipart/form-data" style="padding:20px;float:left;display:inlink-block;">
+		<label>操作员:<input type="text" id="mid1" name="mid" /> </label><br /> 
+		<label>商品编号：<input type="text" id="pro_number1" name="pro_Number"/> </label><br /> <input type="hidden"
+			value="" id="typesid" /> <input type="hidden" value="" id="type" />
+		<label>商品类型</label> <input name="typesid" id="product_types1"
+			class="myinput" /> <br />
+		<script type="text/javascript">
+			$(function() {
+				$('#product_types1').focus(function() {
+					$('#product_types1').combobox({
+						url : 'type_listAllType.action',
+						valueField : 'typesid',
+						textField : 'typename'
+					});
+				});
+			});
+		</script>
+		<label>商品名称:</label><input type="text" name="pro_Name" id="pro_name1"
+			class="myinput" /><br /> <label>吊牌价:</label><input type="text"
+			name="pro_Tagprice" id="pro_tagprice1" class="myinput" /><br /> <label>销售价:</label><input
+			type="text" name="pro_Price" id="pro_price1" class="myinput" /><br />
+
+		<label>商品介绍图片:</label> <input type="file" name="pro_pic1"
+			id="pro_pic1" multiple="multiple"
+			onchange="previewMultipleImage(this,'pic_show')" /><br> 
+		<label>商品细节信息:</label>
+		<div>
+			<script id="editor1" type="text/plain"
+				style="width:800px;height:400px;"></script>
+		</div>
+		<br /> <br /> <label>上架日期:</label><input type="text"
+			name="registertime" id="registertime1" placeholder="例如：2016-01-01"/><br /> <label>下架日期:</label><input
+			type="text" name="removetime" id="removetime1" placeholder="例如：2016-02-01"/><br /> <label>是否已下架:</label><br />
+		<input type="radio" name="registerflag" id="register1flag1" value="1" />已下架
+		<input type="radio" name="registerflag" id="register1flag2" value="0" />未下架<br />
+		<label>库存:</label><input type="text" name="stock" id="stock1"
+			class="myinput" /><br /> <label>性别:</label><br /> <input
+			type="radio" name="pro_sex" id="1pro_sex1" value="男" />男 <input
+			type="radio" name="pro_sex" id="1pro_sex2" value="女" />女<br /> <label>尺码:</label><input
+			type="text" name="pro_size" id="pro_size1" class="myinput" /><br />
+		<label>颜色图片:</label><input type="file" name="pro_colorpic1"
+			id="pro_colorpic1" multiple="multiple"
+			onchange="previewMultipleImage(this,'pic_color_show1')" /><br /> 
+			<a class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="updateProduct()">
+			</a>
+	</form>
+	
+	
+	<div style="float:right;width:380px;height:400px;margin-right:20px;">
+		<filedset id="pic_show1"> <legend>商品介绍图片预览</legend> </filedset>
+	</div>
+	<div style="float:right;width:380px;height:400px;margin-right:20px;">
+		<filedset id="pic_color_show1"> <legend>颜色图片预览</legend> </filedset>
+	</div>
+
+</div>
+<script>
+	//显示详情
+	function findProductDetail(id) {
+		$("#finddetail").dialog("open");
+		var rowData = $("#product_table").datagrid('getSelected');
+		$("#pro_number1").val(rowData.pro_number);
+		$("#mid1").val(rowData.mid);
+		$("#typesid").val(rowData.typesid);
+		$("#type").val(rowData.typename);
+		$("#pro_name1").val(rowData.pro_name);
+		$("#pro_tagprice1").val(rowData.pro_tagprice);
+		$("#pro_price1").val(rowData.pro_price);
+		$("#registertime1").val(rowData.registertime);
+		$("#removetime1").val(rowData.removetime);
+		$("#editor1").val(rowData.detail);
+		if (rowData.registerflag == 1) {
+			document.getElementById("register1flag1").checked = true;
+		} else {
+			document.getElementById("register1flag2").checked = true;
+			//$("#register1flag2").attr('checked','true');
+		}
+		$("#stock1").val(rowData.stock);
+		if (rowData.sex == '男') {
+			document.getElementById("1pro_sex1").checked = true;
+		} else {
+			document.getElementById("1pro_sex2").checked = true;
+		}
+		$("#pro_size1").val(rowData.proSize);
+
+		/* $("#pic_show1").empty();//!!!!!!!!!!清空fieldset里的内容！！！！！！！！
+		var pro_pic;
+		var str = "<legend>商品介绍图片预览</legend><br/>";
+		pro_pic = rowData.proImg.split(",");
+				$.each(pro_pic,function(i) {
+					str += "<img style='width:80px;height:80px;float:left;margin:10px 0px 0px 10px;' src='"+pro_pic[i]+"'/>";
+				});
+		$("#pic_show1").append(str); */
+
+		$("#pic_color_show1").empty();
+		var color_pic;
+		var str1 = "<legend>颜色图片预览</legend><br/>";
+		color_pic = rowData.color.split(",");
+		$.each(color_pic,function(i) {
+			str1 +="<img style='width:80px;height:80px;float:left;margin:10px 0px 0px 10px;' src='"+color_pic[i]+"'/>";
+			 
+		});
+		$("#pic_color_show1").append(str1);
+
+		$("#product_types1").val(rowData.typename);
+
+		//获取商品类别名显示在下拉列表
+		/*
+		var combobox1=$("#product_types1");
+		for(var i= 0;i<combobox1.Items.Count;i++){
+			DataRowView tmpRow = (DataRowView)combobox1.Items[i];
+			string value = (String)tmpRow["valuefield"];
+		    string test = (string)tmpRow["TextField"];
+		    if(rowData.typesid==value){
+		    	combobox.combobox('select',test);
+		    };
+		};*/
+
+	}
+	var ue = UE.getEditor('editor');
+	var ue1 = UE.getEditor('editor1');
+	//添加商品信息
+	function addProduct() {
+		var pro_name = $("#pro_name").val();
+		var typesid = $("#product_types").combobox("getValue");
+		var pro_tagprice = $("#pro_tagprice").val();
+		var pro_price = $("#pro_price").val();
+		var detail = ue.getContent();
+		
+		
+			var now=new Date();
+			var year=now.getFullYear();
+			var month=now.getMonth();
+			var date=now.getDate();
+			month=month+1;
+			var time=year+"-"+month+"-"+date;
+			
+				
+		
+		var registertime = time;
+		var removetime = null;
+		var registerflag = 0;
+
+		var stock = $("#stock").val();
+		if ($("#pro_sex1").checked) {
+			var sex = "男";
+		} else {
+			var sex = "女";
+		}
+		var pro_size = $("#pro_size").val();
+		var mid = $("#mid").val();
+		$.ajaxFileUpload({
+			url : "product_addProduct.action",
+			fileElementId : [ 'pro_picture', 'pro_colorpic' ],
+			secureuri : false,
+			dataType : "json",
+			data : {
+				pro_name : pro_name,
+				typesid : typesid,
+				pro_tagprice : pro_tagprice,
+				detail : detail,
+				registertime : registertime,
+				removetime : removetime,
+				registerflag : registerflag,
+				stock : stock,
+				sex : sex,
+				proSize : pro_size,
+				pro_price : pro_price,
+				mid : mid
+			},
+			success : function(data) {
+				
+				if (data == true) {//添加成功
+					$.messager.show({
+						title : '温馨提示',
+						msg : '商品添加成功',
+						timeout : 2000,
+						showType : 'slide'
+					});
+					$("#add_product").dialog("close");
+					$("#product_table").datagrid("reload");
+					$("#product_types").combobox("setValue", "");
+					$("#pro_name").val("");
+					$("#pro_tagprice").val("");
+					$("#pro_price").val("");
+					ue.setContent("");
+					$("#registertime").val("");
+					$("#removetime").val("");
+					$("#stock").val("");
+					$("#pro_size").val("");
+					$("#pro_picture").val("");
+					$("#pro_colorpic").val("");
+					$("#pic_show").empty();//!!!!!!!!!!清空fieldset里的内容！！！！！！！！
+					$("#pic_color_show").empty();
+				}
+			},
+			error : function(data, status, e) {
+				$.messager.alert("错误提示", "商品添加失败\n" + e, "error");
+			}
+		});
+	}
+
+	//显示商品详情,并修改???????????????????????//
+	function updateProduct() {
+		var pro_number = $("#pro_number1").val();
+		var pro_name = $("#pro_name1").val();
+		//var type = $("#type").val();
+		var typesid = $("#typesid").val();
+		//if($("#product_types1").val()!==undefined){
+		//	var typesid = $("#typesid").val();
+		//}else{
+		//	var typesid =$(".textbox-text validatebox-text").val();
+		//}
+
+		//$(".textbox combo -.textbox-text validatebox-text").val();
+
+		var pro_tagprice = $("#pro_tagprice1").val();
+		var pro_price = $("#pro_price1").val();
+		var detail = ue1.getContent();
+		var registertime = $("#registertime1").val();
+		var removetime = $("#removetime1").val();
+
+		if ($("#registerflag1").checked) {
+			var registerflag = 1;
+		} else {
+			var registerflag = 0;
+		}
+		var stock = $("#stock1").val();
+		if ($("#pro_sex1").checked) {
+			var sex = "男";
+		} else {
+			var sex = "女";
+		}
+		var pro_size = $("pro_size1").val();
+		var mid = $("#mid1").val();
+		console.info(pro_number, pro_name, typesid, pro_tagprice, pro_price,
+				detail, registertime, removetime, registerflag, stock, sex,
+				pro_size, mid);
+		$.ajaxFileUpload({
+			url : "product_updateProduct.action",
+			fileElementId : [ 'pro_pic1', 'pro_colorpic1' ],
+			secureuri : false,
+			dataType : "json",
+			 data : {
+				pro_number : pro_number,
+				pro_name : pro_name,
+				typesid : typesid,
+				pro_tagprice : pro_tagprice,
+				detail : detail,
+				registertime : registertime,
+				removetime : removetime,
+				registerflag : registerflag,
+				stock : stock,
+				sex : sex,
+				proSize : pro_size,
+				pro_price : pro_price,
+				mid : mid
+			}, 
+			success : function(data) {
+				if (data == true) {//添加成功
+					$.messager.show({
+						title : '温馨提示',
+						msg : '商品修改成功',
+						timeout : 2000,
+						showType : 'slide'
+					});
+					$("#finddetail").dialog("close");
+					$("#product_table").datagrid("reload");
+					$("#product_types1").combobox("setValue", "");
+					$("#pro_name1").val("");
+					$("pro_tagprice1").val("");
+					$("pro_price1").val("");
+					ue1.setContent("");
+					$("#registertime1").val("");
+					$("#removetime1").val("");
+					$("#stock1").val("");
+					$("#pro_size1").val("");
+				
+				}
+				
+			}
+			
+		});
+	}
+	function unselect() {
+
+	}
+</script>
+

@@ -12,5 +12,6 @@ public interface UsersinfoMapper {
 	int insertUser(Usersinfo usersinfo);
 	
 	List<Goodsinfo> CollectionById(int uid);
-	
+	//ºóÌ¨²Ù×÷
+	List<Usersinfo> selectAllUsers();
 }

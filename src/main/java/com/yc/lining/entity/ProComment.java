@@ -9,7 +9,15 @@ public class ProComment implements Serializable{
 	private String comment_content;
 	private String username;
     private int u_id;
-    
+    private String comment_image;
+    public String getComment_image() {
+		return comment_image;
+	}
+
+	public void setComment_image(String comment_image) {
+		this.comment_image = comment_image;
+	}
+
     
 	public int getU_id() {
 		return u_id;

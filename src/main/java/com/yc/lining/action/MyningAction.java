@@ -24,7 +24,8 @@ public class MyningAction implements ModelDriven<CommentBean>,SessionAware{
 	}
 	//去会员中心查看未评价的订单
     public String comment(){
-		List<CommentBean> comm=commservice.selectNoComment(u_id);
+    	System.out.println("为评价--》"+commentbean);
+		List<CommentBean> comm=commservice.selectNoComment(101);
 		session.put("OrderList", comm);
 	    return "listorder";
     }

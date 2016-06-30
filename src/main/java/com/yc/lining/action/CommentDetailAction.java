@@ -30,8 +30,7 @@ public class CommentDetailAction implements ModelDriven<ProComment>,SessionAware
 	}
 	//在商品详情页面显示某商品下的所有评论
     public void detailping(){
-    	System.out.println(pro_number);
-		List<ProComment> comm=commservice.selectCommentByProNum1(1);
+		List<ProComment> comm=commservice.selectCommentByProNum1(pro_number);
 		Gson gson = new Gson();
 		String jsonResult = gson.toJson(comm);
 		//取到响应对象

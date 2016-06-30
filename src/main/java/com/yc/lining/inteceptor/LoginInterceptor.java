@@ -27,7 +27,7 @@ public class LoginInterceptor extends MethodFilterInterceptor{
 		Map<String,Object> session = ActionContext.getContext().getSession(); 
 		Object obj = session.get("usersinfo");
 		if(null == obj || "".equals(obj.toString()) ){
-			session.put("errorMsg","登录失败!");
+			session.put("errorMsg","亲,您要登录才能购买哦!");
 			return "loginInt";
 		}
 		return invocation.invoke();

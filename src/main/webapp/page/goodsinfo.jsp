@@ -30,8 +30,7 @@
 		$("#main #info #info4").css("display", "none");
 		$("#main #info #info" + index).css("display", "block");
 		$("#main #info #info1 #head_info1 li").css("background", "#000");
-		$("#main #info #info1 #head_info1 li").eq(index - 2).css("background",
-				"#F03");
+		$("#main #info #info1 #head_info1 li").eq(index - 2).css("background","#F03");
 	}
 	//	选择购买数量
 	function goods_buy(index) {
@@ -457,8 +456,7 @@
 				<div id="head_info1">
 					<ul>
 						<a onClick="click2(2)"><li id="li1">商品描述</li></a>
-
-						<a onClick="click2(3)"><li>商品评论</li></a>
+						<a onClick="click2(3,${sessionScope.goodsinfo.pro_number})"><li>商品评论</li></a>
 						<a onClick="click2(4)"><li>购物须知</li></a>
 					</ul>
 				</div>
@@ -474,22 +472,7 @@
 				</div>
 			</div>
 			<div id="info3" style="display: none">
-				<table id="table" style="margin-left: 20px; width: 740px;">
-					<tbody>
-						<tr>
-							<td id="td_left"><div>
-									<p>
-										鞋子很好，鞋底软，穿着舒服，就是在跑步机跑有种像疼不像疼应该是累的感觉，不知为何，穿其他鞋没试过这样的，但穿着走路舒服</p>
-								</div></td>
-							<td id="td_right">
-								<div>颜色分类：黑</div>
-							</td>
-							<td id="td_right">
-								<div>欧*****萌</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				
 			</div>
 			<div id="info4" style="display: none">
 				<img src="../images/xuzhi.png">

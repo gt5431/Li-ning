@@ -8,7 +8,16 @@ public class Comments implements Serializable{
 	private int orderid;
 	private String comment_content;
 	private int u_id;
+	private String comment_image;
 
+
+	public String getComment_image() {
+		return comment_image;
+	}
+
+	public void setComment_image(String comment_image) {
+		this.comment_image = comment_image;
+	}
 
 	public String getComment_content() {
 		return comment_content;
@@ -46,6 +55,8 @@ public class Comments implements Serializable{
 	@Override
 	public String toString() {
 		return "Comments [comment_id=" + comment_id + ", orderid=" + orderid
-		+ ", comment_content=" + comment_content + ", u_id=" + u_id +"]";
+				+ ", comment_content=" + comment_content + ", u_id=" + u_id
+				+ ", comment_image=" + comment_image + "]";
 	}
+
 }

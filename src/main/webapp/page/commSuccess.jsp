@@ -14,10 +14,8 @@
 </head>
 <body>
 	      <jsp:include page="header.jsp"></jsp:include>
-	         <div id="commsuccess">
-	             <div class="black_content">  
+	         <div id="commsuccess" style="height:200px;width:1349px;">
 	                <img src="../images/comment.PNG" class="white_content"/>
-	             </div> 
 	         </div>
           <jsp:include page="footer.jsp"></jsp:include>
                    

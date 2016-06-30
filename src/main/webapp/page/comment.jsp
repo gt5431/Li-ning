@@ -67,7 +67,7 @@
                 </div>
             </div>
             <!--会员中心右侧-->
-            <div id="member_right">
+            <div id="member_right1">
                 <div id="rule">
                    <p class="r">评价奖励积分规则</p>
                    <p class="u">您的积分可以帮其他用户做出购物参考，同时您可以或得积分奖励。<br/>小积分大用处，积分可兑换礼品和商品优惠券，快来评价吧。</p> 
@@ -86,22 +86,20 @@
                          <span>亲，写点评价吧，你的评价对其他买家有很大帮助的。</span>
                          <img src="../images/hua.PNG"/>
                          <img src="../images/hua.PNG"/> 
-                              <form action="comment_comment1.action" method="post">
+                              <form action="comment_comment1.action" method="post" enctype="multipart/form-data">
                                  <textarea rows="6" cols="60" name="comment_content" type="text"></textarea>
                                  <input type="hidden" name="orderid" value="${OrderImg.orderid}"/>
                                  <input type="hidden" name="u_id" value="${sessionScope.usersinfo.u_id}"/>
-                                 <a href=""><img src="../images/zhao.PNG" style="margin-top:2px;"/><img src="../images/shai.PNG" style="margin-top:2px;margin-left:3px;"/></a>
+                                  <div id="fileFiled1">
+                                    <input type="file" name="image"  id="fileField"  onchange="choosePic(this)"/>
+                                  </div>
                                  <input type="submit" value="提交评价" style="margin-left:440px;margin-top:0px;"/>
                               </form>
+                              <div id="pics"></div>
                      </div>
                  </div>
-                
-				  
             </div>
-            
         </div>
-                  
      <jsp:include page="footer.jsp"></jsp:include>
-
-</body>
+  </body>
 </html>

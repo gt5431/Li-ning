@@ -18,8 +18,18 @@ public class Orderform {
     private int pid;
 
     private int orderflas;
+    
+    private int commentsflag;
 
-    public int getOrderid() {
+    public int getCommentsflag() {
+		return commentsflag;
+	}
+
+	public void setCommentsflag(int commentsflag) {
+		this.commentsflag = commentsflag;
+	}
+
+	public int getOrderid() {
         return orderid;
     }
 
@@ -83,18 +93,21 @@ public class Orderform {
         this.orderflas = orderflas;
     }
 
+    
+    
 	@Override
 	public String toString() {
 		return "\nOrderform [orderid=" + orderid + ", riqi=" + riqi + ", uId="
 				+ uId + ", proNumber=" + proNumber + ", buyNumber=" + buyNumber
 				+ ", buyprice=" + buyprice + ", pid=" + pid + ", orderflas="
-				+ orderflas + "]";
+				+ orderflas + ", commentsflag=" + commentsflag + "]";
 	}
 
-	public Orderform(int buyNumber, double buyprice, int pid) {
+	public Orderform(int buyNumber, double buyprice, int pid,int uid) {
 		this.buyNumber = buyNumber;
 		this.buyprice = buyprice;
 		this.pid = pid;
+		this.uId = uid;
 	}
 
 	public Orderform() {

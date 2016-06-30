@@ -1,0 +1,68 @@
+<div id="type_table"></div>
+<script>
+$(function(){
+	var datagrid;
+	var flag;
+	var editRow=undefined;//编辑的行
+	datagrid=$("#type_table").datagrid({
+		url:'type_listAllType.action',
+		pagination:true,//分页属性
+		pageSize:3,//初始化时每页显示的行数
+		pageList:[1,3,5,7,10],//初始化时每页显示的行数列表
+		columns:[[
+			{field:'typesid',title:'商品类别编号',width:200,align:'center'},
+			{field:'typename',title:'商品类别名',width:200,align:'center',editor:{type:"text",options:{required:true}}}
+		]],
+		toolbar:[{
+			text:'添加',
+			iconCls:'icon-add',
+			handler:function(){
+				flag="添加";
+				//判断没有正在被编辑的行
+				if(editRow!=undefined){//说明有正在被编辑的行，还原当前修改操作
+					datagrid.datagrid("rejectChanges");//回滚自创建以来或自上次调用AcceptChanges，所有的变化数据
+					datagrid.dategrid("endEdit",editRow);//关闭当前正在编辑的行
+					editRow=undefined;
+				} else{
+					datagrid.datagrid("insertRow",{index:0,row:{}});
+					//打开编辑器
+					datagrid.datagrid("beginEdit",0);
+					editRow=0;//记录当前正在被编辑的行
+					
+				}
+			}
+		},'-',{
+			text:'保存',
+			iconCls:'icon-save',
+			handler:function(){
+				datagrid.datagrid("endEdit",editRow);
+				var rows=datagrid.datagrid("getChanges")[0];
+				if(rows==undefined){
+					datagrid.datagrid("rejectChanges");
+					datagrid.dategrid("unselectAll");
+					editRow=undefined;
+				}else{
+					$.post("type_addType.action",rows,function(data){
+						if(data==1){
+							$.messager.show({
+								title:'温馨提示',
+								msg:'商品类别'+flag+'成功',
+								timeout:2000,
+								showType:'slide'
+							});
+						}else{
+							$.messager.alert("失败提示","商品类别"+flag+"失败","error");
+						}
+						rows=null;
+						datagrid.datagrid("reload");
+						datagrid.datagrid("rejectChanges");
+						datagrid.dategrid("unselectAll");
+					},"json");
+				}
+				
+				
+			}
+		}]
+	});
+});
+</script>

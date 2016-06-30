@@ -19,11 +19,14 @@
 <script type="text/javascript" src="../js/global.js" /></script>
 <script type="text/javascript">
 	$(function() {
+		var uid = $("#UidHidden").val();
 		//刷新收货地址信息
+		alert("aaaa");
 		$.ajax({
 			type : "POST",
 			url : "order_order.action",
 			dataType : "JSON",
+			data:{"uid":uid},
 			success : function(msg) {
 				var item = msg.addrList;
 				var value = '';
@@ -101,7 +104,7 @@
 			$.ajax({
 				type:"POST",
 				url:"order_hand.action",
-				data:{"buynumber":buyNumber,"pidnumber":pid,"buyprice":buyprice},
+				data:{"buynumber":buyNumber,"pidnumber":pid,"buyprice":buyprice,"uid":uid},
 				success : function(data) { //查询成功后弹窗
 					window.location.href = "orderOk.jsp";
 				} 
@@ -114,7 +117,6 @@
 
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-
 	<div id="order_center">
 		<div class="clearfix1" style="font-family: 微软雅黑;">
 			<div id="orderbag" style="font-family: 微软雅黑;"></div>

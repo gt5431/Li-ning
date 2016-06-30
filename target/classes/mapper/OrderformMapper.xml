@@ -3,6 +3,21 @@
 <mapper namespace="com.yc.lining.mapper.OrderformMapper" >
   
   <insert id="insertOrderById"  parameterType="Orderform">
-    insert into orderform values (seq_orderid.nextval,sysdate,101,1,#{buyNumber},#{buyprice},#{pid},0,0)
+    insert into orderform values (seq_orderid.nextval,sysdate,#{u_id},1,#{buyNumber},#{buyprice},#{pid},0,0)
   </insert>
+  <resultMap type="Orderform" id="Orderforms">
+		 <id column="orderid" property="orderid"  />
+		 <result column="orderidid" property="orderidid" />
+		 <result column="riqi" property="riqi" />
+		 <result column="u_id" property="uId" />
+		 <result column="pro_number" property="proNumber"/>
+		  <result column="buy_number" property="buyNumber" />
+		   <result column="buyprice" property="buyprice" /> 
+		  <result column="pid" property="pid" /> 
+		  <result column="orderflag" property="orderflas" />
+		  <result column="commentsflag" property="commentsflag" />  
+</resultMap>
+ <select id="listAllOrder" resultMap="Orderforms">
+		select * from orderform
+	</select>
 </mapper>

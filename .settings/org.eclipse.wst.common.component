@@ -5,12 +5,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-<<<<<<< HEAD
         <property name="context-root" value="AiGo"/>
         <property name="java-output-path" value="/AiGo/target/classes"/>
-=======
-        <property name="java-output-path" value="/AiGo/target/classes"/>
-        <property name="context-root" value="AiGo"/>
->>>>>>> refs/remotes/origin/luohongmei
     </wb-module>
 </project-modules>

@@ -8,7 +8,7 @@ public class Place implements Serializable{
 	
 	private int pid;
     private String placename;
-    private int uid;
+    private int u_id;
     private String shname;
     private String shtel;
     private int postcode;
@@ -34,12 +34,15 @@ public class Place implements Serializable{
 	public void setPlacename(String placename) {
 		this.placename = placename;
 	}
-	public int getUid() {
-		return uid;
+	
+	public int getU_id() {
+		return u_id;
 	}
-	public void setUid(int uid) {
-		this.uid = uid;
+
+	public void setU_id(int u_id) {
+		this.u_id = u_id;
 	}
+
 	public String getShname() {
 		return shname;
 	}
@@ -61,16 +64,16 @@ public class Place implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "\nPlace [pid=" + pid + ", placename=" + placename + ", uid="
-				+ uid + ", shname=" + shname + ", shtel=" + shtel
-				+ ", postcode=" + postcode + "]";
+		return "\nPlace [pid=" + pid + ", placename=" + placename + ", u_id="
+				+ u_id + ", shname=" + shname + ", shtel=" + shtel
+				+ ", postcode=" + postcode + ", email=" + email + "]";
 	}
-	
-	public Place(int pid, String placename, int uid, String shname,
+
+	public Place(int pid, String placename, int u_id, String shname,
 			String shtel, int postcode) {
 		this.pid = pid;
 		this.placename = placename;
-		this.uid = uid;
+		this.u_id = u_id;
 		this.shname = shname;
 		this.shtel = shtel;
 		this.postcode = postcode;

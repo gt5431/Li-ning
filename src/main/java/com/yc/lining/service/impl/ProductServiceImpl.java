@@ -95,4 +95,36 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.getCount3(product);
 	}
 
+	@Override
+	public List<Product> listAllProduct() {
+		return productMapper.listAllProduct();
+	}
+
+	@Override
+	public boolean removeProduct(Product product) {
+		if(1==productMapper.removeProduct(product)){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateProduct(Product product) {
+		int result = productMapper.updateProduct(product);
+		System.out.println("上架结果为-->"+result);
+		if(1 == result){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	@Override
+	public boolean addProduct(Product product) {
+		if(1==productMapper.addProduct(product)){
+			return true;
+		}
+		return false;
+	}
+
 }
