@@ -10,7 +10,7 @@
 <title>订单页面</title>
 <link type="text/css" href="../css/Common1.css" rel="stylesheet" />
 <link type="text/css" href="../css/dingdan.css" rel="stylesheet" />
-<link type="text/css" href="../css/comm_header.css" rel="stylesheet" />
+<!-- <link type="text/css" href="../css/comm_header.css" rel="stylesheet" /> -->
 
 <script type="text/javascript" src="../js/jquery-1.11.3.js" /></script>
 <script type="text/javascript" src="../js/public.js" /></script>
@@ -21,7 +21,6 @@
 	$(function() {
 		var uid = $("#UidHidden").val();
 		//刷新收货地址信息
-		alert("aaaa");
 		$.ajax({
 			type : "POST",
 			url : "order_order.action",
@@ -30,7 +29,13 @@
 			success : function(msg) {
 				var item = msg.addrList;
 				var value = '';
+				//动态改变div高度
+				var newHeight = 740+(parseInt(item.length)-1)*50;
+				alert(newHeight);
+				$("#order_center").css("height",newHeight+"px");
+				
 				if (item.length > 3) {
+					alert(item.length);
 					for (var i = 0; i < 3; i++) {
 						value += '<ul>'
 							+ '<li class="address_area_li deliver_top" >'
@@ -272,7 +277,6 @@
 			<input type="button" id="ordersub" value="提交订单"
 				style="width: 200px; height: 50px; background: red; float: right; margin-top: 30px; color: white; font-size: 14px;" />
 		</form>
-
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>

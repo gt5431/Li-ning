@@ -169,12 +169,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		style="width:100px;">
 		<img src="../images/weixin.jpg" width="90px" height="90px" />
 	</div>
-	<div data-options="region:'south'" id="copyright"
+	<!-- <div data-options="region:'south'" id="copyright"
 		style="height:50px;background-color:#4D89BB;margin:auto;">
 		<p>
 			<a href="http://www.hyycinfo.com">20班第二组</a>
 		</p>
-	</div>
+	</div> -->
 	<div data-options="region:'center'">
 		<div id="content_index" class="easyui-tabs" data-options="fit:true"
 			title="内容"></div>

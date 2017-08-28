@@ -8,7 +8,7 @@
 <title>订单页面</title>
 <link type="text/css" href="../css/Common1.css" rel="stylesheet" />
 <link type="text/css" href="../css/ok.css" rel="stylesheet" />
-<link type="text/css" href="../css/comm_header.css" rel="stylesheet" />
+<!-- <link type="text/css" href="../css/comm_header.css" rel="stylesheet" /> -->
 
 <script type="text/javascript" src="../js/jquery-1.11.3.js" /></script>
 <script type="text/javascript" src="../js/public.js" /></script>

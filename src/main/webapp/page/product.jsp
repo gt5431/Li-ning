@@ -9,7 +9,7 @@
 
 <link href="../css/Common1.css" rel="stylesheet" type="text/css"></link>
 <link href="../css/Product.css" rel="stylesheet" type="text/css"></link>
-<link type="text/css" href="../css/comm_header.css" rel="stylesheet" />
+<!-- <link type="text/css" href="../css/comm_header.css" rel="stylesheet" /> -->
 
 <script type="text/javascript" src="../js/jquery-1.11.3.js" /></script>
 <script type="text/javascript" src="../js/public.js" /></script>
@@ -298,7 +298,7 @@ function getid(index){
 						</div>
 					</form>
 				</div>
-			</div>
+			</div>  
 
 			<div id="mainContent_center_center">
 				

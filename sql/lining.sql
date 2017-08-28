@@ -211,6 +211,8 @@ delete from orderform  where pro_number>=1;
 commit;
 delete from typesinfo where typesid=6; 
 
+select * from manager
+
 select o.orderid,o.riqi,o.pro_number,p.pro_name,p.color from orderform o,product p where commentsflag=0 and o.pro_number=p.pro_number and u_id=101
 update product set pro_name=#{pro_name},typesid=#{typesid},pro_tagprice=#{pro_tagprice},pro_price=#{pro_price},pro_img=#{pro_img},detail=#{detail},
  		registertime=#{registertime},removetime=#{removetime},registerflag=#{registerflag},mid=#{mid},stock=#{stock},sex=#{sex},pro_size=#{proSize},color=#{color} 

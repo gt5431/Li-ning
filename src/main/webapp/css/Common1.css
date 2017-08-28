@@ -339,17 +339,17 @@ body{
 }
 
 /*-------------爆款推荐-------------*/
-#indexContent{
+#indexContent_1{
 	width:1349px;
 	height:auto;
 	margin-top:10px;
 }
 
-#indexContent   .hchoice{
+#indexContent_1   .hchoice{
 	width:1195px;
 	height:50px;
 }
-#indexContent   .hchoice .choice_Item  a{
+#indexContent_1   .hchoice .choice_Item  a{
 	font-size:20px;
 	font-family:"Microsoft YaHei UI";
 	font-weight:bold;
@@ -357,14 +357,14 @@ body{
 	top:14px;
 	margin-left:88px;
 }
-#indexContent   .hchoice  .choice_Item{
+#indexContent_1   .hchoice  .choice_Item{
 	background:rgb(237,237,237) none repeat scroll 0 0;
 	width:237px;
 	height:50px;
 	float:left;
 	border-right:0.5px solid rgb(237,237,237);
 }
-#indexContent   .hchoice  span{
+#indexContent_1   .hchoice  span{
 	width:237px;
 	height:25px;
 	color:#000;
@@ -424,16 +424,16 @@ body{
 	background:rgb(237,237,237);
 }
 /*-----------这是跑步系列部分-----------*/
-.indexContent{
+.indexContent_2{
 	width:1349px;
-	height:823px;
+	height:auto;
 }
 .Run{
 	width:1190px;
 	height:811px;
 }
 .Run .Run_head{
-	width:1190px;
+	width:100%;
 	height:52px;
 	background:#000;
 }
@@ -458,7 +458,7 @@ body{
 	float:right;
 }
 .Run .Run_main{
-	width:1190px;
+	width:100%;
 	height:464px;
 	float:left;
 	margin-top:10px;
@@ -488,26 +488,25 @@ body{
 	text-align:left;
 	margin-left:30px;
 }
-.Run .Run_main .run_nav .run_banner{
-	width:342px;
-	height:100%;
+.Run .Run_main .run_banner{
+	width:340px;
+	height:463px;
+	float:left;
 }
 .Run .Run_main  .run_select_bnt{
-	width:63px;
-	height:463px;
+	width:60px;
+	height:464px;
 	background:rgb(226,226,226);
-	position:relative;
-	top:-469px;
-	left:-82px;
+	float:left;
 }
 .Run .Run_main  .run_select_bnt  .select_bnt1{
-	width:63px;
+	width:100%;
 	height:64px;
 	background:#CCC;
 	margin-top:1px;
 }
 .Run .Run_main  .run_select_bnt  .select_bnt2{
-	width:63px;
+	width:100%;
 	height:46px;
 	background:#CCC;
 	margin-top:1px;
@@ -523,10 +522,8 @@ body{
 }
 .Run .Run_main  .run_list{
 	width:648px;
-	height:464px;
-	position:relative;
-	top:-931px;
-	float:right;
+	height:463px;
+	float:left;
 }
 .run_list ul li{
 	float:left;
@@ -601,16 +598,17 @@ body{
 .indexContent p{}
 
 /*----------这是运动系-----------列*/
-.indexCotent_2{
+.indexCotent_3{
 	width:1349px;
-	height:571px;
+	height:auto;
+	margin-top:20px;
 }
 .Sport{
 	width:1190px;
 	height:559px;
 }
 .Sport .Sport_head{
-	width:1190px;
+	width:100%;
 	height:52px;
 	background:#000;
 }
@@ -635,7 +633,7 @@ body{
 	float:right;
 }
 .Sport .Sport_main{
-	width:1190px;
+	width:100%;
 	height:464px;
 	float:left;
 	margin-top:10px;
@@ -665,26 +663,25 @@ body{
 	text-align:left;
 	margin-left:30px;
 }
-.Sport .Sport_main .Sport_nav .Sport_banner{
-	width:342px;
+.Sport .Sport_main  .Sport_banner{
+	width:340px;
 	height:100%;
+	float:left;
 }
 .Sport .Sport_main  .Sport_select_bnt{
-	width:63px;
+	width:62px;
 	height:464px;
 	background:rgb(226,226,226);
-	position:relative;
-	top:-468px;
-	left:-82px;
+	float:left;
 }
 .Sport .Sport_main  .Sport_select_bnt  .select_bnt1{
-	width:63px;
+	width:100%;
 	height:64px;
 	background:#CCC;
 	margin-top:1px;
 }
 .Sport .Sport_main  .Sport_select_bnt  .select_bnt2{
-	width:63px;
+	width:100%;
 	height:46px;
 	background:#CCC;
 	margin-top:1px;
@@ -701,9 +698,7 @@ body{
 .Sport .Sport_main  .Sport_list{
 	width:648px;
 	height:464px;
-	position:relative;
-	top:-931px;
-	float:right;
+	float:left;
 }
 .Sport_list ul li{
 	float:left;
@@ -764,7 +759,7 @@ body{
 #footer_list #footer{
 	width:100%;
 	height:90px;
-	margin-top:140px;
+	margin-top:60px;
 }
 #footer_content{
 	width:840px;
@@ -803,6 +798,9 @@ body{
     width: 139px;
 }
 
+#footer_list{
+	heigth:100px;
+}
 
 #footer_list #footerBd{
 	color: #969492;

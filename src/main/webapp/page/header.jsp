@@ -429,68 +429,7 @@ $.ajax({
 							</div>
 						</div>
 					</div></li>
-					
-				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;" class="logo_inter"></div>
-				<li>
-					<a style="color: #fff;" class="li_a6">韦德</a>
-					<img class="down_img" src="../images/content_down.png" />
-				</li>
-				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;" class="logo_inter"></div>
-				<li>
-					<a style="color: #fff;" class="li_a7">乐途</a>
-					<img lass="down_img" src="../images/content_down.png" />
-				</li>
-				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;" class="logo_inter"></div>
-				<li>
-					<a style="color: #fff;" class="li_a8">10K报名</a>
-					<img class="down_img" src="../images/content_down.png" /></li>
-				<div style="background: rgb(76, 74, 70) none repeat scroll 0% 0%;" class="logo_inter" ></div>
-
-				<li><a style="color: #fff;" href="#" class="li_a9">更多品牌</a><img
-					class="down_img_end" src="../images/content_down.png" />
-					<div id="font_content—8" style="display: none;">
-						<div class="sub_box">
-							<style>
-								#font_content—8  .sub_box .box_1 {
-									float: left;
-									border-left: 1px solid #ccc;
-									border-right: 1px solid #ccc;
-									margin-top: 24px;
-									margin-left: 14%;
-								}
-								#font_content—8  .sub_box .box_2 {
-									float: left;
-									border-right: 1px solid #ccc;
-									margin-top: 24px;
-									margin-left: 20px;
-								}
-								#font_content—8	.sub_box  a {
-									font-size: 12px;
-									display: block;
-									margin-left: 20px;
-									line-height: 20px;
-								}
-							</style>
-							<div
-								style="width: 1349px; height: 102px; background: rgb(246, 246, 246); font-family: 'Microsoft YaHei UI'; text-align: center;">
-								<div class="box_1" style="width: 200px; height: 52px;">
-									<a><img src="../images/lining1.png" /></a>
-								</div>
-								<div class="box_2" style="width: 200px; height: 52px;">
-									<a><img src="../images/lining2.png" /></a>
-								</div>
-								<div class="box_2" style="width: 200px; height: 52px;">
-									<a><img src="../images/shuaxi.png" /></a>
-								</div>
-								<div class="box_2" style="width: 200px; height: 52px;">
-									<a><img src="../images/kaisheng.png" /></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
 			</ul>
-
 		</div>
 		<div id="comm_contain_right">
 			<input type="text" name="search" id="search" /> <span> <img

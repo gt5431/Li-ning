@@ -3,6 +3,7 @@
 	<name>AiGo</name>
 	<comment></comment>
 	<projects>
+		<project>WebServiceTest</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

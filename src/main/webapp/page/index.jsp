@@ -8,7 +8,7 @@
 	<meta charset="utf-8" />
 	<link type="text/css" href="../css/shop.css" rel="stylesheet" />
 	<link type="text/css" href="../css/Common1.css" rel="stylesheet" />
-	<link type="text/css" href="../css/comm_header.css" rel="stylesheet" />
+	<!-- <link type="text/css" href="../css/comm_header.css" rel="stylesheet" /> -->
 	
 	<script type="text/javascript" src="../js/jquery-1.11.3.js" /></script>
 	<script type="text/javascript" src="../js/public.js" /></script>
@@ -76,7 +76,6 @@
 								style="position: absolute; top: 210px; right: 24px;"><img
 								src=" ../images/right.png" /></a>
 						</div>
-					</li>
 					<li>
 						<div class="banner_new">
 							<div class="banner_list2">
@@ -97,15 +96,12 @@
 					</li>
 				</ul>
 			</div>
-
-
 			<div class="banner_buttom">
 				<h2>爆款推荐</h2>
 			</div>
 		</div>
 
-
-		<div id="indexContent">
+		<div id="indexContent_1">
 			<div class="hotcake">
 				<div class="hchoice">
 					<c:forEach items="${sessionScope.Type}" var="type">
@@ -149,8 +145,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="indexContent">
-			<div>
+		<div class="indexContent_2">
 				<div class="Run">
 					<div class="Run_head">
 						<h2>
@@ -187,7 +182,7 @@
 							</ul>
 						</div>
 						<div class="run_banner">
-							<a><img src=" ../images/run_select.png" /></img></a>
+							<span><img src=" ../images/run_select.png" /></span>
 						</div>
 						<div class="run_select_bnt">
 							<div class="select_bnt1">
@@ -207,7 +202,7 @@
 							<div class="run_list_content" id="run_list_content"
 								style="font-family: 'Microsoft YaHei UI'; display: block;">
 								<ul>
-									<li style="font-family: \'Microsoft YaHei UI\';"><a
+								<li style="font-family: \'Microsoft YaHei UI\';"><a
 										href="shoppingcart.jsp"> <img src="../images/goods_3.png" />
 											<span style="font-family: \'Microsoft YaHei UI\';"> <font
 												class="rl_name">【2015新品】李宁</font> <font class="rl_category">ARBK097-1</font>
@@ -249,7 +244,7 @@
 										</span> <em> <font class="ft_14" sku="AWYK001-3">¥ 162</font>
 										</em>
 									</a></li>
-								</ul>
+								</ul> 
 							</div>
 							<div class="clear" style="font-family: 'Microsoft YaHei UI';"></div>
 						</div>
@@ -276,10 +271,9 @@
 					</div>
 					<div class="clear" style="font-family: 'Microsoft YaHei UI';"></div>
 				</div>
-			</div>
-		</div>
+		</div> 
 
-		<div class="indexCotent_2">
+		<div class="indexCotent_3">
 			<div>
 				<div class="Sport">
 					<div class="Sport_head">
@@ -347,10 +341,8 @@
 								</ul>
 							</div>
 						</div>
-
 					</div>
 				</div>
-
 			</div>
 		</div>
 		<!-- <div id="exterFooter"></div> -->
