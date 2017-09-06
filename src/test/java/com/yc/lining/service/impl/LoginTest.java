@@ -33,13 +33,13 @@ public class LoginTest {
 	
 	@Test
 	public void testlogin() {
-		Usersinfo usersinfo = new Usersinfo("老王","aaa");
+		Usersinfo usersinfo = new Usersinfo("hello","aa");
 		usersinfo = userService.login(usersinfo);
 		System.out.println(usersinfo);
 		assertNotNull("登录失败",usersinfo);
 	}
 	
-	@Test
+	/*@Test
 	public void testSendEmail_2() {
 		MimeMessage mm = javaMaiSender.createMimeMessage();//邮件信息类
 		try {
@@ -53,8 +53,8 @@ public class LoginTest {
 					+"<a href='http://localhost:8080/Vote/vote.jsp'>点击链接即可激活</a><br>",true);//内容
 			FileSystemResource fsss = new FileSystemResource("C:/Users/gt123/Desktop/kkkkkk123.jpg");
 			smm.addInline("aaa",fsss);
-			/*File file = new File("C:/Users/gt123/Desktop/事务.txt");
-			smm.addAttachment("事务.txt",file);*/
+			File file = new File("C:/Users/gt123/Desktop/事务.txt");
+			smm.addAttachment("事务.txt",file);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
@@ -97,8 +97,8 @@ public class LoginTest {
 					+ "</tbody></tr></td></table>",true);
 			FileSystemResource fsss = new FileSystemResource("C:/Users/gt123/Desktop/kkkkkk123.jpg");
 			smm.addInline("aaa",fsss);
-			/*File file = new File("C:/Users/gt123/Desktop/事务.txt");
-			smm.addAttachment("事务.txt",file);*/
+			File file = new File("C:/Users/gt123/Desktop/事务.txt");
+			smm.addAttachment("事务.txt",file);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
@@ -126,6 +126,6 @@ public class LoginTest {
 		for(int i=0;i<list.size();i++){
 			System.out.println(list.get(i)+"\n");
 		}
-	}
+	}*/
 }
 

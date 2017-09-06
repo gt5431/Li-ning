@@ -97,7 +97,9 @@ public class UserAction implements ModelDriven<Usersinfo>,SessionAware{
 	}
 
 	public String login(){
+		System.out.println(usersinfo);
 		usersinfo1 = userService.login(usersinfo);
+		System.out.println(usersinfo1);
 		if(usersinfo1 == null){
 			session.put("loginMsg","µÇÂ¼Ê§°Ü");
 			return "userlogin";

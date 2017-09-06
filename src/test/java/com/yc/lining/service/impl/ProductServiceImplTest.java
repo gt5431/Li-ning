@@ -22,21 +22,21 @@ public class ProductServiceImplTest {
 	private ProductService productService;
 	private ProductBean product = new ProductBean();
 	
-	@Test
+	/*@Test
 	public void testProductDetailsById() {
 		Product product = new Product();
 		product = productService.ProductDetailsById(1);
 		System.out.println(product);
 		assertNotNull("≤È—Ø≥…π¶",product);
-	}
+	}*/
 	
 	@Test
 	public void testFindAll() {
 		List<ProductBean> products=productService.findAll();
-		System.out.println(products);
+		/*List<Product> products=productService.getAllProduct();*/
 		assertNotNull(products);
 	}
-	@Test
+	/*@Test
 	public void getCount() {
 		int num=productService.getCount();
 		System.out.println(num);
@@ -67,5 +67,5 @@ public class ProductServiceImplTest {
 		int num=productService.getCount2(product);
 		System.out.println(num);
 		assertNotNull(num);
-	}
+	}*/
 }
